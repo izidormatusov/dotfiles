@@ -1,0 +1,5 @@
+[dotfiles]
+repository = ~/projects/dotfiles
+ignore = [
+    '.git',
+    '*.swp']
