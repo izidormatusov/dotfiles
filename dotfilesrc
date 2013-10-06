@@ -1,5 +1,7 @@
 [dotfiles]
-repository = ~/projects/dotfiles
+repository = ~/workspace/dotfiles
 ignore = [
     '.git',
+    'README.md', 'LICENSE',
     '*.swp']
+packages = ['config']

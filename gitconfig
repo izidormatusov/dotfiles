@@ -1,0 +1,14 @@
+[user]
+	name = Izidor Matušov
+	email = izidor.matusov@gmail.com
+	signingkey = 0x0C8B7023
+[color]
+	ui = auto
+[core]
+	editor = vim
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[core]
+        excludesfile = ~/.gitignore_global
+[push]
+	default = simple
