@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =4
 let g:netrw_dirhist_1='/home/izidor/projects/dotfiles/vim/skeletons'
 let g:netrw_dirhist_2='/home/izidor/.bin'
 let g:netrw_dirhist_3='/home/izidor/workspace/django-oscar/oscar'
+let g:netrw_dirhist_4='/home/izidor/downloads/mechanize-0.2.5/examples'
