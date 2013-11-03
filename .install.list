@@ -6,6 +6,7 @@ config/user-dirs.dirs
 gitconfig
 gitignore_global
 irbrc
+local/share/radiotray/bookmarks.xml
 pip/pip.conf
 pythonrc
 vim
