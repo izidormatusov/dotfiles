@@ -2,43 +2,31 @@
   <group name="root"><bookmark name="Nation Radio (Cardiff) [Alternative/Indie]" url="http://icy-e-01.sharp-stream.com/tcnation.mp3.m3u"/>
   <bookmark name="Absolute 80s (London) [80s music]" url="http://network.absoluteradio.co.uk/core/audio/ogg/live.pls?service=a8bb"/>
     <bookmark name="Free Radio 80s (Birmingham) [80s music]" url="http://stream1.radiomonitor.com/Free-80s-128.m3u"/>
+  <bookmark name="Jack fm (Oxford) [Variety rock]" url="http://stream.jackfm.co.uk:8000/stream.m3u"/>
+  <bookmark name="BBC Radio 4 Extra (National) [Comedy/Drama/Features]" url="http://www.bbc.co.uk/radio/listen/live/r4x_aaclca.pls"/>
+  <bookmark name="BBC 5 Live (National) [News/Talk/Sport]" url="http://www.bbc.co.uk/radio/listen/live/r5l_aaclca.pls"/>
+  <bookmark name="Heat (Digital Network) [Uptempo Pop]" url="http://tx.whatson.com/icecast.php?i=heat.mp3.m3u"/>
+    <bookmark name="LBC 1152 AM (London) [News]" url="http://media-ice.musicradio.com:80/LBC1152.m3u"/>
+    <bookmark name="Eagle Extra (Guildford) [Hits]" url="http://str1.sad.ukrd.com/county.m3u"/>
+    <bookmark name="Absolute Radio 60s (London) [60s music]" url="http://network.absoluteradio.co.uk/core/audio/ogg/live.pls?service=a6bb"/>
+    <bookmark name="Absolute Radio 90s (London) [90s music]" url="http://icecast.timlradio.co.uk/a9160.ogg.m3u"/>
+    <bookmark name="BBC 1Xtra (National) [Urban/RnB/HipHop]" url="http://www.bbc.co.uk/radio/listen/live/r1x_aaclca.pls"/>
+    <bookmark name="LBC 97.3 FM (London) [News/Talk]" url="http://media-ice.musicradio.com/LBC973MP3Low.m3u"/>
+
+
+
+
   <bookmark name="[separator-a148dc48-30f4-4cc2-92e2-6641e255626e]" url="[separator-a148dc48-30f4-4cc2-92e2-6641e255626e]"/><group name="Variety rock">
-    <bookmark name="Jack fm (Oxford) [Variety rock]" url="http://stream.jackfm.co.uk:8000/stream.m3u"/>
     <bookmark name="106 Jack fm (Bristol) [Variety rock]" url="http://stream3.radiomonitor.com/JackBristol-128.m3u"/>
     <bookmark name="106 Jack FM (Hertford) [Variety rock]" url="http://ic01.mediaondemand.net/106JackFM.m3u"/>
     <bookmark name="106 JACK fm (Southampton) [Variety rock]" url="http://stream1.radiomonitor.com/JackSouthCoast-128.m3u"/>
     <bookmark name="107 JACK fm (Swindon) [Variety rock]" url="http://stream1.radiomonitor.com/JackSwindon-128.m3u"/>
-  </group>
-  <group name="Comedy/Drama/Features">
-    <bookmark name="BBC Radio 4 Extra (National) [Comedy/Drama/Features]" url="http://www.bbc.co.uk/radio/listen/live/r4x_aaclca.pls"/>
-  </group>
-  <group name="Urban">
-    <bookmark name="Choice FM (Brixton) [Urban]" url="http://media-ice.musicradio.com/ChoiceFMMP3.m3u"/>
-  </group>
-  <group name="Student Radio">
-    <bookmark name="1449 AM URB (Bath) [Student Radio]" url="http://people.bath.ac.uk/su9urb/audio/urb-hi.m3u"/>
-  </group>
-  <group name="British Forces Pop/News">
-    <bookmark name="BFBS 1 (London) [British Forces Pop/News]" url="http://icy-e-04.sharp-stream.com/ssvcbfbs1.mp3.m3u"/>
-  </group>
-  <group name="News">
-    <bookmark name="BBC World Service News (London) [News]" url="http://www.bbc.co.uk/worldservice/meta/tx/nb/live/ennws.pls"/>
-    <bookmark name="LBC 1152 AM (London) [News]" url="http://media-ice.musicradio.com:80/LBC1152.m3u"/>
-  </group>
-  <group name="Student community radio">
-    <bookmark name="CSR (Canterbury) [Student community radio]" url="http://listen.csrfm.com/stream.m3u"/>
-  </group>
-  <group name="Hits">
-    <bookmark name="Eagle Extra (Guildford) [Hits]" url="http://str1.sad.ukrd.com/county.m3u"/>
   </group>
   <group name="Classic Hits">
     <bookmark name="Pulse 2 (Bradford) [Classic Hits]" url="http://stream1.radiomonitor.com/Pulse-Gold.m3u"/>
     <bookmark name="Radio Jackie (Tolworth) [Classic Hits]" url="http://www.radiojackie.com:5873/listen.pls"/>
     <bookmark name="Sunshine 855 (Ludlow) [Classic Hits]" url="http://wm9.easystream.co.uk/sunshine855"/>
     <bookmark name="Sunshine Radio (Hereford) [Classic Hits]" url="http://wm9.easystream.co.uk/herefordFM"/>
-  </group>
-  <group name="Multicultural">
-    <bookmark name="Spectrum Radio Sky Digital (London) [Multicultural]" url="http://icy-e-04.sharp-stream.com/spectrum3.mp3.m3u"/>
   </group>
   <group name="Student radio">
     <bookmark name="None (Edinburgh) [Student radio]" url="http://live.freshair.org.uk:3066/listen.pls"/>
@@ -48,23 +36,6 @@
     <bookmark name="RaW 1251AM (Warwick) [Student radio]" url="http://radio.warwick.ac.uk/streams/auto-high-mp3.m3u"/>
     <bookmark name="UWS Radio (Ayr) [Student radio]" url="http://icecast.commedia.org.uk:8000/ucaradio.mp3.m3u"/>
     <bookmark name="Xpress Radio (Cardiff) [Student radio]" url="http://stream.suon.cf.ac.uk:8000/xpress.m3u"/>
-  </group>
-  <group name="African Community radio">
-    <bookmark name="Voice of Africa Radio (Newham) [African Community radio]" url="http://ice3.securenetsystems.net/VOAR943.m3u"/>
-  </group>
-  <group name="Chillout / lounge music">
-    <bookmark name="Chill (Digital Network) [Chillout / lounge music]" url="http://media-ice.musicradio.com/ChillMP3.m3u"/>
-  </group>
-  <group name="News/Feature programming">
-    <bookmark name="BBC Radio 4 (National) [News/Feature programming]" url="http://www.bbc.co.uk/radio/listen/live/r4_aaclca.pls"/>
-    <bookmark name="BBC Radio 4 LW (National) [News/Feature programming]" url="http://www.bbc.co.uk/radio4/wm_asx/aod/radio4_lw.asx"/>
-  </group>
-  <group name="Talk">
-    <bookmark name="City Talk 105.9 (Liverpool) [Talk]" url="http://tx.whatson.com/icecast.php?i=citytalk.mp3.m3u"/>
-  </group>
-  <group name="Multiultural">
-    <bookmark name="Spectrum Radio AM (London) [Multiultural]" url="http://icy-e-04.sharp-stream.com/spectrum1.mp3.m3u"/>
-    <bookmark name="Spectrum Radio DAB (London) [Multiultural]" url="http://icy-e-04.sharp-stream.com/spectrum2.mp3.m3u"/>
   </group>
   <group name="Adult Contemporary">
     <bookmark name="BBC Radio 2 (National) [Adult Contemporary]" url="http://www.bbc.co.uk/radio/listen/live/r2_aaclca.pls"/>
@@ -145,15 +116,6 @@
     <bookmark name="West Sound (Ayr) [Adult Contemporary]" url="http://tx.whatson.com/icecast.php?i=westsound.mp3.m3u"/>
     <bookmark name="West Sound FM (Dumfries) [Adult Contemporary]" url="http://tx.whatson.com/icecast.php?i=westsoundfm.mp3.m3u"/>
   </group>
-  <group name="Classical">
-    <bookmark name="BBC Radio 3 (National) [Classical]" url="http://www.bbc.co.uk/radio/listen/live/r3_aaclca.pls"/>
-    <bookmark name="Classic FM (London) [Classical]" url="http://media-ice.musicradio.com/ClassicFMMP3.m3u"/>
-  </group>
-  <group name="Regional programming">
-    <bookmark name="BBC Radio Scotland (Glasgow) [Regional programming]" url="http://wmlive-lracl.bbc.co.uk/wms/nations/scotland"/>
-    <bookmark name="BBC Radio Ulster (Belfast) [Regional programming]" url="http://wmlive-lracl.bbc.co.uk/wms/nations/ulster"/>
-    <bookmark name="BBC Radio Wales (Cardiff) [Regional programming]" url="http://wmlive-lracl.bbc.co.uk/wms/nations/wales"/>
-  </group>
   <group name="Top 40/Dance">
     <bookmark name="BBC Radio 1 (National) [Top 40/Dance]" url="http://www.bbc.co.uk/radio/listen/live/r1_aaclca.pls"/>
     <bookmark name="Fire 107.6 (Bournemouth) [Top 40/Dance]" url="http://s3.xrad.io:8024/listen.pls"/>
@@ -203,13 +165,6 @@
     <bookmark name="Viking FM (Hull) [Top 40]" url="http://tx.whatson.com/icecast.php?i=viking.mp3.m3u"/>
     <bookmark name="West FM (Ayr) [Top 40]" url="http://tx.whatson.com/icecast.php?i=westfm.mp3.m3u"/>
   </group>
-  <group name="Sport">
-    <bookmark name="BBC 5 Live Sports Extra (National) [Sport]" url="http://www.bbc.co.uk/radio/listen/live/r5lsp_aaclca.pls"/>
-    <bookmark name="talkSPORT (London) [Sport]" url="http://82.197.66.102/talksport_uk.m3u"/>
-  </group>
-  <group name="Community radio (Irish)">
-    <bookmark name="Raidió Fáilte (Belfast) [Community radio (Irish)]" url="http://icecast.commedia.org.uk:8000/raidiofailte.mp3.m3u"/>
-  </group>
   <group name="70s music">
     <bookmark name="Absolute Radio 70s (London) [70s music]" url="http://icecast.timlradio.co.uk/a7160.ogg.m3u"/>
   </group>
@@ -218,14 +173,8 @@
     <bookmark name="KL.FM 96.7 (Kings Lynn) [Current/Classic hits]" url="http://str1.sad.ukrd.com/klfm.m3u"/>
     <bookmark name="Rutland Radio (Oakham) [Current/Classic hits]" url="http://icy-e-04.sharp-stream.com/lincsfmrutland.aac.m3u"/>
   </group>
-  <group name="Bible readings">
-    <bookmark name="UCB Bible (Digital Network) [Bible readings]" url="http://icy-e-04.sharp-stream.com/ucbbible.mp3.m3u"/>
-  </group>
   <group name="Adult contemporary">
     <bookmark name="Southend Radio (Southend) [Adult contemporary]" url="http://asx.abacast.com/southend-southend-64.asx"/>
-  </group>
-  <group name="Uptempo Pop">
-    <bookmark name="Heat (Digital Network) [Uptempo Pop]" url="http://tx.whatson.com/icecast.php?i=heat.mp3.m3u"/>
   </group>
   <group name="Supermarket radio">
     <bookmark name="None (Leeds) [Supermarket radio]" url="http://audio.asdafm.com/ASDAFMLive"/>
@@ -339,18 +288,9 @@
   <group name="Adult Contemporary/Local news">
     <bookmark name="107.7 Splash FM (Worthing) [Adult Contemporary/Local news]" url="http://www.mybroadbandradio.com/asx/listen.asx?station=SPLASH_HIGH"/>
   </group>
-  <group name="Jewish Community radio">
-    <bookmark name="Radio Jcom (Leeds) [Jewish Community radio]" url="http://icecast.commedia.org.uk:8000/radiojcom.mp3.m3u"/>
-  </group>
   <group name="Adult Alternative">
     <bookmark name="BBC 6 Music (National) [Adult Alternative]" url="http://www.bbc.co.uk/radio/listen/live/r6_aaclca.pls"/>
     <bookmark name="Original 106 (Aberdeen) [Adult Alternative]" url="http://sharpflow.sharp-stream.com:8000/original106.mp3.m3u"/>
-  </group>
-  <group name="Inspirational music/worship">
-    <bookmark name="UCB Inspirational (Digital Network) [Inspirational music/worship]" url="http://icy-e-04.sharp-stream.com/ucbinspirational.mp3.m3u"/>
-  </group>
-  <group name="Talk/Soul/Afro-Caribbean issues">
-    <bookmark name="Colourful Radio (Digital network) [Talk/Soul/Afro-Caribbean issues]" url="http://streaming.colourfulradio.com:8080/listen.pls"/>
   </group>
   <group name="Rock">
     <bookmark name="Kerrang! (Digital Network) [Rock]" url="http://tx.whatson.com/icecast.php?i=kerrang.mp3.m3u"/>
@@ -360,15 +300,6 @@
     <bookmark name="Forest FM (Verwood) [Community Radio]" url="http://195.10.228.4:8000/forestfm.mp3.m3u"/>
     <bookmark name="GFM (Gloucester) [Community Radio]" url="http://icecast.commedia.org.uk:8000/gloucesterfm.mp3.m3u"/>
     <bookmark name="Tameside Radio ( Ashton-under-Lyne) [Community Radio]" url="http://icecast.commedia.org.uk:8000/tameside.mp3.m3u"/>
-  </group>
-  <group name="Urban/RnB/HipHop">
-    <bookmark name="BBC 1Xtra (National) [Urban/RnB/HipHop]" url="http://www.bbc.co.uk/radio/listen/live/r1x_aaclca.pls"/>
-  </group>
-  <group name="News/Talk">
-    <bookmark name="LBC 97.3 FM (London) [News/Talk]" url="http://media-ice.musicradio.com/LBC973MP3Low.m3u"/>
-  </group>
-  <group name="Top 40/Dance for Polish ">
-    <bookmark name="Polskie Radio Londyn (London) [Top 40/Dance for Polish ]" url="http://radio.prl24.net:8128/listen.pls"/>
   </group>
   <group name="Dance">
     <bookmark name="Ministry of Sound Radio (London) [Dance]" url="mms://wma.sharp-stream.com/moswma"/>
@@ -382,9 +313,6 @@
   </group>
   <group name="Adult Contemporary / Oldies">
     <bookmark name="Big L 1395 (Digital Network) [Adult Contemporary / Oldies]" url="http://eastlondonradio.com:8100/biglh.mp3.m3u"/>
-  </group>
-  <group name="Unsigned artists">
-    <bookmark name="Amazing Radio (Digital Network) [Unsigned artists]" url="http://stream.amazingradio.co.uk:8000/listen.pls"/>
   </group>
   <group name="Oldies">
     <bookmark name="Gold (London) [Oldies]" url="http://media-ice.musicradio.com/GoldMP3.m3u"/>
@@ -444,27 +372,6 @@
     <bookmark name="Yorkshire Coast Radio (Bridlington) [Current/Classic Hits]" url="http://str1.sad.ukrd.com/yorkshirecoastb.m3u"/>
     <bookmark name="Yorkshire Coast Radio (Whitby) [Current/Classic Hits]" url="http://str1.sad.ukrd.com/yorkshirecoastw.m3u"/>
   </group>
-  <group name="Soul/Jazz">
-    <bookmark name="Solar Radio (London) [Soul/Jazz]" url="http://icy-e-04.sharp-stream.com/solarradio.aac.m3u"/>
-  </group>
-  <group name="Youth Community radio">
-    <bookmark name="Takeover Radio (Leicester) [Youth Community radio]" url="http://www.takeoverradio.co.uk/stream/streamcma.m3u"/>
-  </group>
-  <group name="Service for blind/partially sighted">
-    <bookmark name="Insight Radio (Glasgow) [Service for blind/partially sighted]" url="http://icecast1.phasebroadcast.net/insight96.mp3.m3u"/>
-  </group>
-  <group name="Local news/features">
-    <bookmark name="BBC London (London) [Local news/features]" url="http://wmlive-lracl.bbc.co.uk/wms/england/lrlondon"/>
-  </group>
-  <group name="Celtic music">
-    <bookmark name="Celtic Music Radio (Glasgow) [Celtic music]" url="http://www.celticmusicradio.net/cmr/celtic_live.m3u"/>
-  </group>
-  <group name="90s music">
-    <bookmark name="Absolute Radio 90s (London) [90s music]" url="http://icecast.timlradio.co.uk/a9160.ogg.m3u"/>
-  </group>
-  <group name="Diverse, community radio">
-    <bookmark name="Oban FM (Oban) [Diverse, community radio]" url="http://icy-e-04.sharp-stream.com/obanfm.mp3.m3u"/>
-  </group>
   <group name="Soft Adult Contemporary">
     <bookmark name="The Breeze (Andover) [Soft Adult Contemporary]" url="http://stream1.radiomonitor.com/Breeze-Andover-128.m3u"/>
     <bookmark name="The Breeze (Basingstoke) [Soft Adult Contemporary]" url="http://stream1.radiomonitor.com/KestrelFM-North-128.m3u"/>
@@ -511,17 +418,11 @@
     <bookmark name="104.9 XFM (London) [Alternative/New music]" url="http://media-ice.musicradio.com/XFMMP3.m3u"/>
     <bookmark name="97.7 XFM (Manchester) [Alternative/New music]" url="http://media-ice.musicradio.com/XFMManchesterMP3.m3u"/>
   </group>
-  <group name="Local service (English/Welsh)">
-    <bookmark name="Radio Ceredigion (Aberystwyth) [Local service (English/Welsh)]" url="http://icy-e-01.sharp-stream.com/tcceredigion.aac.m3u"/>
-  </group>
   <group name="International news/features">
     <bookmark name="BBC World Service (London) [International news/features]" url="mms://livewmstream-ws.bbc.co.uk.edgestreams.net/reflector:43021"/>
   </group>
   <group name="Jazz">
     <bookmark name="Jazz FM (London) [Jazz]" url="http://listen.onmyradio.net:8050/listen.pls"/>
-  </group>
-  <group name="Pop, dance, gay">
-    <bookmark name="Gaydio (Manchester) [Pop, dance, gay]" url="http://listen.gaydio.co.uk:8000/gaydio.mp3.m3u"/>
   </group>
   <group name="Hot Adult Contemporary">
     <bookmark name="Absolute Radio (London) [Hot Adult Contemporary]" url="http://network.absoluteradio.co.uk/core/audio/ogg/live.pls?service=vrbb"/>
@@ -576,13 +477,6 @@
   <group name="70s Pop/Soul">
     <bookmark name="Smooth Radio 70s (London) [70s Pop/Soul]" url="http://shoutcast.gmgradio.com:10008/listen.pls"/>
   </group>
-  <group name="60s music">
-    <bookmark name="Absolute Radio 60s (London) [60s music]" url="http://network.absoluteradio.co.uk/core/audio/ogg/live.pls?service=a6bb"/>
-  </group>
-  <group name="Gospel">
-    <bookmark name="Premier Gospel (London) [Gospel]" url="http://wma.premier.org.uk/premiergospel"/>
-    <bookmark name="UCB Talk (Digital Network) [Gospel]" url="http://icy-e-04.sharp-stream.com/ucbgospel.mp3.m3u"/>
-  </group>
   <group name="Classic Rock">
     <bookmark name="Absolute Radio Classic Rock (London) [Classic Rock]" url="http://network.absoluteradio.co.uk/core/audio/ogg/live.pls?service=vcbb"/>
     <bookmark name="Planet Rock (Digital Network) [Classic Rock]" url="http://mars.sharp-stream.com/planetrock"/>
@@ -590,19 +484,7 @@
     <bookmark name="Real Radio XS (Manchester) [Classic Rock]" url="http://shoutcast.gmgradio.com:10103/listen.pls"/>
     <bookmark name="Real Radio XS (Renfrewshire) [Classic Rock]" url="http://shoutcast.gmgradio.com:10001/listen.pls"/>
   </group>
-  <group name="00s music">
-    <bookmark name="Absolute Radio 00s (London) [00s music]" url="http://network.absoluteradio.co.uk/core/audio/ogg/live.pls?service=a0bb"/>
-  </group>
-  <group name="Asian community radio">
-    <bookmark name="Asian Star 101.6 FM (Slough) [Asian community radio]" url="http://icecast.commedia.org.uk:8000/asianstar.mp3.m3u"/>
-    <bookmark name="Awaz FM (Glasgow) [Asian community radio]" url="http://icecast.commedia.org.uk:8000/awaz.mp3.m3u"/>
-  </group>
-  <group name="News/Talk/Sport">
-    <bookmark name="BBC 5 Live (National) [News/Talk/Sport]" url="http://www.bbc.co.uk/radio/listen/live/r5l_aaclca.pls"/>
-  </group>
   <group name="Dance/RnB">
-    <bookmark name="Juice 107.6 (Liverpool) [Dance/RnB]" url="http://stream1.radiomonitor.com/Juice-Liverpool.m3u"/>
-    <bookmark name="Juice 107.2 (Brighton) [Dance/RnB]" url="http://icy-e-04.sharp-stream.com/juice1072.mp3.m3u"/>
     <bookmark name="Kiss 100 (London) [Dance/RnB]" url="http://tx.whatson.com/icecast.php?i=kiss100.mp3.m3u"/>
     <bookmark name="Kiss 105-108 (Bury St.Edmunds) [Dance/RnB]" url="http://tx.whatson.com/icecast.php?i=kiss105.mp3.m3u"/>
     <bookmark name="Kiss 101 (Bristol) [Dance/RnB]" url="http://tx.whatson.com/icecast.php?i=kiss101.mp3.m3u"/>

@@ -1,0 +1,13 @@
+bash_completion
+bash_completion.d
+bashrc
+bin
+config/user-dirs.dirs
+gitconfig
+gitignore_global
+irbrc
+pip.conf
+pythonrc
+vim
+vimrc
+xinitrc
