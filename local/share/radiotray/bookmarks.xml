@@ -1,17 +1,21 @@
 <bookmarks>
-  <group name="root"><bookmark name="Nation Radio (Cardiff) [Alternative/Indie]" url="http://icy-e-01.sharp-stream.com/tcnation.mp3.m3u"/>
-  <bookmark name="Absolute 80s (London) [80s music]" url="http://network.absoluteradio.co.uk/core/audio/ogg/live.pls?service=a8bb"/>
-    <bookmark name="Free Radio 80s (Birmingham) [80s music]" url="http://stream1.radiomonitor.com/Free-80s-128.m3u"/>
-  <bookmark name="Jack fm (Oxford) [Variety rock]" url="http://stream.jackfm.co.uk:8000/stream.m3u"/>
-  <bookmark name="BBC Radio 4 Extra (National) [Comedy/Drama/Features]" url="http://www.bbc.co.uk/radio/listen/live/r4x_aaclca.pls"/>
-  <bookmark name="BBC 5 Live (National) [News/Talk/Sport]" url="http://www.bbc.co.uk/radio/listen/live/r5l_aaclca.pls"/>
-  <bookmark name="Heat (Digital Network) [Uptempo Pop]" url="http://tx.whatson.com/icecast.php?i=heat.mp3.m3u"/>
-    <bookmark name="LBC 1152 AM (London) [News]" url="http://media-ice.musicradio.com:80/LBC1152.m3u"/>
-    <bookmark name="Eagle Extra (Guildford) [Hits]" url="http://str1.sad.ukrd.com/county.m3u"/>
-    <bookmark name="Absolute Radio 60s (London) [60s music]" url="http://network.absoluteradio.co.uk/core/audio/ogg/live.pls?service=a6bb"/>
-    <bookmark name="Absolute Radio 90s (London) [90s music]" url="http://icecast.timlradio.co.uk/a9160.ogg.m3u"/>
-    <bookmark name="BBC 1Xtra (National) [Urban/RnB/HipHop]" url="http://www.bbc.co.uk/radio/listen/live/r1x_aaclca.pls"/>
-    <bookmark name="LBC 97.3 FM (London) [News/Talk]" url="http://media-ice.musicradio.com/LBC973MP3Low.m3u"/>
+    <group name="root">
+        <group name="Listen-able">
+            <bookmark name="Nation Radio (Cardiff) [Alternative/Indie]" url="http://icy-e-01.sharp-stream.com/tcnation.mp3.m3u"/>
+            <bookmark name="Absolute 80s (London) [80s music]" url="http://network.absoluteradio.co.uk/core/audio/ogg/live.pls?service=a8bb"/>
+            <bookmark name="Free Radio 80s (Birmingham) [80s music]" url="http://stream1.radiomonitor.com/Free-80s-128.m3u"/>
+            <bookmark name="Jack fm (Oxford) [Variety rock]" url="http://stream.jackfm.co.uk:8000/stream.m3u"/>
+            <bookmark name="BBC Radio 4 Extra (National) [Comedy/Drama/Features]" url="http://www.bbc.co.uk/radio/listen/live/r4x_aaclca.pls"/>
+            <bookmark name="BBC 5 Live (National) [News/Talk/Sport]" url="http://www.bbc.co.uk/radio/listen/live/r5l_aaclca.pls"/>
+            <bookmark name="Heat (Digital Network) [Uptempo Pop]" url="http://tx.whatson.com/icecast.php?i=heat.mp3.m3u"/>
+            <bookmark name="LBC 1152 AM (London) [News]" url="http://media-ice.musicradio.com:80/LBC1152.m3u"/>
+            <bookmark name="Eagle Extra (Guildford) [Hits]" url="http://str1.sad.ukrd.com/county.m3u"/>
+            <bookmark name="Absolute Radio 60s (London) [60s music]" url="http://network.absoluteradio.co.uk/core/audio/ogg/live.pls?service=a6bb"/>
+            <bookmark name="Absolute Radio 90s (London) [90s music]" url="http://icecast.timlradio.co.uk/a9160.ogg.m3u"/>
+            <bookmark name="BBC 1Xtra (National) [Urban/RnB/HipHop]" url="http://www.bbc.co.uk/radio/listen/live/r1x_aaclca.pls"/>
+            <bookmark name="LBC 97.3 FM (London) [News/Talk]" url="http://media-ice.musicradio.com/LBC973MP3Low.m3u"/>
+            <bookmark name="Big L 1395 (Digital Network) [Adult Contemporary / Oldies]" url="http://eastlondonradio.com:8100/biglh.mp3.m3u"/>
+        </group>
 
 
 
@@ -310,9 +314,6 @@
   </group>
   <group name="Pop/rock/dance">
     <bookmark name="Reach OnAir (Internet only) [Pop/rock/dance]" url="http://78.110.169.162:8192/live192.m3u"/>
-  </group>
-  <group name="Adult Contemporary / Oldies">
-    <bookmark name="Big L 1395 (Digital Network) [Adult Contemporary / Oldies]" url="http://eastlondonradio.com:8100/biglh.mp3.m3u"/>
   </group>
   <group name="Oldies">
     <bookmark name="Gold (London) [Oldies]" url="http://media-ice.musicradio.com/GoldMP3.m3u"/>
