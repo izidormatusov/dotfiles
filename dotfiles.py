@@ -25,7 +25,7 @@ import os
 import shutil
 import sys
 
-HOMEDIR = os.path.expanduser('~/test')
+HOMEDIR = os.path.expanduser('~')
 INSTALL_FILE = os.path.join(os.path.dirname(__file__), '.install.list')
 
 def read_install_files():
@@ -37,6 +37,8 @@ def write_install_files(install_files):
     """ Save sorted install files list """
     with open(INSTALL_FILE, 'w') as f:
         f.write('\n'.join(sorted(install_files)))
+        # Trailing newline
+        f.write('\n')
 
 def clean_filename(orig_filename):
     abs_filename = os.path.abspath(orig_filename)
@@ -89,12 +91,19 @@ if __name__ == "__main__":
                 INSTALL_FILES.append(filename)
     elif action == 'install':
         for filename in INSTALL_FILES:
+            abs_path = os.path.abspath(os.path.join(HOMEDIR, '.' + filename))
+            if os.path.exists(abs_path):
+                if not os.path.islink(abs_path):
+                    print("File '%s' already exists" % abs_path)
+                # Ignore existing files
+                continue
+
             # Create folder structure
-            dirname = os.path.join(HOMEDIR, '.' + os.path.dirname(filename))
+            dirname = os.path.dirname(abs_path)
             if dirname and not os.path.exists(dirname):
                 os.makedirs(dirname)
 
-            abs_path = os.path.abspath(os.path.join(HOMEDIR, '.' + filename))
+            print("ln -s %s %s" % (os.path.abspath(filename), abs_path))
             os.symlink(os.path.abspath(filename), abs_path)
     else:
         print("Unrecognized action '%s'" % action)
