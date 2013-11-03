@@ -68,10 +68,10 @@ if __name__ == "__main__":
             else:
                 folder = os.path.dirname(filename)
                 if not os.path.exists(folder):
-                    os.path.makedirs(folder)
+                    os.makedirs(folder)
                 abs_path = os.path.abspath(orig_filename)
                 shutil.move(abs_path, folder)
-                os.symlink(os.path.abspath(filename), abs_filename)
+                os.symlink(os.path.abspath(filename), abs_path)
                 INSTALL_FILES.append(filename)
     elif action in ['rm', 'delete', 'remove']:
         for orig_filename in sys.argv[2:]:

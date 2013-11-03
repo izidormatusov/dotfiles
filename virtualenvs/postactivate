@@ -1,0 +1,40 @@
+#!/bin/bash
+# This hook is run after every virtualenv is activated.
+
+# Enter work directory if it exists
+WORK_DIR="$HOME/workspace/`basename $VIRTUAL_ENV`"
+[ -d ${WORK_DIR} ] && cd $WORK_DIR
+
+# Find a suitable management file
+MANAGE=${MANAGE:-"UNSET"}
+if [ "$MANAGE" = "UNSET" ]
+then
+    for script in './sites/sandbox/manage.py' './www/manage.py' './sandbox/manage.py'
+    do
+        if [ -e "$script" ]
+        then
+            MANAGE="$script"
+            break
+        fi
+    done
+fi
+
+function r() {
+    PORT=${1:-0.0.0.0:8080}
+    expr index "$PORT" ":" | : || PORT="0.0.0.0:$PORT"
+    $MANAGE runserver $PORT
+}
+
+function rr() {
+    PORT=${1:-0.0.0.0:8080}
+    expr index "$PORT" ":" | : || PORT="0.0.0.0:$PORT"
+    $MANAGE runserver_plus $PORT
+}
+
+function s() {
+    $MANAGE shell_plus $@
+}
+
+function m() {
+    $MANAGE $@
+}

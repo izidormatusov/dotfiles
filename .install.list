@@ -10,4 +10,5 @@ pip/pip.conf
 pythonrc
 vim
 vimrc
+virtualenvs/postactivate
 xinitrc
