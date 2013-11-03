@@ -6,7 +6,7 @@ config/user-dirs.dirs
 gitconfig
 gitignore_global
 irbrc
-pip.conf
+pip/pip.conf
 pythonrc
 vim
 vimrc
