@@ -21,13 +21,9 @@
 
 
   <bookmark name="[separator-a148dc48-30f4-4cc2-92e2-6641e255626e]" url="[separator-a148dc48-30f4-4cc2-92e2-6641e255626e]"/><group name="Variety rock">
-    <bookmark name="106 Jack fm (Bristol) [Variety rock]" url="http://stream3.radiomonitor.com/JackBristol-128.m3u"/>
-    <bookmark name="106 Jack FM (Hertford) [Variety rock]" url="http://ic01.mediaondemand.net/106JackFM.m3u"/>
-    <bookmark name="106 JACK fm (Southampton) [Variety rock]" url="http://stream1.radiomonitor.com/JackSouthCoast-128.m3u"/>
     <bookmark name="107 JACK fm (Swindon) [Variety rock]" url="http://stream1.radiomonitor.com/JackSwindon-128.m3u"/>
   </group>
   <group name="Classic Hits">
-    <bookmark name="Pulse 2 (Bradford) [Classic Hits]" url="http://stream1.radiomonitor.com/Pulse-Gold.m3u"/>
     <bookmark name="Radio Jackie (Tolworth) [Classic Hits]" url="http://www.radiojackie.com:5873/listen.pls"/>
     <bookmark name="Sunshine 855 (Ludlow) [Classic Hits]" url="http://wm9.easystream.co.uk/sunshine855"/>
     <bookmark name="Sunshine Radio (Hereford) [Classic Hits]" url="http://wm9.easystream.co.uk/herefordFM"/>
