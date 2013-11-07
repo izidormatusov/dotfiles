@@ -67,6 +67,25 @@ genpasswd() {
     [ "$l" == "" ] && l=20
     tr -dc A-Za-z0-9_ < /dev/urandom | head -c ${l} | xargs
 }
+
+clone() {
+    # Clone tangentlabs repo
+    local org="tangentlabs"
+    local repo=""
+
+    if [ $# -ge 2 ] ; then
+        local org="$1"
+        local repo="$2"
+        shift 2
+    elif [ $# -eq 1 ] ; then
+        local repo="$1"
+        shift 1
+    else
+        echo "Usage: clone [org] repo"
+    fi
+    git clone "git@github.com:$org/$repo.git" $@
+}
+
 eval `dircolors -b`
 export PATH="$HOME/.bin:$PATH"
 
