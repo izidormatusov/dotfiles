@@ -58,6 +58,8 @@ function fn() {
 
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
+# Source highlighting
+alias scat='pygmentize -f console256 -O "style=monokai"'
 
 eval `dircolors -b`
 export PATH="$HOME/.bin:$PATH"
