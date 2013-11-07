@@ -87,7 +87,7 @@ clone() {
 }
 
 eval `dircolors -b`
-export PATH="$HOME/.bin:$PATH"
+export PATH="$HOME/.bin:$PATH:/usr/local/go/bin"
 
 export PYTHONSTARTUP=$HOME/.pythonrc
 
