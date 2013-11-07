@@ -5,36 +5,29 @@
 WORK_DIR="$HOME/workspace/`basename $VIRTUAL_ENV`"
 [ -d ${WORK_DIR} ] && cd $WORK_DIR
 
-# Find a suitable management file
-MANAGE=${MANAGE:-"UNSET"}
-if [ "$MANAGE" = "UNSET" ]
-then
-    for script in './sites/sandbox/manage.py' './www/manage.py' './sandbox/manage.py'
-    do
-        if [ -e "$script" ]
-        then
-            MANAGE="$script"
-            break
-        fi
-    done
-fi
+function get_manage_script() {
+    # Find manage.py script
+    find -name 'manage.py' | head -1
+}
 
-function r() {
+function get_bind_address() {
     PORT=${1:-0.0.0.0:8080}
     expr index "$PORT" ":" | : || PORT="0.0.0.0:$PORT"
-    $MANAGE runserver $PORT
+    echo $PORT
+}
+
+function r() {
+    `get_manage_script` runserver `get_bind_address $1`
 }
 
 function rr() {
-    PORT=${1:-0.0.0.0:8080}
-    expr index "$PORT" ":" | : || PORT="0.0.0.0:$PORT"
-    $MANAGE runserver_plus $PORT
+    `get_manage_script` runserver_plus `get_bind_address $1`
 }
 
 function s() {
-    $MANAGE shell_plus $@
+    `get_manage_script` shell_plus $@
 }
 
 function m() {
-    $MANAGE $@
+    `get_manage_script` $@
 }
