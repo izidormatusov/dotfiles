@@ -61,6 +61,12 @@ alias pbpaste='xsel --clipboard --output'
 # Source highlighting
 alias scat='pygmentize -f console256 -O "style=monokai"'
 
+genpasswd() {
+    # Generate random password
+    local l=$1
+    [ "$l" == "" ] && l=20
+    tr -dc A-Za-z0-9_ < /dev/urandom | head -c ${l} | xargs
+}
 eval `dircolors -b`
 export PATH="$HOME/.bin:$PATH"
 
