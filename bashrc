@@ -60,7 +60,7 @@ alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
 
 eval `dircolors -b`
-export PATH="$HOME/.bin:$PATH"
+export PATH="$HOME/.bin:$PATH:/opt/android/platform-tools:/opt/android/tools"
 
 export PYTHONSTARTUP=$HOME/.pythonrc
 
