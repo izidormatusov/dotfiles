@@ -58,9 +58,36 @@ function fn() {
 
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
+# Source highlighting
+alias scat='pygmentize -f console256 -O "style=monokai"'
+
+genpasswd() {
+    # Generate random password
+    local l=$1
+    [ "$l" == "" ] && l=20
+    tr -dc A-Za-z0-9_ < /dev/urandom | head -c ${l} | xargs
+}
+
+clone() {
+    # Clone tangentlabs repo
+    local org="tangentlabs"
+    local repo=""
+
+    if [ $# -ge 2 ] ; then
+        local org="$1"
+        local repo="$2"
+        shift 2
+    elif [ $# -eq 1 ] ; then
+        local repo="$1"
+        shift 1
+    else
+        echo "Usage: clone [org] repo"
+    fi
+    git clone "git@github.com:$org/$repo.git" $@
+}
 
 eval `dircolors -b`
-export PATH="$HOME/.bin:$PATH:/opt/android/platform-tools:/opt/android/tools"
+export PATH="$HOME/.bin:$PATH:/opt/android/platform-tools:/opt/android/tools:/usr/local/go/bin"
 
 export PYTHONSTARTUP=$HOME/.pythonrc
 
