@@ -315,9 +315,6 @@
   <group name="Pop/rock/dance">
     <bookmark name="Reach OnAir (Internet only) [Pop/rock/dance]" url="http://78.110.169.162:8192/live192.m3u"/>
   </group>
-  <group name="Oldies">
-    <bookmark name="Gold (London) [Oldies]" url="http://media-ice.musicradio.com/GoldMP3.m3u"/>
-  </group>
   <group name="Current/Classic Hits">
     <bookmark name="2BR (Burnley) [Current/Classic Hits]" url="http://str1.sad.ukrd.com/2br.m3u"/>
     <bookmark name="Arrow FM (Hastings) [Current/Classic Hits]" url="http://78.129.232.99/arrowfm"/>
