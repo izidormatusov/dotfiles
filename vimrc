@@ -42,6 +42,9 @@ colorscheme wombat256
 " Pathogen
 execute pathogen#infect()
 
+" Sudo saving
+cmap w!! w !sudo tee % >/dev/null
+
 function! MakfileSetting()
     " Makefile requires tabs
     set noexpandtab
