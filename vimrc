@@ -24,7 +24,7 @@ set expandtab
 
 " Take care of whitespace characters
 set list
-set listchars=tab:>\ ,trail:~,extends:>,precedes:<,nbsp:.
+set listchars=tab:>\ ,trail:✗,extends:▶,precedes:◀,nbsp:☢
 
 " Toggle paste mode
 set pastetoggle=<F2>
@@ -45,17 +45,27 @@ execute pathogen#infect()
 " Sudo saving
 cmap w!! w !sudo tee % >/dev/null
 
+" Show up to 10 files
+let g:CommandTMaxHeight=10
+
+" Easily search codebases
+map <Leader>o :CommandT ~/workspace/oscar/<CR>
+
 function! MakfileSetting()
     " Makefile requires tabs
-    set noexpandtab
+    setlocal noexpandtab
 endfunction
 
 function! PythonSettings()
     " Red line for 80 character limit
-    set colorcolumn=80
+    setlocal colorcolumn=80
 endfunction
 
 if has('autocmd')
     autocmd FileType make call MakfileSetting()
     autocmd FileType python call PythonSettings()
+    autocmd FileType gitcommit setlocal nolist
+
+    " Treat .rss files as XML
+    " autocmd BufNewFile,BufRead *.rss setfiletype xml
 endif
