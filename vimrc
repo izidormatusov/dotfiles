@@ -32,6 +32,9 @@ set pastetoggle=<F2>
 " Time to learn to live with mouse
 set mouse=a
 
+" Let's give it a try
+set relativenumber
+
 " change the mapleader from \ to ,
 let mapleader=","
 
@@ -47,6 +50,8 @@ cmap w!! w !sudo tee % >/dev/null
 
 " Show up to 10 files
 let g:CommandTMaxHeight=10
+" Python checkers
+let g:syntastic_python_checkers=['flake8', 'py3kwarn']
 
 " Easily search codebases
 map <Leader>o :CommandT ~/workspace/oscar/<CR>

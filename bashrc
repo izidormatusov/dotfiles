@@ -96,6 +96,8 @@ _VIRTUALENVWRAPPER="/usr/local/bin/virtualenvwrapper.sh"
 if [ -e "$_VIRTUALENVWRAPPER" ] ; then
     source $_VIRTUALENVWRAPPER
 
+    # Use system-site packages (PyZen, flake8, etc)
+    alias 'mkvirtualenv'='mkvirtualenv --system-site-packages'
     alias 'w'='workon'
     complete -o default -o nospace -F _virtualenvs w
 fi

@@ -28,10 +28,12 @@ import sys
 HOMEDIR = os.path.expanduser('~')
 INSTALL_FILE = os.path.join(os.path.dirname(__file__), '.install.list')
 
+
 def read_install_files():
     """ Return list of install files """
     return [line.strip().lstrip('.')
             for line in open(INSTALL_FILE).read().splitlines() if line.strip()]
+
 
 def write_install_files(install_files):
     """ Save sorted install files list """
@@ -39,6 +41,7 @@ def write_install_files(install_files):
         f.write('\n'.join(sorted(install_files)))
         # Trailing newline
         f.write('\n')
+
 
 def clean_filename(orig_filename):
     abs_filename = os.path.abspath(orig_filename)
@@ -87,7 +90,8 @@ if __name__ == "__main__":
                     break
             else:
                 print("'%s' is not registered dotfile" % orig_filename)
-                os.symlink(os.path.abspath(filename), abs_filename)
+                os.symlink(os.path.abspath(filename),
+                           os.path.abspath(orig_filename))
                 INSTALL_FILES.append(filename)
     elif action == 'install':
         for filename in INSTALL_FILES:
