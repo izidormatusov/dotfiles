@@ -11,6 +11,9 @@ set hlsearch
 set ignorecase
 set smartcase
 
+" I love many tabs
+set tabpagemax=999
+
 " Indentation
 set autoindent
 
@@ -32,6 +35,21 @@ set pastetoggle=<F2>
 " Time to learn to live with mouse
 set mouse=a
 
+" Use sane regexes.
+nnoremap / /\v
+vnoremap / /\v
+
+" Space to toggle folds.
+nnoremap <Space> za
+vnoremap <Space> za
+
+" "Refocus" folds
+nnoremap ,z zMzvzz
+
+" Make zO recursively open whatever top level fold we're in, no matter where the
+" cursor happens to be.
+nnoremap zO zCzO
+
 " Let's give it a try
 set relativenumber
 
@@ -50,8 +68,6 @@ cmap w!! w !sudo tee % >/dev/null
 
 " Show up to 10 files
 let g:CommandTMaxHeight=10
-" Python checkers
-let g:syntastic_python_checkers=['flake8', 'py3kwarn']
 
 " Easily search codebases
 map <Leader>o :CommandT ~/workspace/oscar/<CR>
