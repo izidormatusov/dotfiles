@@ -21,9 +21,12 @@
 
 
   <bookmark name="[separator-a148dc48-30f4-4cc2-92e2-6641e255626e]" url="[separator-a148dc48-30f4-4cc2-92e2-6641e255626e]"/><group name="Variety rock">
+    <bookmark name="106 Jack FM (Hertford) [Variety rock]" url="http://ic01.mediaondemand.net/106JackFM.m3u"/>
+    <bookmark name="106 JACK fm (Southampton) [Variety rock]" url="http://stream1.radiomonitor.com/JackSouthCoast-128.m3u"/>
     <bookmark name="107 JACK fm (Swindon) [Variety rock]" url="http://stream1.radiomonitor.com/JackSwindon-128.m3u"/>
   </group>
   <group name="Classic Hits">
+    <bookmark name="Pulse 2 (Bradford) [Classic Hits]" url="http://stream1.radiomonitor.com/Pulse-Gold.m3u"/>
     <bookmark name="Radio Jackie (Tolworth) [Classic Hits]" url="http://www.radiojackie.com:5873/listen.pls"/>
     <bookmark name="Sunshine 855 (Ludlow) [Classic Hits]" url="http://wm9.easystream.co.uk/sunshine855"/>
     <bookmark name="Sunshine Radio (Hereford) [Classic Hits]" url="http://wm9.easystream.co.uk/herefordFM"/>
@@ -297,7 +300,6 @@
   </group>
   <group name="Community Radio">
     <bookmark name="BCB 106.6FM (Bradford) [Community Radio]" url="http://icecast.commedia.org.uk:8000/bcb.mp3.m3u"/>
-    <bookmark name="Forest FM (Verwood) [Community Radio]" url="http://195.10.228.4:8000/forestfm.mp3.m3u"/>
     <bookmark name="GFM (Gloucester) [Community Radio]" url="http://icecast.commedia.org.uk:8000/gloucesterfm.mp3.m3u"/>
     <bookmark name="Tameside Radio ( Ashton-under-Lyne) [Community Radio]" url="http://icecast.commedia.org.uk:8000/tameside.mp3.m3u"/>
   </group>
@@ -476,11 +478,5 @@
     <bookmark name="Planet Rock (Digital Network) [Classic Rock]" url="http://mars.sharp-stream.com/planetrock"/>
     <bookmark name="Radio Caroline (Digital Network) [Classic Rock]" url="http://sc6.radiocaroline.net:8040/listen.pls"/>
     <bookmark name="Real Radio XS (Manchester) [Classic Rock]" url="http://shoutcast.gmgradio.com:10103/listen.pls"/>
-    <bookmark name="Real Radio XS (Renfrewshire) [Classic Rock]" url="http://shoutcast.gmgradio.com:10001/listen.pls"/>
-  </group>
-  <group name="Dance/RnB">
-    <bookmark name="Kiss 100 (London) [Dance/RnB]" url="http://tx.whatson.com/icecast.php?i=kiss100.mp3.m3u"/>
-    <bookmark name="Kiss 105-108 (Bury St.Edmunds) [Dance/RnB]" url="http://tx.whatson.com/icecast.php?i=kiss105.mp3.m3u"/>
-    <bookmark name="Kiss 101 (Bristol) [Dance/RnB]" url="http://tx.whatson.com/icecast.php?i=kiss101.mp3.m3u"/>
   </group>
 </group></bookmarks>
