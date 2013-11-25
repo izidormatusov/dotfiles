@@ -50,9 +50,6 @@ nnoremap ,z zMzvzz
 " cursor happens to be.
 nnoremap zO zCzO
 
-" Let's give it a try
-set relativenumber
-
 " change the mapleader from \ to ,
 let mapleader=","
 

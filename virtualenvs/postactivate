@@ -12,7 +12,7 @@ function get_manage_script() {
 
 function get_bind_address() {
     PORT=${1:-0.0.0.0:8080}
-    expr index "$PORT" ":" | : || PORT="0.0.0.0:$PORT"
+    expr index "$PORT" ":" > /dev/null || PORT="0.0.0.0:$PORT"
     echo $PORT
 }
 
