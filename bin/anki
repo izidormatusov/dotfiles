@@ -1,3 +1,2 @@
 #!/bin/sh
-sleep 1m
 exec /usr/bin/anki -b $HOME/files/anki $@
