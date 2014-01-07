@@ -10,8 +10,13 @@ function get_manage_script() {
     find -name 'manage.py' | head -1
 }
 
+function get_vagrant_folder() {
+    # Find manage.py script
+    dirname $(find -name 'Vagrantfile' | head -1)
+}
+
 function get_bind_address() {
-    PORT=${1:-0.0.0.0:8080}
+    PORT=${1:-0.0.0.0:7070}
     expr index "$PORT" ":" > /dev/null || PORT="0.0.0.0:$PORT"
     echo $PORT
 }
@@ -30,4 +35,9 @@ function s() {
 
 function m() {
     `get_manage_script` $@
+}
+
+function v() {
+    cd `get_vagrant_folder`
+    vagrant $@
 }

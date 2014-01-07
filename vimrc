@@ -65,9 +65,13 @@ cmap w!! w !sudo tee % >/dev/null
 
 " Show up to 10 files
 let g:CommandTMaxHeight=10
+set wildignore=*.pyc,*.jpeg,*.png
 
 " Easily search codebases
 map <Leader>o :CommandT ~/workspace/oscar/<CR>
+map <Leader>d :CommandT ~/workspace/django/django/<CR>
+map <Leader>al :CommandT ~/workspace/asset-library/<CR>
+map <Leader>b :CommandT ~/workspace/blakey/<CR>
 
 function! MakfileSetting()
     " Makefile requires tabs
