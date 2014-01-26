@@ -44,7 +44,7 @@ alias 'clear'='echo -en "\033c"'
 
 alias 'clpy'='find -type f -name \*.pyc -exec rm {} \;'
 
-which hub && alias 'git'='hub'
+eval "$(hub alias -s)"
 alias g='git status -sb'
 alias ga='git add'
 alias gd='git diff'
