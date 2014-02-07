@@ -1,0 +1,57 @@
+#!/bin/bash
+#
+# Allow journalling
+#
+# Requires GNU date for doing string matching, e.g. date -d yesterday
+
+STORAGE="$HOME/files/journal"
+TEMPLATE="$STORAGE/template.md"
+WEEKEND_SKIP=1
+
+# Ensure template
+[ -e "$TEMPLATE" ] || {
+    echo "Missing template"
+    echo "$EDITOR $TEMPLATE"
+    exit 1
+}
+
+
+create_file() {
+    local date="$1"
+    local file="$STORAGE/`date +%Y-%m-%d.md -d "$date"`"
+    [ -e "$file" ] || {
+        date '+# %A, %b %-d, %Y' -d $date > "$file"
+        cat "$TEMPLATE" >> "$file"
+    }
+    exec vim "$file"
+}
+
+view_file() {
+    local date="$1"
+    local file="$STORAGE/`date +%Y-%m-%d.md -d "$date"`"
+    [ -e "$file" ] || {
+        echo "No journal for $date"
+        exit 1
+    }
+    exec vim "$file"
+}
+
+
+mkdir -p $STORAGE
+
+case $1 in
+    today)
+        create_file "today"
+        ;;
+    tomorrow)
+        create_file "tomorrow"
+        ;;
+    yesterday)
+        view_file "yesterday"
+        ;;
+    *)
+        # Print usage
+        echo "Usage $0 today|tomorrow|yesterday"
+        exit 1
+        ;;
+esac

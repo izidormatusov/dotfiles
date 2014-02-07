@@ -53,6 +53,11 @@ alias gci='git commit'
 alias grm='git rm'
 alias gmv='git mv'
 
+# Journal
+alias today='journal today'
+alias tomorrow='journal tomorrow'
+alias yesterday='journal yesterday'
+
 function fn() {
     find -name "*$**"
 }
