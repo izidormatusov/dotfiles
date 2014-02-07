@@ -73,6 +73,9 @@ map <Leader>d :CommandT ~/workspace/django/django/<CR>
 map <Leader>al :CommandT ~/workspace/asset-library/<CR>
 map <Leader>b :CommandT ~/workspace/blakey/<CR>
 
+" Edit current snippet filetype
+map <Leader>s :execute 'tabe ~/.vim/bundle/snipmate/snippets/' . &filetype . '.snippets'<CR>
+
 function! MakfileSetting()
     " Makefile requires tabs
     setlocal noexpandtab

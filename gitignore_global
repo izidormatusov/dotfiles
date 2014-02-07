@@ -1,3 +1,5 @@
 .sw*
 .*.sw*
 *.pyc
+# My notes in projects folder
+xnotes
