@@ -11,9 +11,6 @@ set hlsearch
 set ignorecase
 set smartcase
 
-" I love many tabs
-set tabpagemax=999
-
 " Indentation
 set autoindent
 
@@ -34,10 +31,6 @@ set pastetoggle=<F2>
 
 " Time to learn to live with mouse
 set mouse=a
-
-" Use sane regexes.
-nnoremap / /\v
-vnoremap / /\v
 
 " Space to toggle folds.
 nnoremap <Space> za
@@ -70,7 +63,6 @@ set wildignore=*.pyc,*.jpeg,*.png
 " Easily search codebases
 map <Leader>o :CommandT ~/workspace/oscar/<CR>
 map <Leader>d :CommandT ~/workspace/django/django/<CR>
-map <Leader>al :CommandT ~/workspace/asset-library/<CR>
 map <Leader>b :CommandT ~/workspace/blakey/<CR>
 
 " Edit current snippet filetype
@@ -90,7 +82,4 @@ if has('autocmd')
     autocmd FileType make call MakfileSetting()
     autocmd FileType python call PythonSettings()
     autocmd FileType gitcommit setlocal nolist
-
-    " Treat .rss files as XML
-    " autocmd BufNewFile,BufRead *.rss setfiletype xml
 endif
