@@ -90,6 +90,9 @@ cabbr <expr> %% expand('%:p:h')
 set exrc
 set secure
 
+" Allow buffer jumping
+set hidden
+
 " Edit current snippet filetype
 map <Leader>s :execute 'tabe ~/.vim/bundle/snipmate/snippets/' . &filetype . '.snippets'<CR>
 
