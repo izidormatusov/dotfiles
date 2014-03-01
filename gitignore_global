@@ -3,3 +3,4 @@
 *.pyc
 # My notes in projects folder
 xnotes
+.agignore

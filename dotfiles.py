@@ -70,7 +70,7 @@ if __name__ == "__main__":
                     break
             else:
                 folder = os.path.dirname(filename)
-                if not os.path.exists(folder):
+                if folder and not os.path.exists(folder):
                     os.makedirs(folder)
                 abs_path = os.path.abspath(orig_filename)
                 shutil.move(abs_path, folder)
