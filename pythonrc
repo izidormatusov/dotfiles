@@ -4,7 +4,7 @@
 try:
     import readline
 except ImportError:
-    print "Readline not available"
+    print("Readline not available")
 else:
     import rlcompleter
     readline.parse_and_bind("tab: complete")

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # Copyright (c) 2013 Izidor Matušov
@@ -25,93 +25,124 @@ import os
 import shutil
 import sys
 
-HOMEDIR = os.path.expanduser('~')
-INSTALL_FILE = os.path.join(os.path.dirname(__file__), '.install.list')
+class Dotfiles(object):
+    HOMEDIR = os.path.expanduser('~')
 
+    def __init__(self, install_file):
+        self._install_file = install_file
+        self.load()
 
-def read_install_files():
-    """ Return list of install files """
-    return [line.strip().lstrip('.')
-            for line in open(INSTALL_FILE).read().splitlines() if line.strip()]
+    def load(self):
+        """ Load list of install files """
+        self.install_files = [
+            line.strip().lstrip('.')
+            for line in open(self._install_file).read().splitlines()
+            if line.strip()
+        ]
 
+    def save(self):
+        """ Save sorted install files list """
+        with open(self._install_file, 'w') as f:
+            f.write('\n'.join(sorted(self.install_files)))
+            # Trailing newline
+            f.write('\n')
 
-def write_install_files(install_files):
-    """ Save sorted install files list """
-    with open(INSTALL_FILE, 'w') as f:
-        f.write('\n'.join(sorted(install_files)))
-        # Trailing newline
-        f.write('\n')
+    def _clean(self, orig_filename):
+        """ Return filepath relative to HOMEDIR without initial dot """
+        abs_filename = os.path.abspath(orig_filename)
+        if not abs_filename.startswith(self.HOMEDIR):
+            raise ValueError(
+                "'{}' is outside of the home folder".format(orig_filename))
+        filename = abs_filename[len(self.HOMEDIR):].lstrip(os.path.sep)
+        filename = filename.lstrip('.')
+        return filename
 
+    def contains(self, filename):
+        for existing_filename in self.install_files:
+            if filename.startswith(existing_filename):
+                return True
+        return False
 
-def clean_filename(orig_filename):
-    abs_filename = os.path.abspath(orig_filename)
-    if not abs_filename.startswith(HOMEDIR):
-        raise ValueError("'%s' is outside of the home folder" % orig_filename)
-    filename = abs_filename[len(HOMEDIR):].lstrip(os.path.sep)
-    filename = filename.lstrip('.')
-    return filename
+    def add(self, orig_filename):
+        """ Add file into install files """
+        filename = self._clean(orig_filename)
+
+        if self.contains(filename):
+            raise ValueError("'%s' is already included" % orig_filename)
+
+        folder = os.path.join('.', os.path.dirname(filename))
+        if not os.path.exists(folder):
+            os.makedirs(folder)
+        abs_path = os.path.abspath(orig_filename)
+        shutil.move(abs_path, folder)
+        os.symlink(os.path.abspath(filename), abs_path)
+        self.install_files.append(filename)
+
+    def remove(self, orig_filename):
+        """ Remove file from install files """
+        filename = self._clean(orig_filename)
+
+        if not self.contains(filename):
+            raise ValueError("'%s' is not registered dotfile" % orig_filename)
+
+        if os.path.isdir(filename):
+            shutil.rmtree(filename)
+        else:
+            os.unlink(filename)
+
+        os.unlink(os.path.abspath(orig_filename))
+
+    def install(self, filename):
+        """ Install symlink to file """
+        abs_path = os.path.abspath(os.path.join(self.HOMEDIR, '.' + filename))
+        if os.path.exists(abs_path):
+            if os.path.islink(abs_path):
+                # Ignore existing symlink
+                return False
+            else:
+                raise ValueError("File '%s' already exists" % abs_path)
+
+        # Create folder structure
+        dirname = os.path.dirname(abs_path)
+        if dirname and not os.path.exists(dirname):
+            os.makedirs(dirname)
+
+        os.symlink(os.path.abspath(filename), abs_path)
+        return True
 
 
 if __name__ == "__main__":
     # Operate inside script's folder
     os.chdir(os.path.dirname(__file__))
-    INSTALL_FILES = read_install_files()
+
+    install_file = os.path.join(os.path.dirname(__file__), '.install.list')
+    dotfiles = Dotfiles(install_file)
+
     if len(sys.argv) <= 1:
-        print("Usage: %s <install|add> [files]" % sys.argv[0])
+        print("Usage: %s <install|add|rm> [files]" % sys.argv[0])
         sys.exit(1)
 
     action = sys.argv[1]
     if action == 'add':
-        for orig_filename in sys.argv[2:]:
-            filename = clean_filename(orig_filename)
-            for existing_filename in INSTALL_FILES:
-                if filename.startswith(existing_filename):
-                    print("'%s' is already included" % orig_filename)
-                    break
-            else:
-                folder = os.path.dirname(filename)
-                if not os.path.exists(folder):
-                    os.makedirs(folder)
-                abs_path = os.path.abspath(orig_filename)
-                shutil.move(abs_path, folder)
-                os.symlink(os.path.abspath(filename), abs_path)
-                INSTALL_FILES.append(filename)
+        for filename in sys.argv[2:]:
+            try:
+                dotfiles.add(filename)
+            except ValueError as e:
+                print(e.msg)
     elif action in ['rm', 'delete', 'remove']:
-        for orig_filename in sys.argv[2:]:
-            filename = clean_filename(orig_filename)
-            for existing_filename in INSTALL_FILES:
-                if filename == existing_filename:
-                    if os.path.isdir(filename):
-                        shutil.rmtree(filename)
-                        shutil.rmtree(os.path.abspath(orig_filename))
-                    else:
-                        os.unlink(filename)
-                        os.unlink(os.path.abspath(orig_filename))
-                    break
-            else:
-                print("'%s' is not registered dotfile" % orig_filename)
-                os.symlink(os.path.abspath(filename),
-                           os.path.abspath(orig_filename))
-                INSTALL_FILES.append(filename)
+        for filename in sys.argv[2:]:
+            try:
+                dotfiles.remove(filename)
+            except ValueError as e:
+                print(e.msg)
     elif action == 'install':
-        for filename in INSTALL_FILES:
-            abs_path = os.path.abspath(os.path.join(HOMEDIR, '.' + filename))
-            if os.path.exists(abs_path):
-                if not os.path.islink(abs_path):
-                    print("File '%s' already exists" % abs_path)
-                # Ignore existing files
-                continue
-
-            # Create folder structure
-            dirname = os.path.dirname(abs_path)
-            if dirname and not os.path.exists(dirname):
-                os.makedirs(dirname)
-
-            print("ln -s %s %s" % (os.path.abspath(filename), abs_path))
-            os.symlink(os.path.abspath(filename), abs_path)
+        for filename in dotfiles.install_files:
+            try:
+                if dotfiles.install(filename):
+                    print("Installing {}".format(filename))
+            except ValueError as e:
+                print(e.msg)
     else:
         print("Unrecognized action '%s'" % action)
 
-    write_install_files(INSTALL_FILES)
-
-# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
+    dotfiles.save()

@@ -38,7 +38,6 @@ alias 'diff'='colordiff'
 alias 'open'='xdg-open'
 # No more Octave SPAM
 alias 'octave'='octave --silent'
-alias 'vim'='vim -p'
 # Quicker reset of screen
 alias 'clear'='echo -en "\033c"'
 
@@ -52,6 +51,11 @@ alias gdc='git diff --cached'
 alias gci='git commit'
 alias grm='git rm'
 alias gmv='git mv'
+
+# Journal
+alias today='journal today'
+alias tomorrow='journal tomorrow'
+alias yesterday='journal yesterday'
 
 function fn() {
     find -name "*$**"

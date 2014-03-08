@@ -11,9 +11,6 @@ set hlsearch
 set ignorecase
 set smartcase
 
-" I love many tabs
-set tabpagemax=999
-
 " Indentation
 set autoindent
 
@@ -34,10 +31,6 @@ set pastetoggle=<F2>
 
 " Time to learn to live with mouse
 set mouse=a
-
-" Use sane regexes.
-nnoremap / /\v
-vnoremap / /\v
 
 " Space to toggle folds.
 nnoremap <Space> za
@@ -63,15 +56,45 @@ execute pathogen#infect()
 " Sudo saving
 cmap w!! w !sudo tee % >/dev/null
 
-" Show up to 10 files
-let g:CommandTMaxHeight=10
 set wildignore=*.pyc,*.jpeg,*.png
 
 " Easily search codebases
-map <Leader>o :CommandT ~/workspace/oscar/<CR>
-map <Leader>d :CommandT ~/workspace/django/django/<CR>
-map <Leader>al :CommandT ~/workspace/asset-library/<CR>
-map <Leader>b :CommandT ~/workspace/blakey/<CR>
+map <Leader>o :CtrlP ~/workspace/oscar/<CR>
+map <Leader>d :CtrlP ~/workspace/django/django/<CR>
+map <Leader>b :CtrlP ~/workspace/blakey/<CR>
+map <Leader>n :CtrlP ~/files/<CR>
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+
+else
+    let g:ctrlp_user_command = 'find %s -type f'
+endif
+
+" :Ag command
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" Expand %%/ into a directory
+cabbr <expr> %% expand('%:p:h')
+
+" Allow project specific vimrc
+set exrc
+set secure
+
+" Allow buffer jumping
+set hidden
+
+" Edit current snippet filetype
+map <Leader>s :execute 'tabe ~/.vim/bundle/snipmate/snippets/' . &filetype . '.snippets'<CR>
 
 function! MakfileSetting()
     " Makefile requires tabs
@@ -87,7 +110,4 @@ if has('autocmd')
     autocmd FileType make call MakfileSetting()
     autocmd FileType python call PythonSettings()
     autocmd FileType gitcommit setlocal nolist
-
-    " Treat .rss files as XML
-    " autocmd BufNewFile,BufRead *.rss setfiletype xml
 endif
