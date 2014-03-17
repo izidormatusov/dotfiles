@@ -80,8 +80,9 @@ else
 endif
 
 " :Ag command
-command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+command -nargs=+ -complete=file -bar Ag silent grep <args>|cwindow|redraw!
+command -nargs=+ -complete=file -bar AgArgs args `ag --nocolor -l <args>`
+nnoremap K *:grep "\b<C-R><C-W>\b"<CR>:cwindow<CR>
 
 " Expand %%/ into a directory
 cabbr <expr> %% expand('%:p:h')

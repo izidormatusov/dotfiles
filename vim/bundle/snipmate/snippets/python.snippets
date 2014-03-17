@@ -10,3 +10,10 @@ snippet iredirect
 	from django.shortcuts import redirect
 snippet i_
 	from django.utils.translation import ugettext as _
+snippet defover
+	def ${1:method_name}(self, *args, **kwargs):
+	    return super(${2:ClassName}, self).$1(*args, **kwargs)
+snippet defchan
+	def ${1:method_name}(self, *args, **kwargs):
+	    ${2:result_var} = super(${3:ClassName}, self).$1(*args, **kwargs)
+		return $2
