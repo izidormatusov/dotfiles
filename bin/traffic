@@ -1,4 +1,0 @@
-#!/bin/sh
-
-cd "$HOME/.wine/drive_c/Program Files (x86)/Traffic"
-exec wine Traffic.exe
