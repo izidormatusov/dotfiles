@@ -109,3 +109,5 @@ fi
 
 # Tangent stuff
 export TANGENT_USER="matusovi"
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
