@@ -97,6 +97,7 @@ clone() {
 
 eval `dircolors -b`
 export PATH="$HOME/.bin:$PATH:/opt/android/platform-tools:/opt/android/tools:/usr/local/go/bin"
+export GOPATH="$HOME/go"
 
 export PYTHONSTARTUP=$HOME/.pythonrc
 

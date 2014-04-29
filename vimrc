@@ -14,6 +14,9 @@ set smartcase
 " Indentation
 set autoindent
 
+" Show keys as typed in
+set showcmd
+
 " Prefer spaces
 " You want to keep those settings set to the same value:
 " http://vimcasts.org/episodes/tabs-and-spaces/
@@ -118,10 +121,16 @@ function! PythonSettings()
     set tags+=~/workspace/blakey/tags
 endfunction
 
+function! YamlSettings()
+    set tabstop=2 softtabstop=2 shiftwidth=2
+endfunction
+
 if has('autocmd')
     autocmd FileType make call MakfileSetting()
     autocmd FileType python call PythonSettings()
     autocmd FileType gitcommit setlocal nolist
+    autocmd FileType mkd setlocal foldlevel=1
+    autocmd FileType yaml call YamlSettings()
 endif
 
 " Remove toolbar
