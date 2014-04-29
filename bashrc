@@ -7,6 +7,10 @@ PS2='>> '
 # notify of bg job completion immediately
 set -o notify
 
+# use vi for editing mode (after pressing ESC or CTRL+[
+# Note that "fc" can be use to "fix command" in $EDITOR
+set -o vi
+
 # shell opts. see bash(1) for details
 shopt -s cdspell >/dev/null 2>&1
 shopt -s histappend >/dev/null 2>&1
@@ -43,19 +47,17 @@ alias 'clear'='echo -en "\033c"'
 
 alias 'clpy'='find -type f -name \*.pyc -exec rm {} \;'
 
+alias 'zuri'='mplayer http://statslive.infomaniak.ch/playlist/energyzuerich/energyzuerich-high.mp3/playlist.pls'
+
 eval "$(hub alias -s)"
 alias g='git status -sb'
 alias ga='git add'
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias gci='git commit'
+alias gco='git checkout'
 alias grm='git rm'
 alias gmv='git mv'
-
-# Journal
-alias today='journal today'
-alias tomorrow='journal tomorrow'
-alias yesterday='journal yesterday'
 
 function fn() {
     find -name "*$**"
@@ -65,6 +67,8 @@ alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
 # Source highlighting
 alias scat='pygmentize -f console256 -O "style=monokai"'
+
+alias pql='sudo -u postgres psql'
 
 genpasswd() {
     # Generate random password
@@ -111,3 +115,6 @@ fi
 export TANGENT_USER="matusovi"
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+# added by travis gem
+[ -f /home/imatusov/.travis/travis.sh ] && source /home/imatusov/.travis/travis.sh

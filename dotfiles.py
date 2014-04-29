@@ -141,7 +141,7 @@ if __name__ == "__main__":
                 if dotfiles.install(filename):
                     print("Installing {}".format(filename))
             except ValueError as e:
-                print(e.msg)
+                print(e.message)
     else:
         print("Unrecognized action '%s'" % action)
 

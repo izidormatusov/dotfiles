@@ -24,7 +24,7 @@ set expandtab
 
 " Take care of whitespace characters
 set list
-set listchars=tab:>\ ,trail:✗,extends:▶,precedes:◀,nbsp:☢
+set listchars=tab:>\ ,trail:·,extends:▶,precedes:◀,nbsp:☢
 
 " Toggle paste mode
 set pastetoggle=<F2>
@@ -46,12 +46,14 @@ nnoremap zO zCzO
 " change the mapleader from \ to ,
 let mapleader=","
 
-" Wombat colorscheme
-set t_Co=256
-colorscheme wombat256
-
 " Pathogen
 execute pathogen#infect()
+
+" Wombat colorscheme
+set t_Co=256
+"colorscheme wombat256
+set background=light
+colorscheme solarized
 
 " Sudo saving
 cmap w!! w !sudo tee % >/dev/null
@@ -64,20 +66,20 @@ map <Leader>d :CtrlP ~/workspace/django/django/<CR>
 map <Leader>b :CtrlP ~/workspace/blakey/<CR>
 map <Leader>n :CtrlP ~/files/<CR>
 
-" The Silver Searcher
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-
-else
-    let g:ctrlp_user_command = 'find %s -type f'
-endif
+"" The Silver Searcher
+"if executable('ag')
+"  " Use ag over grep
+"  set grepprg=ag\ --nogroup\ --nocolor
+"
+"  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+"  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+"
+"  " ag is fast enough that CtrlP doesn't need to cache
+"  let g:ctrlp_use_caching = 0
+"
+"else
+"    let g:ctrlp_user_command = 'find %s -type f'
+"endif
 
 " :Ag command
 command -nargs=+ -complete=file -bar Ag silent grep <args>|cwindow|redraw!
@@ -97,6 +99,10 @@ set hidden
 " Edit current snippet filetype
 map <Leader>s :execute 'tabe ~/.vim/bundle/snipmate/snippets/' . &filetype . '.snippets'<CR>
 
+" Job log
+map <Leader>j :edit ~/files/journal/job.log<CR>:setlocal textwidth=80<CR>
+map <F3> Go<CR><ESC>:r! date "+\%Y-\%m-\%d (\%A) \%H:\%M @ `hostname`"<CR>o
+
 function! MakfileSetting()
     " Makefile requires tabs
     setlocal noexpandtab
@@ -105,6 +111,11 @@ endfunction
 function! PythonSettings()
     " Red line for 80 character limit
     setlocal colorcolumn=80
+
+    map <C-F12> :!ctags -R .<CR>
+    set tags+=~/workspace/django/tags
+    set tags+=~/workspace/oscar/tags
+    set tags+=~/workspace/blakey/tags
 endfunction
 
 if has('autocmd')
@@ -112,3 +123,8 @@ if has('autocmd')
     autocmd FileType python call PythonSettings()
     autocmd FileType gitcommit setlocal nolist
 endif
+
+" Remove toolbar
+set guioptions-=T
+" Remove scrollbars
+set guioptions-=r
