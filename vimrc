@@ -54,9 +54,10 @@ execute pathogen#infect()
 
 " Wombat colorscheme
 set t_Co=256
-"colorscheme wombat256
-set background=light
-colorscheme solarized
+" colorscheme wombat256
+let g:lucius_style='dark'
+let g:lucius_contrast='normal'
+colorscheme lucius
 
 " Sudo saving
 cmap w!! w !sudo tee % >/dev/null
@@ -69,20 +70,19 @@ map <Leader>d :CtrlP ~/workspace/django/django/<CR>
 map <Leader>b :CtrlP ~/workspace/blakey/<CR>
 map <Leader>n :CtrlP ~/files/<CR>
 
-"" The Silver Searcher
-"if executable('ag')
-"  " Use ag over grep
-"  set grepprg=ag\ --nogroup\ --nocolor
-"
-"  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-"  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-"
-"  " ag is fast enough that CtrlP doesn't need to cache
-"  let g:ctrlp_use_caching = 0
-"
-"else
-"    let g:ctrlp_user_command = 'find %s -type f'
-"endif
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+else
+    let g:ctrlp_user_command = 'find %s -type f'
+endif
 
 " :Ag command
 command -nargs=+ -complete=file -bar Ag silent grep <args>|cwindow|redraw!

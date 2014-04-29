@@ -25,6 +25,7 @@ import os
 import shutil
 import sys
 
+
 class Dotfiles(object):
     HOMEDIR = os.path.expanduser('~')
 
