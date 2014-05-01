@@ -76,12 +76,12 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" | sort'
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 else
-    let g:ctrlp_user_command = 'find %s -type f'
+    let g:ctrlp_user_command = 'find %s -type f | sort'
 endif
 
 " :Ag command
@@ -131,6 +131,16 @@ if has('autocmd')
     autocmd FileType gitcommit setlocal nolist
     autocmd FileType mkd setlocal foldlevel=1
     autocmd FileType yaml call YamlSettings()
+endif
+
+
+if has('persistent_undo')
+    set undodir=~/.vim/undodir
+    set undofile
+    " maximum number of changes that can be undone
+    set undolevels=1000
+    " maximum number lines to save for undo on a buffer reload
+    set undoreload=10000
 endif
 
 " Remove toolbar
