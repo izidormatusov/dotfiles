@@ -28,6 +28,8 @@ set expandtab
 " Take care of whitespace characters
 set list
 set listchars=tab:>\ ,trail:·,extends:▶,precedes:◀,nbsp:☢
+" Soft wrap
+:set showbreak=…
 
 " Toggle paste mode
 set pastetoggle=<F2>
@@ -114,6 +116,9 @@ endfunction
 function! PythonSettings()
     " Red line for 80 character limit
     setlocal colorcolumn=80
+
+    " Punish me for long lines!
+    setlocal nowrap
 
     map <C-F12> :!ctags -R .<CR>
     set tags+=~/workspace/django/tags
