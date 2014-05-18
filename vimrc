@@ -123,6 +123,9 @@ function! PythonSettings()
     " Format python
     setlocal formatprg=autopep8\ -aa\ -
 
+    " Omni complete
+    set omnifunc=pythoncomplete#Complete
+
     map <C-F12> :!ctags -R .<CR>
     set tags+=~/workspace/django/tags
     set tags+=~/workspace/oscar/tags
@@ -144,6 +147,14 @@ if has('autocmd')
     autocmd FileType gitcommit setlocal nolist
     autocmd FileType mkd setlocal foldlevel=1
     autocmd FileType yaml call YamlSettings()
+
+    " Omni complete
+    autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+    autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+    autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+    autocmd FileType c set omnifunc=ccomplete#Complete
 endif
 
 
