@@ -120,10 +120,17 @@ function! PythonSettings()
     " Punish me for long lines!
     setlocal nowrap
 
+    " Format python
+    setlocal formatprg=autopep8\ -aa\ -
+
     map <C-F12> :!ctags -R .<CR>
     set tags+=~/workspace/django/tags
     set tags+=~/workspace/oscar/tags
     set tags+=~/workspace/blakey/tags
+endfunction
+
+function! SQLSettings()
+    setlocal formatprg=sqlformat\ --keywords=upper\ -r\ -
 endfunction
 
 function! YamlSettings()
@@ -133,6 +140,7 @@ endfunction
 if has('autocmd')
     autocmd FileType make call MakfileSetting()
     autocmd FileType python call PythonSettings()
+    autocmd FileType sql call SQLSettings()
     autocmd FileType gitcommit setlocal nolist
     autocmd FileType mkd setlocal foldlevel=1
     autocmd FileType yaml call YamlSettings()
