@@ -25,6 +25,9 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 
+" Allow more tabs by default
+set tabpagemax=50
+
 " Take care of whitespace characters
 set list
 set listchars=tab:>\ ,trail:·,extends:▶,precedes:◀,nbsp:☢
