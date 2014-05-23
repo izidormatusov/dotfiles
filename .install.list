@@ -9,6 +9,7 @@ gitignore_global
 irbrc
 pip/pip.conf
 pythonrc
+tmux.conf
 vim
 vimrc
 virtualenvs/postactivate

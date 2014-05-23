@@ -9,7 +9,7 @@ set -o notify
 
 # use vi for editing mode (after pressing ESC or CTRL+[
 # Note that "fc" can be use to "fix command" in $EDITOR
-set -o vi
+#set -o vi
 
 # shell opts. see bash(1) for details
 shopt -s cdspell >/dev/null 2>&1
@@ -40,6 +40,8 @@ alias 'grep'='grep --color=auto'
 alias 'egrep'='egrep --color=auto'
 alias 'diff'='colordiff'
 alias 'open'='xdg-open'
+# Run tmux with 256 colors
+alias 'tmux'='tmux -2'
 # No more Octave SPAM
 alias 'octave'='octave --silent'
 # Quicker reset of screen
