@@ -62,6 +62,7 @@ set t_Co=256
 " colorscheme wombat256
 let g:lucius_style='dark'
 let g:lucius_contrast='normal'
+let g:lucius_contrast_bg='high'
 colorscheme lucius
 
 " Sudo saving
