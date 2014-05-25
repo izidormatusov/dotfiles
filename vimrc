@@ -159,8 +159,13 @@ if has('autocmd')
     autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
     autocmd FileType php set omnifunc=phpcomplete#CompletePHP
     autocmd FileType c set omnifunc=ccomplete#Complete
+
+    " Delete fugitive buffers after leaving them (no need to clutter :ls)
+    autocmd BufReadPost fugitive://* set bufhidden=delete
 endif
 
+" Put fugitive in statusline
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 if has('persistent_undo')
     set undodir=~/.vim/undodir
