@@ -1,6 +1,7 @@
 agignore
 bash_completion
 bash_completion.d
+bash_profile
 bashrc
 bin
 config/user-dirs.dirs
