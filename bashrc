@@ -49,7 +49,7 @@ alias 'clear'='echo -en "\033c"'
 
 alias 'clpy'='find -type f -name \*.pyc -exec rm {} \;'
 
-alias 'zuri'='mplayer http://statslive.infomaniak.ch/playlist/energyzuerich/energyzuerich-high.mp3/playlist.pls'
+alias 'zuri'='mplayer -playlist http://statslive.infomaniak.ch/playlist/energyzuerich/energyzuerich-high.mp3/playlist.pls'
 
 eval "$(hub alias -s)"
 alias g='git status -sb'
