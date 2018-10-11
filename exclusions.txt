@@ -1,1 +1,5 @@
+.bash_secrets
 .cache/
+.esets/
+.dropbox/
+.DS_Store
