@@ -1,14 +1,24 @@
-# My dotfiles
+# izidor's dotfiles
 
-Collection of my dotfiles.
+Collection of my various configs (aka dotfiles) and installation scripts.
 
-Originally,
-[dotfiles module](https://pypi.python.org/pypi/dotfiles) was used for dotfiles
-management. That module has serious limitations (e.g. managing a single file
-beyond 2nd folder level) and was replaced by my custom script
-[dotfiles.py](dotfiles.py). The script keeps the list of manage files/folders in
-[.install.list](.install.list) file.
+## Get started
 
-## Installation
+Config files are stored under directory [dotfiles/](dotfiles/). They can be converted to
+an instalation script by running:
 
-    ./dotfiles.py install
+```shell
+./build.py
+```
+
+The configs then can be installed throught the generated script:
+
+```shell
+./install
+```
+
+The configs can be pulled from your home directory to dotfiles:
+
+```shell
+./collect.py
+```
