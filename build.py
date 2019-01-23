@@ -61,5 +61,8 @@ def main():
     with open(INSTALL_SCRIPT, 'w') as install_file:
         generate_script(install_file, dotfiles)
 
+    # Make the script executable
+    os.chmod(INSTALL_SCRIPT, 0755)
+
 if __name__ == "__main__":
     main()
