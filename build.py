@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-"""Build and deploy a script of dotfiles from the file."""
+"""Build an install script installing dotfiles and executing scripts."""
 
 import collections
 import logging
 import os
 import sys
 
-DOTFILES_DIR = 'dotfiles'
 INSTALL_SCRIPT = 'install'
+SCRIPTS_FOLDER = 'scripts'
+LIBRARY_FILE = os.path.join(SCRIPTS_FOLDER, 'common.sh')
+DOTFILES_DIR = 'dotfiles'
 MINIMAL_CONFIGS = ['tmux', 'bash', 'vim']
 
 
@@ -33,11 +35,16 @@ def get_dotfiles():
     return dotfiles
 
 
-def generate_script(install, dotfiles):
-    """Writes the script into install file."""
-    install.write('#!/bin/bash\n')
-    install.write('CONFIG_SET="${1:-all}"\n')
+def get_scripts():
+   """Returns an ordered list of scripts to install."""
+   scripts = [os.path.join(SCRIPTS_FOLDER, script)
+              for script in os.listdir(SCRIPTS_FOLDER)]
+   scripts = [script for script in scripts if script != LIBRARY_FILE]
+   return sorted(scripts)
 
+
+def install_dotfiles(install, dotfiles):
+    """Generates the script that installs dotfiles."""
     last_folder = None
     for config_set in dotfiles:
         install.write(
@@ -52,14 +59,23 @@ def generate_script(install, dotfiles):
                 content = config_file.read()
             install.write('\ncat > ~/{} <<"END_OF_DOTFILE"\n{}END_OF_DOTFILE\n'.format(
                 config_name, content))
-        install.write('\nfi\n')
+        install.write('\nfi\n\n')
 
+def include_file(install_file, filename):
+    """Embeds the file as is in the installation script."""
+    with open(filename) as include_file:
+        install_file.write(include_file.read())
+        install_file.write('\n')
 
 def main():
     """Build dotfiles into a shell script."""
     dotfiles = get_dotfiles()
+    scripts = get_scripts()
     with open(INSTALL_SCRIPT, 'w') as install_file:
-        generate_script(install_file, dotfiles)
+        include_file(install_file, LIBRARY_FILE)
+        install_dotfiles(install_file, dotfiles)
+        for script in scripts:
+            include_file(install_file, script)
 
     # Make the script executable
     os.chmod(INSTALL_SCRIPT, 0755)
