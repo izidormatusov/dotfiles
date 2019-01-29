@@ -50,7 +50,7 @@ def generate_script(install, dotfiles):
             last_folder = folder
             with open(config_path) as config_file:
                 content = config_file.read()
-            install.write('\ncat > ~/{} <<"EOF"\n{}EOF\n'.format(
+            install.write('\ncat > ~/{} <<"END_OF_DOTFILE"\n{}END_OF_DOTFILE\n'.format(
                 config_name, content))
         install.write('\nfi\n')
 
