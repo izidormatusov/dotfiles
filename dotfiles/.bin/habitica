@@ -1,0 +1,58 @@
+#!/bin/bash
+# Cast habitica burst of flames to kill the boss
+#
+# Habitica.com is RPG style TODO list/habit tracker. User collects mana which
+# can then be used on a spell to kill a quest monster. This script casts the
+# spell enough times to produce desired damage to the monster. (Who would want
+# to kill 10x on the web :)
+#
+# Algorithm:
+#  - fetch the user data
+#  - find the best task to cast the spell on
+#  - cast the spell until the target is reached or out of mana
+#
+# Requires HABITICA_USER and HABITICA_KEY environment variables.
+#
+# Usage for doing 400 damage: habitica 400
+
+set -o errexit
+set -o nounset
+
+REQUIRED_DAMAGE="$1"
+
+curl --silent --fail https://habitica.com/api/v4/user \
+  -H "x-api-user: $HABITICA_USER" -H "x-api-key: $HABITICA_KEY" > /tmp/habitica.user
+
+DAMAGE=`jq --raw-output '.data.party.quest.progress.up' /tmp/habitica.user`
+
+# Convert damage to integer
+DAMAGE=${DAMAGE%%.*}
+
+if [ $DAMAGE -ge $REQUIRED_DAMAGE ]
+then
+    echo "Already doing $DAMAGE damage"
+    exit 0
+fi
+
+curl --silent --fail https://habitica.com/api/v4/tasks/user \
+  -H "x-api-user: $HABITICA_USER" -H "x-api-key: $HABITICA_KEY" > /tmp/habitica.tasks
+
+BEST_TASK=`jq --raw-output '.data | max_by(.value) | .id' < /tmp/habitica.tasks`
+echo The best task is `jq '.data | max_by(.value) | .text' < /tmp/habitica.tasks`
+
+
+while [ $DAMAGE -lt $REQUIRED_DAMAGE ]
+do
+    echo "Casting to increase damage from $DAMAGE damage"
+    DAMAGE=`curl --fail --silent \
+  "https://habitica.com/api/v4/user/class/cast/fireball?targetId=$BEST_TASK" \
+  -H "x-api-user: $HABITICA_USER" -H "x-api-key: $HABITICA_KEY" \
+  -H 'Content-Type: application/json;charset=UTF-8' \
+  --data-binary '{}' | jq --raw-output '.data.user.party.quest.progress.up'`
+
+    # Convert damage to integer
+    DAMAGE=${DAMAGE%%.*}
+done
+
+echo "Done $DAMAGE damage"
+
