@@ -1,0 +1,10 @@
+#!/bin/bash
+# Capture part of the screen, OCR it and put it to the clipboard
+
+set -e
+
+screenshot=`mktemp`
+parsed=`mktemp`
+screencapture -x -s "$screenshot" && tesseract "$screenshot" - | tee "$parsed"
+pbcopy < "$parsed"
+rm $screenshot $parsed
