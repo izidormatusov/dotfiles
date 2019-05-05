@@ -1,5 +1,8 @@
+.DS_Store
+.Trash/
+.bash_history
 .bash_secrets
 .cache/
-.esets/
 .dropbox/
-.DS_Store
+.esets/
+.vagrant.d/
