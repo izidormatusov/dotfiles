@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Build an install script installing dotfiles and executing scripts."""
 
+import base64
 import collections
 import logging
 import os
@@ -43,6 +44,25 @@ def get_scripts():
    return sorted(scripts)
 
 
+def install_dotfile_content(install, name, path):
+    """Generate script that installs a content of dotfile.
+
+    If a dotfile is binary, then use bas64 to decode it.
+    """
+    with open(path, 'rb') as dotfile:
+        content = dotfile.read()
+    try:
+        content = content.decode('utf-8')
+        command = (
+            'cat > ~/{} <<"END_OF_DOTFILE"\n'
+            '{}END_OF_DOTFILE'.format(name, content))
+    except UnicodeDecodeError:
+        content = base64.b64encode(content).decode('utf-8')
+        command = (
+            'base64 --decode --output ~/{} <<"END_OF_DOTFILE"\n'
+            '{}\nEND_OF_DOTFILE'.format(name, content))
+    install.write('\n{}\n'.format(command))
+
 def install_dotfiles(install, dotfiles):
     """Generates the script that installs dotfiles."""
     last_folder = None
@@ -55,10 +75,10 @@ def install_dotfiles(install, dotfiles):
             if folder and folder != last_folder:
                 install.write('\nmkdir -p ~/{}\n'.format(folder))
             last_folder = folder
-            with open(config_path) as config_file:
-                content = config_file.read()
-            install.write('\ncat > ~/{} <<"END_OF_DOTFILE"\n{}END_OF_DOTFILE\n'.format(
-                config_name, content))
+            install_dotfile_content(install, config_name, config_path)
+
+
+
         install.write('\nfi\n\n')
 
 def include_file(install_file, filename):
