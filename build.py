@@ -98,7 +98,7 @@ def main():
             include_file(install_file, script)
 
     # Make the script executable
-    os.chmod(INSTALL_SCRIPT, 0755)
+    os.chmod(INSTALL_SCRIPT, 0o755)
 
 if __name__ == "__main__":
     main()
