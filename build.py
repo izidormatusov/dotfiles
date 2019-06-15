@@ -3,6 +3,7 @@
 
 import base64
 import collections
+import stat
 import logging
 import os
 import sys
@@ -77,9 +78,10 @@ def install_dotfiles(install, dotfiles):
             last_folder = folder
             install_dotfile_content(install, config_name, config_path)
 
+            chmod_mode = stat.S_IMODE(os.lstat(config_path).st_mode)
+            install.write('chmod %s ~/%s\n' % (oct(chmod_mode)[2:], config_name))
 
-
-        install.write('\nfi\n\n')
+        install.write('fi\n\n')
 
 def include_file(install_file, filename):
     """Embeds the file as is in the installation script."""
