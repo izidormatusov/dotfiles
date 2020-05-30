@@ -60,7 +60,7 @@ def install_dotfile_content(install, name, path):
     except UnicodeDecodeError:
         content = base64.b64encode(content).decode('utf-8')
         command = (
-            'base64 --decode --output ~/{} <<"END_OF_DOTFILE"\n'
+            'base64 --decode > ~/{} <<"END_OF_DOTFILE"\n'
             '{}\nEND_OF_DOTFILE'.format(name, content))
     install.write('\n{}\n'.format(command))
 
@@ -70,7 +70,7 @@ def install_dotfiles(install, dotfiles):
     for config_set in dotfiles:
         install.write(
             '\nif [ $CONFIG_SET = "{}" -o $CONFIG_SET = "all" '
-            '-o $CONFIG_SET = "unset"]\nthen\n'.format(
+            '-o $CONFIG_SET = "unset" ]\nthen\n'.format(
                 config_set))
         for config_name, config_path in sorted(dotfiles[config_set]):
             folder = os.path.dirname(config_name)
