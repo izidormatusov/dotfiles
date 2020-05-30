@@ -69,7 +69,8 @@ def install_dotfiles(install, dotfiles):
     last_folder = None
     for config_set in dotfiles:
         install.write(
-            '\nif [ $CONFIG_SET = "{}" -o $CONFIG_SET = "all" ]\nthen\n'.format(
+            '\nif [ $CONFIG_SET = "{}" -o $CONFIG_SET = "all" '
+            '-o $CONFIG_SET = "unset"]\nthen\n'.format(
                 config_set))
         for config_name, config_path in sorted(dotfiles[config_set]):
             folder = os.path.dirname(config_name)
@@ -89,6 +90,15 @@ def include_file(install_file, filename):
         install_file.write(include_file.read())
         install_file.write('\n')
 
+def install_scripts(install, scripts):
+    """Install scripts."""
+    install.write(
+            '\nif [ $CONFIG_SET = "scripts" -o $CONFIG_SET = "unset" ]\nthen\n')
+    for script in scripts:
+        include_file(install, script)
+    install.write('fi\n\n')
+
+
 def main():
     """Build dotfiles into a shell script."""
     dotfiles = get_dotfiles()
@@ -96,8 +106,7 @@ def main():
     with open(INSTALL_SCRIPT, 'w') as install_file:
         include_file(install_file, LIBRARY_FILE)
         install_dotfiles(install_file, dotfiles)
-        for script in scripts:
-            include_file(install_file, script)
+        install_scripts(install_file, scripts)
 
     # Make the script executable
     os.chmod(INSTALL_SCRIPT, 0o755)

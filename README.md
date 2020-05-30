@@ -11,11 +11,19 @@ an instalation script by running:
 ./build.py
 ```
 
-The configs then can be installed throught the generated script:
+To install the configs and run provisioning scripts:
 
 ```shell
 ./install
 ```
+
+Install profiles:
+
+ - `./install minimal` will install important configs (bash/vim/tmux) only. No
+   scripted provisioning will happen
+ - `./install all` will install all configs but no provisioning will happen
+ - `./install scripts` will only provision
+ - `./install` (default) will install all configs and run provision
 
 The configs can be pulled from your home directory to dotfiles:
 

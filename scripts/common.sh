@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONFIG_SET="${1:-all}"
+CONFIG_SET="${1:-unset}"
 
 # By default exit by error
 set -e
