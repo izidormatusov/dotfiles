@@ -1,0 +1,84 @@
+#!/usr/bin/env python3
+"""Convert numbers into human readable format.
+
+Supporting:
+    - bytes prefixes
+    - timestamp conversion
+"""
+
+import sys
+import datetime
+import pytz
+import sys
+
+class color:
+   PURPLE = '\033[95m'
+   CYAN = '\033[96m'
+   DARKCYAN = '\033[36m'
+   BLUE = '\033[94m'
+   GREEN = '\033[92m'
+   YELLOW = '\033[93m'
+   RED = '\033[91m'
+   BOLD = '\033[1m'
+   UNDERLINE = '\033[4m'
+   END = '\033[0m'
+
+_BINARY_SCALE = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB']
+_DECIMAL_SCALE = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB']
+
+def scaled_number(n, factor, scales):
+    """Scale the number given factor and scales."""
+    for suffix in scales:
+        if n <= factor / 2:
+            return "%.3f %s" % (n, suffix)
+        n /= factor
+    return "%d %s" % (n, scales[-1])
+
+def parse_timestamp(timestamp):
+    if timestamp >= 10**15:
+        # in microseconds
+        timestamp /= 10**6
+    elif timestamp >= 10**12:
+        # in milliseconds
+        timestamp /= 10**3
+    return datetime.datetime.fromtimestamp(timestamp)
+
+
+def humanize(s):
+    try:
+        n = float(s)
+        print(scaled_number(n, 1000, _DECIMAL_SCALE))
+        print(scaled_number(n, 1024, _BINARY_SCALE))
+    except ValueError:
+        pass
+
+    try:
+        n = float(s)
+        dt = parse_timestamp(n)
+        times = [
+                ('Local', dt),
+                ('UTC', dt.astimezone(pytz.utc)),
+                ('US West',
+                    dt.astimezone(pytz.timezone('America/Los_Angeles'))),
+        ]
+        prefix_len = max(len(prefix) for prefix, _ in times)
+        for prefix, t in times:
+            fmt = '%s%' + str(prefix_len) + 's%s %s'
+            print(fmt % (color.YELLOW, prefix, color.END, t))
+    except ValueError:
+        pass
+
+
+if __name__ == "__main__":
+    args = sys.argv[1:]
+    if len(args) == 1:
+        humanize(args[0])
+    else:
+        first = True
+        for arg in args:
+            if not first:
+                print('')
+            else:
+                first = False
+            print('%s%s%s%s:' % (color.PURPLE, color.BOLD, arg, color.END))
+            humanize(arg)
