@@ -1,19 +1,10 @@
 [user]
     name = Izidor Matušov
     email = izidor.matusov@gmail.com
-    signingkey = 0x0C8B7023
-[color]
-    ui = auto
-[core]
-    editor = vim
-[alias]
-    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-    co = checkout
 [core]
     excludesfile = ~/.gitignore_global
-[push]
-    default = simple
-[merge]
-    tool = meld
-[mergetool "mymeld"]
-    cmd = $HOME/.bin/gitmerge $BASE $LOCAL $RMOTE $MERGED
+[mailmap]
+    file = ~/.git_mailmap
+[alias]
+    lg = log --color --graph --pretty=format:'%Cred%h %Cgreen(%cs) %Creset-%C(yellow)%d %Creset%s %C(bold blue)<%aN>%Creset' --abbrev-commit
+    ll = log --stat
