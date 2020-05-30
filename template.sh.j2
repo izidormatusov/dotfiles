@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Exit if there is any error
+set -e
+
+CONFIG_SET="${1:-unset}"
+
+check_config() {
+    local expected="$1"
+    [ "$CONFIG_SET" == "$expected" -o "$CONFIG_SET" = "all" -o "$CONFIG_SET" == "unset" ]
+}
+
+# Check if this is a MacOS machine
+[ `uname -s` = "Darwin" ] && IS_MAC="true" || IS_MAC="false"
+
+{% for dotfile in dotfiles %}
+if check_config "{% if dotfile.is_minimal %}minimal{% else %}default{% endif %}"
+then
+    echo "Installing {{ dotfile.home_path }}"
+    mkdir -p "{{ dotfile.home_path.parent }}"
+    {% if dotfile.is_encoded -%}
+    base64 --decode > "{{ dotfile.home_path }}" <<"END_OF_DOTFILE"
+{{ dotfile.content }}
+END_OF_DOTFILE
+    {% else -%}
+    cat > "{{ dotfile.home_path }}" <<"END_OF_DOTFILE"
+{{ dotfile.content }}END_OF_DOTFILE
+    {% endif -%}
+    chmod {{ dotfile.mode }} {{ dotfile.home_path }}
+fi
+{% endfor %}
+
+if [ $CONFIG_SET = "scripts" -o $CONFIG_SET = "unset" ]
+then
+{% for script in scripts %}
+{{ script.content }}
+{% endfor %}
+fi
