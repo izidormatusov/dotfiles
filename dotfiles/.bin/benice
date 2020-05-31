@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# Force the job to be nice by pining it to CPUs, increasing
+# nice and ionice
+
+P=${1?}
+
+set -e
+
+renice 19 -g "$P"
+ionice -c 3 -P "$P"
+taskset -a -p --cpu-list 2-64 "$P"
