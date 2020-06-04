@@ -25,13 +25,17 @@ class Dotfile:
         self._encoded = None
 
     @property
+    def relpath(self):
+        return self.path.relative_to(DOTFILES_FOLDER)
+
+    @property
     def home_path(self):
-        return Path('$HOME').joinpath(self.path.relative_to(DOTFILES_FOLDER))
+        return Path('$HOME').joinpath(self.relpath)
 
     @property
     def is_minimal(self):
         """Is this config a important and should be installed?"""
-        path = str(self.path.relative_to(DOTFILES_FOLDER))
+        path = str(self.relpath)
         for prefix in self.MINIMAL_CONFIGS:
             if path.startswith(prefix):
                 return True
@@ -63,6 +67,19 @@ class Dotfile:
         if self._encoded is None:
             self._read_content()
         return self._encoded
+
+    @property
+    def is_symlink(self):
+        return os.path.islink(self.path)
+
+    @property
+    def link_path(self):
+        assert self.is_symlink
+        return os.readlink(self.path)
+
+    @property
+    def is_mac_only(self):
+        return str(self.relpath).startswith('Library')
 
 
 class Script:
