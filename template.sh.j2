@@ -28,7 +28,8 @@ then
 END_OF_DOTFILE
     {% else -%}
     cat > "{{ dotfile.home_path }}" <<"END_OF_DOTFILE"
-{{ dotfile.content }}END_OF_DOTFILE
+{{ dotfile.content }}
+END_OF_DOTFILE
     {% endif -%}
     chmod {{ dotfile.mode }} "{{ dotfile.home_path }}"
 fi

@@ -60,7 +60,7 @@ class Dotfile:
     def content(self):
         if self._content is None:
             self._read_content()
-        return self._content
+        return self._content.rstrip('\n')
 
     @property
     def is_encoded(self):
