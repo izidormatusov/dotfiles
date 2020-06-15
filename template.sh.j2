@@ -22,6 +22,10 @@ then
     {% if dotfile.is_symlink -%}
     rm -f "{{ dotfile.home_path }}"
     ln -s "{{ dotfile.link_path }}" "{{ dotfile.home_path }}"
+    {% elif dotfile.is_plist -%}
+    plutil -convert binary1 -o "{{ dotfile.home_path }}" - <<"END_OF_PLIST"
+{{ dotfile.content }}
+END_OF_PLIST
     {% elif dotfile.is_encoded -%}
     base64 --decode > "{{ dotfile.home_path }}" <<"END_OF_DOTFILE"
 {{ dotfile.content }}

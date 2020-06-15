@@ -81,6 +81,10 @@ class Dotfile:
     def is_mac_only(self):
         return str(self.relpath).startswith('Library')
 
+    @property
+    def is_plist(self):
+        return str(self.path).endswith('.plist')
+
 
 class Script:
     def __init__(self, path):
