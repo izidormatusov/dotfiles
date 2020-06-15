@@ -42,7 +42,8 @@ def get_dotfiles(dotfile_path):
             path = os.path.join(dirpath, filename)
             if os.path.isfile(path) or os.path.islink(path):
                 path = os.path.join(HOME_DIR, os.path.relpath(path, DOTFILES_DIR))
-                existing_dotfiles.add(path)
+                if os.path.exists(path):
+                  existing_dotfiles.add(path)
 
     exclusion = DotfilesExclusion()
     for dirpath, dirnames, filenames in os.walk(HOME_DIR, topdown=True):
