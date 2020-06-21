@@ -35,7 +35,9 @@ END_OF_DOTFILE
 {{ dotfile.content }}
 END_OF_DOTFILE
     {% endif -%}
+    {% if not dotfile.is_symlink -%}
     chmod {{ dotfile.mode }} "{{ dotfile.home_path }}"
+    {%- endif %}
 fi
 {% endfor %}
 
