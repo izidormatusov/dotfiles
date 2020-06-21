@@ -102,7 +102,7 @@ def get_dotfiles():
     for dirpath, _, filenames in os.walk(DOTFILES_FOLDER):
         for filename in filenames:
             dotfiles.append(Dotfile(Path(dirpath) / filename))
-    dotfiles.sort(key=lambda d: (d.is_minimal, d.home_path))
+    dotfiles.sort(key=lambda d: (not d.is_minimal, d.home_path))
     return dotfiles
 
 
