@@ -1,0 +1,11 @@
+<bookmarks>
+<group name="root">
+    <bookmark name="Energy Zurich" url="http://statslive.infomaniak.ch/playlist/energyzuerich/energyzuerich-high.mp3/playlist.pls"/>
+    <bookmark name="Radio24" url="http://icecast.radio24.ch/radio24.m3u"/>
+    <bookmark name="Capital FM" url="http://media-ice.musicradio.com/CapitalMP3.m3u"/>
+    <bookmark name="East London" url="http://eastlondonradio.com:8100/biglh.mp3.m3u"/>
+    <bookmark name="Krokodýl" url="http://icecast4.play.cz/krokodyl128.mp3.m3u"/>
+    <bookmark name="Radio Beat" url="http://www.play.cz/radio/beat128.mp3.m3u"/>
+    <bookmark name="WABC AM (77 WABC)" url="http://provisioning.streamtheworld.com/pls/WABCAMAAC.pls"/>
+</group>
+</bookmarks>

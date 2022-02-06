@@ -61,7 +61,7 @@ command -v dircolors >/dev/null && eval `dircolors --bourne-shell`
 # Exports {{{
 export EDITOR=/usr/bin/vim
 export GOPATH="$HOME/code/go"
-export PATH="$HOME/.bin:$PATH"
+export PATH="$HOME/.bin:$PATH:$HOME/.cargo/bin"
 export PASSWORD_STORE_DIR="$HOME/code/pass"
 # }}}
 
