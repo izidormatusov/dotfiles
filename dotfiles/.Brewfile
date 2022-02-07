@@ -65,6 +65,7 @@ cask "obsidian"
 cask "signal"
 cask "skype"
 cask "spotify"
+cask "stats"           # https://github.com/exelban/stats
 cask "telegram"
 cask "typora"  # Markdown editor
 

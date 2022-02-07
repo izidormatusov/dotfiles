@@ -76,4 +76,21 @@ exclusions:
   - .zsh_history
 
 plist_exclusions:
-  # TODO: Add a first app exclusions here
+  eu.exelban.Stats:
+    - version
+    - id
+    - NSStatusItem Preferred Position CPU
+    - NSStatusItem Preferred Position CPU_Bar chart
+    - NSStatusItem Preferred Position CPU_Mini
+    - NSStatusItem Preferred Position Disk
+    - NSStatusItem Preferred Position Disk_Mini
+    - NSStatusItem Preferred Position Fans
+    - NSStatusItem Preferred Position Fans_Text
+    - NSStatusItem Preferred Position GPU
+    - NSStatusItem Preferred Position GPU_Mini
+    - NSStatusItem Preferred Position Network
+    - NSStatusItem Preferred Position Network_Speed
+    - NSStatusItem Preferred Position RAM
+    - NSStatusItem Preferred Position RAM_Mini
+    - NSStatusItem Preferred Position Sensors
+    - NSStatusItem Preferred Position Sensors_Text
