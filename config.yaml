@@ -1,5 +1,6 @@
 ---
 exclusions:
+  - .Brewfile.lock.json
   - .DS_Store
   - .ICEauthority
   - .IdeaIC20
@@ -8,8 +9,11 @@ exclusions:
   - .android/
   - .bash_history
   - .bash_secrets
+  - .bash_sessions/
+  - .bean-shell-history
   - .cache/
   - .cargo/.package-cache
+  - .cargo/bin/
   - .cargo/git/
   - .cargo/registry/
   - .cinnamon/
@@ -24,52 +28,77 @@ exclusions:
   - .config/google-chrome/
   - .config/gtk-2.0/
   - .config/gtk-3.0/
+  - .config/htop/htoprc
   - .config/libreoffice/
+  - .config/menus/applications-merged/
   - .config/monitors.xml
+  - .config/pudb/saved-breakpoints-3.9
   - .config/pulse/
   - .config/vlc/
   - .config/yet-another-timer/
+  - .cpanm/
   - .cups/lpoptions
   - .dbus/session-bus/
+  - .designer/gradients.xml
   - .esets/
   - .face
   - .gksu.lock
   - .gnome/apps/
+  - .gnupg/
+  - .gradle/
+  - .hashcat/
+  - .icesoft/
+  - .ipython/profile_default/db/dhist
   - .ipython/profile_default/history.sqlite
+  - .ipython/profile_default/startup/README
   - .java/
+  - .keras/
   - .lesshst
   - .local/lib/python
+  - .local/lib/python3.6/site-packages/
   - .local/share/JetBrains/
   - .local/share/Trash
   - .local/share/applications/
   - .local/share/cinnamon/
   - .local/share/clipit/
+  - .local/share/cryfs
   - .local/share/desktop-directories/
   - .local/share/gvfs-metadata/
   - .local/share/icc/
   - .local/share/icons/
+  - .local/share/karabiner/log/
+  - .local/share/karabiner/pid/
   - .local/share/keyrings/
   - .local/share/locale/
   - .local/share/mime/
   - .local/share/radiotray/radiotray.log
   - .local/share/recently-used.xbel
+  - .local/share/sqlmap/
   - .local/share/user-places.xbel
   - .local/share/virtualenvs/
   - .local/share/vlc/
+  - .matplotlib/fontlist-v330.json
   - .mozilla/
+  - .mypy_cache/
+  - .nuuid.ini
+  - .nv/GLCache/
   - .oracle_jre_usage/
   - .parallel/
+  - .password-store/
   - .pip/pip.log
   - .pki/
+  - .psql_history
   - .python_history
   - .secureConnect
   - .sqlite_history
   - .ssh/
+  - .swt/
+  - .thumbnails/
   - .vagrant.d/
   - .vim/.netrwhist
   - .viminfo
-  - .vimtemp/undo/
   - .vimtemp/swap/
+  - .vimtemp/undo/
   - .wget-hsts
   - .xsession-errors
   - .xsession-errors.old
