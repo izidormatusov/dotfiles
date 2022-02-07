@@ -10,10 +10,10 @@ import sys
 from jinja2 import Template
 
 INSTALL_SCRIPT = 'install'
-current_folder = Path(sys.argv[0]).parent
-DOTFILES_FOLDER = current_folder / 'dotfiles'
-SCRIPTS_FOLDER = current_folder / 'scripts'
-TEMPLATE_FILE = current_folder / 'template.sh.j2'
+BASE_FOLDER = Path(sys.argv[0]).parent.resolve()
+DOTFILES_FOLDER = BASE_FOLDER / 'dotfiles'
+SCRIPTS_FOLDER = BASE_FOLDER / 'scripts'
+TEMPLATE_FILE = BASE_FOLDER / 'template.sh.j2'
 
 
 class Dotfile:
@@ -30,7 +30,7 @@ class Dotfile:
 
     @property
     def home_path(self):
-        return Path('$HOME').joinpath(self.relpath)
+        return Path.home() / self.relpath
 
     @property
     def is_minimal(self):
@@ -79,11 +79,11 @@ class Dotfile:
 
     @property
     def is_mac_only(self):
-        return str(self.relpath).startswith('Library')
+        return str(self.relpath).startswith('Library/')
 
     @property
     def is_plist(self):
-        return str(self.path).endswith('.plist')
+        return self.path.suffix == '.plist'
 
 
 class Script:
@@ -100,8 +100,9 @@ def get_dotfiles():
     """Returns a mapping of dotfile type => list of dotfiles."""
     dotfiles = []
     for dirpath, _, filenames in os.walk(DOTFILES_FOLDER):
+        dirpath = Path(dirpath)
         for filename in filenames:
-            dotfiles.append(Dotfile(Path(dirpath) / filename))
+            dotfiles.append(Dotfile(dirpath / filename))
     dotfiles.sort(key=lambda d: (not d.is_minimal, d.home_path))
     return dotfiles
 
@@ -119,12 +120,13 @@ def main():
     dotfiles = get_dotfiles()
     scripts = get_scripts()
 
-    with open(TEMPLATE_FILE) as template_file:
+    with TEMPLATE_FILE.open() as template_file:
         template = Template(template_file.read())
 
     with open(INSTALL_SCRIPT, 'w') as install_file:
         install_file.write(template.render(
             dotfiles=dotfiles, scripts=scripts))
+
     # Make the script executable
     os.chmod(INSTALL_SCRIPT, 0o755)
 

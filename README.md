@@ -28,5 +28,5 @@ Install profiles:
 The configs can be pulled from your home directory to dotfiles:
 
 ```shell
-./collect.py
+./collect.py --no-dry_run
 ```
