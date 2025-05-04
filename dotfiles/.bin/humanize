@@ -42,16 +42,19 @@ def scaled_number(n, factor, scales):
 
 def parse_timestamp(timestamp):
     if timestamp >= 10**15:
-        # in microseconds
+        unit = "microseconds"
         timestamp /= 10**6
     elif timestamp >= 10**12:
-        # in milliseconds
+        unit = "milliseconds"
         timestamp /= 10**3
-    return datetime.datetime.fromtimestamp(timestamp)
+    else:
+        unit = "seconds"
+    return datetime.datetime.fromtimestamp(timestamp), unit
 
 
 def humanize(s):
     try:
+        s = s.replace(",", "")
         n = float(s)
         print(scaled_number(n, 1000, _DECIMAL_SCALE))
         print(scaled_number(n, 1024, _BINARY_SCALE))
@@ -60,7 +63,7 @@ def humanize(s):
 
     try:
         n = float(s)
-        dt = parse_timestamp(n)
+        dt, unit = parse_timestamp(n)
         times = [
             ("Local", dt),
             ("UTC", dt.astimezone(pytz.utc)),
@@ -70,6 +73,7 @@ def humanize(s):
         for prefix, t in times:
             fmt = "%s%" + str(prefix_len) + "s%s %s"
             print(fmt % (color.YELLOW, prefix, color.END, t))
+        print(f"({unit})")
     except ValueError:
         pass
 
