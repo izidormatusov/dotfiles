@@ -1,6 +1,7 @@
 ---
 exclusions:
   - .Brewfile.lock.json
+  - .CFUserTextEncoding
   - .DS_Store
   - .ICEauthority
   - .IdeaIC20
@@ -11,30 +12,45 @@ exclusions:
   - .bash_secrets
   - .bash_sessions/
   - .bean-shell-history
+  - .bundle/cache/
   - .cache/
-  - .cargo/.package-cache
-  - .cargo/bin/
-  - .cargo/git/
-  - .cargo/registry/
+  - .cargo/
   - .cinnamon/
   - .cinnamon/glass.log
   - .cinnamon/spices.cache/
+  - .config/.gsd-keyboard.settings-ported
+  - .config/GIMP/
+  - .config/JetBrains/IdeaIC
+  - .config/PureRef.ini
+  - .config/broot/
+  - .config/btop/btop.log
   - .config/chrome-profile-
+  - .config/btop/
   - .config/chrome-remote-desktop/
   - .config/d-feet/
   - .config/dconf/user
   - .config/eog/
+  - .config/evolution/
+  - .config/gcloud/
   - .config/gedit/
+  - .config/glade.conf
+  - .config/gnome-control-center/
+  - .config/go/
   - .config/google-chrome/
   - .config/gtk-2.0/
   - .config/gtk-3.0/
   - .config/htop/htoprc
+  - .config/ibus/bus/
+  - .config/inkscape/
+  - .config/iterm2/
   - .config/libreoffice/
   - .config/menus/applications-merged/
   - .config/monitors.xml
   - .config/pudb/saved-breakpoints-3.9
   - .config/pulse/
+  - .config/spotify/
   - .config/vlc/
+  - .config/wireshark/
   - .config/yet-another-timer/
   - .cpanm/
   - .cups/lpoptions
@@ -42,27 +58,43 @@ exclusions:
   - .designer/gradients.xml
   - .esets/
   - .face
+  - .gem/ruby/
+  - .gem/specs/
+  - .ghidra/
   - .gksu.lock
+  - .gmailctl/credentials.json
+  - .gmailctl/token.json
   - .gnome/apps/
   - .gnupg/
+  - .gnuplot_history
   - .gradle/
+  - .gtk-bookmarks
   - .hashcat/
   - .icesoft/
-  - .ipython/profile_default/db/dhist
-  - .ipython/profile_default/history.sqlite
-  - .ipython/profile_default/startup/README
+  - .ipython/
   - .java/
   - .keras/
   - .lesshst
+  - .local/bin/
   - .local/lib/python
   - .local/lib/python3.6/site-packages/
   - .local/share/JetBrains/
   - .local/share/Trash
   - .local/share/applications/
+  - .local/share/backgrounds/
   - .local/share/cinnamon/
   - .local/share/clipit/
   - .local/share/cryfs
+  - .local/share/deepin/
   - .local/share/desktop-directories/
+  - .local/share/evolution/
+  - .local/share/fish/fish_history
+  - .local/share/fish/generated_completions/
+  - .local/share/folks/
+  - .local/share/fonts/
+  - .local/share/fzf-history/
+  - .local/share/gedit/
+  - .local/share/gnome-shell/
   - .local/share/gvfs-metadata/
   - .local/share/icc/
   - .local/share/icons/
@@ -71,24 +103,46 @@ exclusions:
   - .local/share/keyrings/
   - .local/share/locale/
   - .local/share/mime/
+  - .local/share/nautilus/
+  - .local/share/org.gnome.TextEditor/
   - .local/share/radiotray/radiotray.log
   - .local/share/recently-used.xbel
+  - .local/share/sounds/
   - .local/share/sqlmap/
   - .local/share/user-places.xbel
   - .local/share/virtualenvs/
   - .local/share/vlc/
+  - .local/share/wezterm/check_update
+  - .local/share/wezterm/default-org.wezfurlong.wezterm
+  - .local/share/wezterm/gui-sock-
+  - .local/share/wezterm/recent-commands.json
+  - .local/share/wezterm/recent-emoji.json
+  - .local/share/wezterm/repl-history
+  - .local/share/wezterm/wezterm-gui-log-
+  - .local/share/wezterm/wezterm-log-
+  - .local/share/xorg/
+  - .local/state/
+  - .m2/
   - .matplotlib/fontlist-v330.json
+  - .mitmproxy/
   - .mozilla/
   - .mypy_cache/
+  - .npm/_cacache/
+  - .npm/_logs/
+  - .npm/_npx/
+  - .npm/_update-notifier-last-checked
   - .nuuid.ini
   - .nv/GLCache/
   - .oracle_jre_usage/
   - .parallel/
   - .password-store/
+  - .pdbhistory
   - .pip/pip.log
   - .pki/
   - .psql_history
+  - .pyhist
   - .python_history
+  - .rustup/
   - .secureConnect
   - .sqlite_history
   - .ssh/
@@ -96,6 +150,8 @@ exclusions:
   - .thumbnails/
   - .vagrant.d/
   - .vim/.netrwhist
+  - .vim/spell/
+  - .vimgolf/
   - .viminfo
   - .vimtemp/swap/
   - .vimtemp/undo/
@@ -105,21 +161,64 @@ exclusions:
   - .zsh_history
 
 plist_exclusions:
+  com.googlecode.iterm2:
+    - NSNavLastRootDirectory
+    - NSNavPanelExpandedSizeForOpenMode
+    - NSNavPanelExpandedSizeForSaveMode
+    - NSSplitView Subview Frames NSColorPanelSplitView
+    - NSTableView Columns v2 KeyBingingTable
+    - NSTableView Sort Ordering v2 KeyBingingTable
+    - NSTableView Supports v2 KeyBingingTable
+    - NSToolbar Configuration com.apple.NSColorPanel
+    - NSWindow Frame NSNavPanelAutosaveName
+    - NSWindow Frame SUStatusFram
+    - NSWindow Frame SUUpdateAlert
+    - NSWindow Frame iTerm Window 0
+    - NSWindow Frame iTerm Window 1
+    - NSWindow Frame iTerm Window 2
+    - NSWindow Frame iTerm Window 3
+    - NSWindow Frame iTerm Window 3
+    - NSWindow Frame iTerm Window 4
+    - NSWindow Frame iTerm Window 5
+    - NSWindow Frame iTerm Window 6
+    - NSWindow Frame iTerm Window 7
+    - NSWindow Frame iTerm Window 8
+    - NSWindow Frame iTerm Window 9
+    - NoSyncAllAppVersions
+    - NoSyncFrame_SessionsPreferences
+    - NoSyncFrame_SharedPreferences
+    - NoSyncLastOSVersion
+    - NoSyncLaunchExperienceControllerRunCount
+    - NoSyncNextAnnoyanceTime
+    - NoSyncRecordedVariables
+    - NoSyncTipOfTheDayEligibilityBeganTime
+    - SUFeedURL
+    - SULastCheckTime
+    - SUUpdateGroupIdentifier
+    - iTerm Version
+
   eu.exelban.Stats:
     - version
     - id
     - NSStatusItem Preferred Position CPU
-    - NSStatusItem Preferred Position CPU_Bar chart
+    - NSStatusItem Preferred Position CPU_bar_chart
     - NSStatusItem Preferred Position CPU_Mini
     - NSStatusItem Preferred Position Disk
+    - NSStatusItem Preferred Position Disk_speed
     - NSStatusItem Preferred Position Disk_Mini
     - NSStatusItem Preferred Position Fans
     - NSStatusItem Preferred Position Fans_Text
     - NSStatusItem Preferred Position GPU
     - NSStatusItem Preferred Position GPU_Mini
     - NSStatusItem Preferred Position Network
-    - NSStatusItem Preferred Position Network_Speed
+    - NSStatusItem Preferred Position Network_speed
     - NSStatusItem Preferred Position RAM
+    - NSStatusItem Preferred Position RAM_pie_chart
     - NSStatusItem Preferred Position RAM_Mini
     - NSStatusItem Preferred Position Sensors
+    - NSStatusItem Preferred Position Sensors_sensors
     - NSStatusItem Preferred Position Sensors_Text
+    - NSStatusItem Restore Position Sensors_sensors
+    - NSToolbar Configuration eu.exelban.Stats.Settings.Toolbar
+    - telemetry_id
+    - updater_check_ts
