@@ -1,8 +1,0 @@
-#!/bin/bash
-# Take a picture using a webcam. Useful for remote workstation with a webcam.
-
-# Alternative command
-# fswebcam --delay 2 -r 1920x1080 --no-banner ~/`date +"%Y-%m-%d_%H%M"`.jpg
-
-ffmpeg -f video4linux2 -i /dev/video0 -s 1920x1080 -ss 0:0:2 -frames 1 \
-    ~/`date +"%Y-%m-%d_%H%M"`.jpg
