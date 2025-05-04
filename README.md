@@ -2,31 +2,38 @@
 
 Collection of my various configs (aka dotfiles) and installation scripts.
 
+
+
 ## Get started
 
-Config files are stored under directory [dotfiles/](dotfiles/). They can be converted to
-an instalation script by running:
+The philosophy of the dotfiles is that you keep your configs in home and once in
+a while you collect them into the dotfiles, submit to the git and publish them.
+No symlinking, no forced edits in the dotfiles repo.
+
+Folder structures:
+
+ - [config.yaml](config.yaml) has configuration such as:
+   - what non-dotfiles folders to include
+   - what folders to exclude as they might not have a human-written config / I
+     don't care about them
+   - what keys should be ignored from various `.plist` configs
+ - [dotfiles/](dotfiles/) contains the configuration files
+ - [scripts/](scripts/) has installation scripts. Each script should be
+   idempotent
+ - [tools/](tools/) has scripts for management.
+
+You can create sub folders in `work/` and `private/` to keep some dotfiles
+private (you don't want to leak your work configuration to the internet, right?)
+
+There is a convenient script to manage your dotfiles:
 
 ```shell
-./build.py
+# Show modified config files and select which ones should be copied to the repo
+./management.py
+# Override the config files in home
+./management.py install
+# Interactively choose which script(s) to run
+./management.py run
 ```
 
-To install the configs and run provisioning scripts:
-
-```shell
-./install
-```
-
-Install profiles:
-
- - `./install minimal` will install important configs (bash/vim/tmux) only. No
-   scripted provisioning will happen
- - `./install all` will install all configs but no provisioning will happen
- - `./install scripts` will only provision
- - `./install` (default) will install all configs and run provision
-
-The configs can be pulled from your home directory to dotfiles:
-
-```shell
-./collect.py --no-dry_run
-```
+The interactive choose is [FZF](https://github.com/junegunn/fzf).

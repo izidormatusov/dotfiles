@@ -1,1 +1,4 @@
-install
+
+# Submodules for the configuration
+private/
+work/
