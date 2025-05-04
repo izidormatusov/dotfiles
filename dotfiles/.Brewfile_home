@@ -1,0 +1,18 @@
+# Packages that I only want to install on my personal devices
+
+brew "apktool"
+brew "postgres", restart_service: :changed
+brew "restic"                      # Backup tool
+
+cask "autodesk-fusion"             # Hobbyist Fusion 360
+cask "bambu-studio"
+cask "google-cloud-sdk"
+cask "google-drive"
+cask "mitmproxy"
+cask "obsidian"
+cask "parallels"
+cask "qflipper"                    # Flipper Zero app
+
+# Cross compiling
+tap "filosottile/musl-cross"
+brew "filosottile/musl-cross/musl-cross", args: ["with-arm-hf"]

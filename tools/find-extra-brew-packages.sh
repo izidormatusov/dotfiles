@@ -1,9 +1,7 @@
 #!/bin/bash
 # Detect what packages have not been installed
 
-set -e
-
-set -xv
+set -euo pipefail
 
 comm -13 > /tmp/brew.pkg.extra \
   <(sed -n -e 's/^brew "\([^"]*\)".*/\1/p' ~/.Brewfile | sort ) \

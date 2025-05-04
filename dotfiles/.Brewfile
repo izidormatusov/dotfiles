@@ -1,95 +1,86 @@
-brew "entr"            # Run arbitrary commands when files change
-brew "jq"              # Lightweight and flexible command-line JSON processor
-brew "htop"            # Fancier top
-brew "fdupes"          # Find duplicate files
-brew "unrar"           # for unraring things
-brew "exiftool"        # for playing with pictures
-brew "pv"              # pipeline viewer (shows how fast is the data moved around)
-brew "ripgrep"         # faster grep
-brew "poppler"         # pdfimages command line tool
-brew "vim"             # To support termguicolors
-brew "tesseract"       # for OCR
-brew "tesseract-lang"  # for OCR
-brew "findutils"       # Replacement for mac find
-brew "mas"             # Mac App Store control tool
-brew "broot"           # Terminal viewer
-brew "fswatch"
+brew "bash"
+brew "bash-completion"
+brew "bat"
+brew "broot"                       # Terminal viewer
+brew "btop"                        # Fancier top
+brew "coreutils"                   # Better sleep
+brew "czkawka"                     # GUI deduplication tool
+brew "direnv"
+brew "exiftool"                    # extract EXIF metadata
+brew "fd"                          # Replacement for find
+brew "ffmpeg"
+brew "findutils"                   # GNU find (better than Mac find)
+brew "fish"                        # Friendly Interactive SHell
+brew "fzf"
+brew "gifski"
+brew "gitui"
+brew "gmailctl"                    # Manage gmail filters
 brew "gnupg2"
 brew "go"
 brew "graphviz"
-brew "openjdk"
-brew "youtube-dl"
-brew "gopass"
-brew "ncdu"
-brew "watch"
-brew "irssi"
-brew "ffmpeg"
-brew "fzf"
-brew "git"
+brew "htop"                        # Fancier top
+brew "hyperfine"                   # Benchmarking tool https://github.com/sharkdp/hyperfine
 brew "imagemagick"
-brew "ipython"
-brew "pipenv"
-brew "wget"
-brew "tmux"
-brew "gcc"
-brew "rust"
-brew "rustup-init"
-brew "apktool"
-brew "binwalk"
+brew "jless"                       # JSON explorer
+brew "jq"                          # JSON query tool
+brew "just"
+brew "mtr"                         # My Trace Route - ping on steroids
 brew "nmap"
-brew "mitmproxy"
+brew "npm"
+brew "pass"
+brew "pass-otp"
+brew "pinentry-mac"
 brew "protobuf"
 brew "qrencode"
-brew "zbar"
-
-# Backups & security utils
-brew "restic"          # Backup tool
+brew "ripgrep"                    # Faster grep
+brew "rsync"
+brew "ruff"                       # Python formatter
 brew "syncthing", restart_service: :changed
-brew "pass"
-
-# Cross compiling
-brew "FiloSottile/musl-cross/musl-cross", args: ["with-arm-hf"]
-
-tap "homebrew/services"
-brew "postgres", restart_service: :changed
-
-tap "caskroom/cask"
+brew "tesseract"                  # OCR
+brew "tesseract-lang"             # OCR
+brew "timg"                       # Show images in terminal, either libsixel, iTerm, kitty or unicode pixelation
+brew "tmux"
+brew "uv"                         # Python package manager
+brew "vim"                        # Support termguicolors
+brew "wget"
+brew "yazi"
+brew "yt-dlp"                     # youtube-dl is no longer maintained
+brew "zbar"
+brew "zoxide"                     # Jumping around directories
 
 cask "alfred"
-cask "android-file-transfer"
+cask "android-platform-tools"
+cask "audacity"
 cask "blender"
-cask "dash"
-cask "hammerspoon"
+cask "db-browser-for-sqlite"
+cask "gimp"
+cask "google-chrome"
 cask "inkscape"
-cask "obsidian"
+cask "rectangle"
 cask "signal"
-cask "skype"
 cask "spotify"
-cask "stats"           # https://github.com/exelban/stats
+cask "stats"                      # https://github.com/exelban/stats
+cask "stolendata-mpv"             # MPV app
 cask "telegram"
-cask "typora"  # Markdown editor
+cask "vlc"
+cask "wezterm"                    # Terminal
+
+# QuickLook plugins
+# To get the plugin working, you might need to open up the plugin app directly.
+# Then:
+#  - `xattr -cr ~/Library/QuickLook/$APP.qlgenerator`
+#  - `qlmanage -r && qlmanage -r cache`
+#  - In Dock,  Option + right click on Finder and hit "Relaunch"
+# Run `qlmanage -r` to reload plugins. You might need to manually open them to
+# confirm that they can run.
+cask "qlstephen"           # default files, e.g. README
+cask "qlmarkdown"          # render markdown
+cask "quicklook-json"      # json
+cask "qlcolorcode"         # syntax highlight
 
 mas "Flow", id: 1423210932        # Pomodoro timer
 
-# QuickLook plugins
-cask "qlstephen"           # default files
-cask "qlcolorcode"         # syntax highlight
-cask "qlimagesize"         # display image size
-cask "qlmarkdown"          # render markdown
-cask "suspicious-package"  # content of .pkg
-
-# I don't like the Evernote 10 version, use the old pinned version
-# https://cdn1.evernote.com/mac-smd/public/Evernote_RELEASE_7.14_458244.dmg
-# cask "evernote"
-
-# Already preinstalled packages:
-#  - Firefox
-#  - GIMP
-#  - MacVim
-#  - VLC media player
-#  - Wireshark
-#  - XQuartz
-#  - iTerm2
-#  - tmux
-#  - Virtualbox and vagrant
-#  - Sublime
+# Additional Brewfiles
+Dir.glob(File.join(File.dirname(__FILE__), ".Brewfile_*")) do |brewfile|
+  instance_eval(File.read(brewfile))
+end
