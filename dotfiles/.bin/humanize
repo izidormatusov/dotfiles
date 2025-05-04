@@ -1,4 +1,7 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# dependencies = ["pytz"]
+# ///
 """Convert numbers into human readable format.
 
 Supporting:
@@ -6,25 +9,27 @@ Supporting:
     - timestamp conversion
 """
 
-import sys
 import datetime
-import pytz
 import sys
+import pytz
+
 
 class color:
-   PURPLE = '\033[95m'
-   CYAN = '\033[96m'
-   DARKCYAN = '\033[36m'
-   BLUE = '\033[94m'
-   GREEN = '\033[92m'
-   YELLOW = '\033[93m'
-   RED = '\033[91m'
-   BOLD = '\033[1m'
-   UNDERLINE = '\033[4m'
-   END = '\033[0m'
+    PURPLE = "\033[95m"
+    CYAN = "\033[96m"
+    DARKCYAN = "\033[36m"
+    BLUE = "\033[94m"
+    GREEN = "\033[92m"
+    YELLOW = "\033[93m"
+    RED = "\033[91m"
+    BOLD = "\033[1m"
+    UNDERLINE = "\033[4m"
+    END = "\033[0m"
 
-_BINARY_SCALE = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB']
-_DECIMAL_SCALE = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB']
+
+_BINARY_SCALE = ["B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB"]
+_DECIMAL_SCALE = ["B", "kB", "MB", "GB", "TB", "PB", "EB"]
+
 
 def scaled_number(n, factor, scales):
     """Scale the number given factor and scales."""
@@ -33,6 +38,7 @@ def scaled_number(n, factor, scales):
             return "%.3f %s" % (n, suffix)
         n /= factor
     return "%d %s" % (n, scales[-1])
+
 
 def parse_timestamp(timestamp):
     if timestamp >= 10**15:
@@ -56,14 +62,13 @@ def humanize(s):
         n = float(s)
         dt = parse_timestamp(n)
         times = [
-                ('Local', dt),
-                ('UTC', dt.astimezone(pytz.utc)),
-                ('US West',
-                    dt.astimezone(pytz.timezone('America/Los_Angeles'))),
+            ("Local", dt),
+            ("UTC", dt.astimezone(pytz.utc)),
+            ("US West", dt.astimezone(pytz.timezone("America/Los_Angeles"))),
         ]
         prefix_len = max(len(prefix) for prefix, _ in times)
         for prefix, t in times:
-            fmt = '%s%' + str(prefix_len) + 's%s %s'
+            fmt = "%s%" + str(prefix_len) + "s%s %s"
             print(fmt % (color.YELLOW, prefix, color.END, t))
     except ValueError:
         pass
@@ -77,8 +82,8 @@ if __name__ == "__main__":
         first = True
         for arg in args:
             if not first:
-                print('')
+                print("")
             else:
                 first = False
-            print('%s%s%s%s:' % (color.PURPLE, color.BOLD, arg, color.END))
+            print("%s%s%s%s:" % (color.PURPLE, color.BOLD, arg, color.END))
             humanize(arg)
