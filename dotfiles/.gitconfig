@@ -1,6 +1,11 @@
 [user]
     name = Izidor Matušov
     email = izidor.matusov@gmail.com
+[include]
+    # Overrides for work setting
+    path = ~/.gitconfig_work
+[init]
+    defaultBranch = main
 [core]
     excludesfile = ~/.gitignore_global
 [mailmap]
