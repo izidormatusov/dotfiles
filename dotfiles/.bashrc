@@ -86,7 +86,20 @@ export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 pycd() { # {{{
   pushd $(python3 -c "import os.path, $1; print(os.path.dirname($1.__file__))")
 } # }}}
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alert() { # {{{
+  local status=$([ $? = 0 ] && echo S || echo E)
+  local text="$@"
+  if [ -z "$text" ]; then
+    local command=$(HISTTIMEFORMAT='' builtin history 2 |
+      sed -e 's/^\s*[0-9]\+\s*//;s/[;&|]\s*alert\s*$//;s/\s\s*/ /g' |
+      tail -n 1)
+    text="\`${command}\`"
   fi
+  command alert "$status" "$text"
+} # }}}
 
 # }}}
 
