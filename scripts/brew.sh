@@ -1,4 +1,6 @@
-set -e
+#!/bin/bash
+
+set -euo pipefail
 
 # Only on Mac
 if [ `uname -s` = "Darwin" ]
