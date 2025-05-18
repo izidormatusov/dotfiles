@@ -1,0 +1,56 @@
+# Updating aliases in existing sessions:
+#
+#   source ~/.aliases
+
+command -v colordiff > /dev/null && alias diff='colordiff'
+
+# Ubuntu installs the new unix tools under weird aliases
+command -v batcat > /dev/null && alias bat='batcat'
+command -v fdfind > /dev/null && alias fd='fdfind'
+
+# Click on the window that will float above other windows, Linux only
+command -v wmctrl > /dev/null && alias window_on_top='wmctrl -r :SELECT: -b add,above'
+
+# Prefer GNU tools on MacOS
+command -v gfind > /dev/null && alias find='gfind'
+command -v gsleep > /dev/null && alias sleep='gsleep'
+
+# ls is has slightly different flags between Mac and Linux
+[ "$(uname -s)" = "Darwin" ] && alias ls='ls -FG' || alias ls='ls -F --color=auto'
+[ "$(uname -s)" = "Darwin" ] && alias ll='ls -l@AeFGh' || alias ll='ls -hl'
+
+# Extra information about the command like what is the size of memory and such
+[ "$(uname -s)" = "Darwin" ] && alias timev='/usr/bin/time -l' || alias timev='/usr/bin/time -v'
+
+# Compatibility between Mac and Linux
+command -v open > /dev/null || alias open='xdg-open'
+command -v pbcopy > /dev/null || alias pbcopy='xsel --clipboard --input'
+command -v pbpaste > /dev/null || alias pbpaste='xsel --clipboard --output'
+
+# MacOS preview
+[ -f /usr/bin/qlmanage ] && alias preview='/usr/bin/qlmanage -p'
+
+alias ..='cd ..'
+alias egrep='egrep --color=auto'
+alias grep='grep --color=auto'
+alias less='less -R'
+
+# Require confirmation in case of overwriting an existing file
+alias cp='cp -i'
+alias mv='mv -i'
+
+alias ncdu='ncdu --color dark'
+
+# Serve files from the current folder on port 8000. You can change the port as
+#   httpserver 8123
+alias httpserver='python3 -m http.server'
+
+# Git aliases
+alias gs='git status -sb'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias grc='git add -u && git rebase --continue'
+
+# Tmux aliases
+alias tmux='tmux -2'   # Run tmux with 256 colors
+alias ta='tmux attach'

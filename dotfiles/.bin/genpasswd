@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# Generate a random password of a given length
+
+default_len=20
+len=${1:-$default_len}
+
+# MacOS requires overriding LC_ALL=C to prevent "tr: Illegal byte sequence"
+# error. See https://unix.stackexchange.com/a/45406
+LC_ALL=C tr -dc A-Za-z0-9_\!\@\#\$\%\^\&\*\(\)\\-+= < /dev/urandom |
+  head -c ${len} | xargs

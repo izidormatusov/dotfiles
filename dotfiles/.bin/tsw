@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# tsw - Tmux SWap
+# Swap the current pane with the destination (by default .1)
+
+dest="${1-.1}"
+
+tmux swap-pane -t "$dest"
+tmux switch-client -t "$dest"

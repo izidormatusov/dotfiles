@@ -1,0 +1,4 @@
+#!/bin/bash
+# Install all dependencies from ~/.Brewfile
+
+${EDITOR-vi} ~/.Brewfile && brew bundle --global --verbose --no-upgrade

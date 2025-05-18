@@ -1,0 +1,67 @@
+#!/bin/bash
+#
+# Present all colors and their escape sequences
+#
+# Useful websites:
+#  https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
+#  https://misc.flogisoft.com/bash/tip_colors_and_formatting
+
+if [ "$1" == "256" ]; then
+  printf "Forground color:  \e[1m\\\\e[38;5;{value}m\e[0m\n"
+  printf "Background color: \e[1m\\\\e[38;5;{value}m\e[0m\n"
+  echo
+
+  # First 16 colors
+  for i in {0..15}; do
+    printf "\e[38;5;${i}m%2d\e[48;5;${i}m  \e[0m" $i
+  done
+  echo
+  echo
+
+  # Colors
+  for j in {16..231}; do
+    printf "\e[38;5;${j}m%3d\e[48;5;${j}m  \e[0m " $j
+    [ $(((j - 15) % 6)) == 0 ] && echo
+  done
+  echo
+
+  # Grayscale
+  for start in 232 244; do
+    for ((j = start; j < start + 12; j++)); do
+      printf "\e[38;5;${j}m%3d\e[48;5;${j}m  \e[0m " $j
+    done
+    echo
+  done
+
+  return
+fi
+
+printf "Run \e[1;3m$0 256\e[0m for 256 colors version\n\n"
+printf "Color escapes are \e[1;3m%s\e[0m (echo uses \e[1;3m%s\e[0m or \e[1;3m%s\e[0m)\n" \
+  '\e[${value};...;${value}m' '\033[...m' '\x1B[...m'
+printf "Values 30..37,  90..97  are \e[33mforeground colors\e[m\n"
+printf "Values 40..47, 100..107 are \e[43mbackground colors\e[m\n"
+printf "Values \e[1m1 = bold\e[m, \e[2m2 = dimmed\e[0m, "
+printf "\e[3m3 = cursive\e[0m, \e[4m4 = underline\e[0m\n"
+
+echo -e "\nRegular 16 colors"
+for i in {0..7}; do
+  for j in 0 60; do
+    fgc=$((30 + i + j))
+    bgc=$((40 + i + j))
+
+    printf "\e[${fgc}m\\\e[${fgc}m\e[0m  "
+    printf "\e[${fgc};1m\\\e[${fgc};1m\e[0m  "
+    printf "\e[${fgc};2m\\\e[${fgc};2m\e[0m  "
+    printf "\e[${fgc};3m\\\e[${fgc};2m\e[0m  "
+    printf "\e[${fgc};4m\\\e[${fgc};2m\e[0m  "
+    printf "\e[${bgc}m\\\e[%3dm \e[0m\n" "${bgc}"
+  done
+done
+
+echo
+# See http://rrbrandt.dee.ufcg.edu.br/en/docs/ansi/cursor and
+# https://en.wikipedia.org/wiki/ANSI_escape_code#Terminal_output_sequences
+echo "Cursor positions"
+echo -e " \033[1;3m\e[{line};{column}H\033[0m - moves cursor to the position (left corner is 0,0)"
+echo -e " \033[1;3m\\e[2J\033[0m - clears the screen"

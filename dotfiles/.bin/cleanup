@@ -1,0 +1,18 @@
+#!/bin/bash
+# Cleanup unnecessary things from filesystem:
+#  - empty folders
+#  - MacOS .DS_Store
+#  - python cache
+
+set -euo pipefail
+
+# Use find from findutils on MacOS
+command -v gfind > /dev/null && FIND=gfind || FIND=find
+
+$FIND . -depth \
+  -not -regex '.*/\.git\(/.*\)?$' \
+  -not -regex '.*/\.stfolder\(/.*\)?$' \
+  \( \
+    \( -type d -empty \) -or \
+    \( -type f \( -name .DS_Store -or -name \*.pyc \) \) \
+  \) -print -delete

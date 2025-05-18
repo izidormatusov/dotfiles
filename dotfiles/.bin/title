@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+# Send escape code to set the title in terminal / iTerm / tmux
+#
+# Note that fish constantly overrides the title with `fish_title` at each
+# prompt. It still works within scripts.
+
+echo -en "\033]2;$*\033\\"

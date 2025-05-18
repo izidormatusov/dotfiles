@@ -1,0 +1,6 @@
+#!/bin/bash
+#
+# Remove color escape sequence from the output,
+# see https://stackoverflow.com/a/18000433
+
+exec sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,3})?)?[mGK]//g"
