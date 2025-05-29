@@ -63,12 +63,16 @@ def collect(config, just_list=False):
 
 
 def install(config, just_list=False):
-    dotfiles = lib.discover_home_dotfiles(config, exclude_dotfiles_only=False)
+    dotfiles = lib.discover_dotfiles(config)
 
     file_list = '\n'.join(
             dotfile.name
             for dotfile in sorted(dotfiles, key=lambda d: d.name)
             if dotfile.is_modified())
+
+    if not file_list:
+        print('All OK')
+        return
 
     if just_list:
         print(file_list)

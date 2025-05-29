@@ -1,6 +1,7 @@
 import os
 import plistlib
 import shutil
+import sys
 
 from .diff import diff
 
@@ -38,9 +39,11 @@ class DotFile:
     def __hash__(self):
         return hash((self.name, self.home_path, self.dotfile_path))
 
+    @property
     def is_macos_only(self):
         return self.name.startswith('Library/')
 
+    @property
     def is_plist(self):
         return self.is_macos_only and self.name.endswith(
                 self.MAC_PREFERENCES_SUFFIX)
@@ -81,7 +84,7 @@ class DotFile:
             home_link = os.readlink(self.home_path)
             dotfile_link = os.readlink(self.dotfile_path)
             return home_link != dotfile_link
-        elif self.is_plist():
+        elif self.is_plist:
             with open(self.dotfile_path) as f:
                 dotfile_content = f.read()
             return self._filtered_source_plist() != dotfile_content
@@ -102,7 +105,7 @@ class DotFile:
         dotfile_exists = os.path.exists(self.dotfile_path)
         # TODO: deal with permissions
 
-        if self.is_plist():
+        if self.is_plist:
             home_content = self._filtered_source_plist()
 
         if direction == 'dotfiles':
@@ -147,7 +150,7 @@ class DotFile:
             destination_stat = os.lstat(destination)
             if source_stat.st_mode != destination_stat.st_mode:
                 os.chmod(destination, source_stat.st_mode)
-        elif self.is_plist():
+        elif self.is_plist:
             if direction == 'dotfiles':
                 content = self._filtered_source_plist()
                 self._create_folders(destination)
@@ -163,7 +166,7 @@ class DotFile:
             shutil.copy2(source, destination, follow_symlinks=False)
 
 
-def discover_home_dotfiles(config, exclude_dotfiles_only=True):
+def discover_home_dotfiles(config):
     """Discover all dotfiles in home directory."""
     dotfiles = dict()
     home_dir = config.home_dir
@@ -178,7 +181,7 @@ def discover_home_dotfiles(config, exclude_dotfiles_only=True):
                 if os.path.isfile(dotfile_path) or os.path.islink(dotfile_path):
                     name = os.path.relpath(dotfile_path, dotfiles_dir)
                     home_path = os.path.join(home_dir, name)
-                    if os.path.exists(home_path) or not exclude_dotfiles_only:
+                    if os.path.exists(home_path):
                         dotfiles[name] = DotFile(
                                 name, home_path, dotfile_path, config)
 
@@ -237,5 +240,30 @@ def discover_home_dotfiles(config, exclude_dotfiles_only=True):
             if name not in dotfiles:
                 dotfiles[name] = DotFile(
                         name, home_path, dotfile_path, config)
+
+    return dotfiles.values()
+
+
+def discover_dotfiles(config):
+    """Discover already existing dotfiles."""
+    dotfiles = dict()
+    home_dir = config.home_dir
+    default_dotfiles_dir = config.dotfiles[0]
+
+    # Files that exist in the repo but might not be considered regular dotfile.
+    for dotfiles_dir in config.dotfiles:
+        for dirpath, dirnames, filenames in os.walk(dotfiles_dir):
+            for filename in filenames + dirnames:
+                dotfile_path = os.path.join(dirpath, filename)
+
+                if os.path.isfile(dotfile_path) or os.path.islink(dotfile_path):
+                    name = os.path.relpath(dotfile_path, dotfiles_dir)
+                    home_path = os.path.join(home_dir, name)
+
+                    dotfile = DotFile(name, home_path, dotfile_path, config)
+                    if dotfile.is_macos_only and sys.platform != 'darwin2':
+                        continue
+
+                    dotfiles[name] = dotfile
 
     return dotfiles.values()
