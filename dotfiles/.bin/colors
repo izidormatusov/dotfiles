@@ -63,5 +63,5 @@ echo
 # See http://rrbrandt.dee.ufcg.edu.br/en/docs/ansi/cursor and
 # https://en.wikipedia.org/wiki/ANSI_escape_code#Terminal_output_sequences
 echo "Cursor positions"
-echo -e " \033[1;3m\e[{line};{column}H\033[0m - moves cursor to the position (left corner is 0,0)"
-echo -e " \033[1;3m\\e[2J\033[0m - clears the screen"
+echo -e " \033[1;3m\\\\e[{line};{column}H\033[0m - moves cursor to the position (left corner is 0,0)"
+echo -e " \033[1;3m\\\\e[2J\033[0m - clears the screen"
