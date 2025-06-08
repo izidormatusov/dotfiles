@@ -94,7 +94,12 @@ alert() { # {{{
   local text="$@"
   if [ -z "$text" ]; then
     local command=$(HISTTIMEFORMAT='' builtin history 2 |
-      sed -e 's/^\s*[0-9]\+\s*//;s/[;&|]\s*alert\s*$//;s/\s\s*/ /g' |
+      sed -e '
+          s/^[ \t]*[0-9][0-9]*[ \t]*//
+          s/[;&|][ \t]*alert[ \t]*$//
+          s/[ \t][ \t]*/ /g
+          s/[ \t]*$//
+          ' |
       tail -n 1)
     text="\`${command}\`"
   fi
