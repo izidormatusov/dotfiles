@@ -1,0 +1,27 @@
+partial alphanumeric_keys
+xkb_symbols "izidor"
+{
+  name[Group1] = "Izidor layout";
+  include "us(basic)"
+  include "level3(ralt_switch)"
+  key <AC01> { [ NoSymbol, NoSymbol,     adiaeresis,  Adiaeresis ] }; // ä Ä
+  key <AC02> { [ NoSymbol, NoSymbol,         ssharp              ] }; // ß
+  key <AC10> { [ NoSymbol, NoSymbol,    ocircumflex, Ocircumflex ] }; // ô Ô
+  key <AD03> { [ NoSymbol, NoSymbol,       EuroSign              ] }; // €
+  key <AD07> { [ NoSymbol, NoSymbol,     udiaeresis,  Udiaeresis ] }; // ü
+  key <AD09> { [ NoSymbol, NoSymbol,     odiaeresis,  Odiaeresis ] }; // ö Ö
+  key <AD11> { [ NoSymbol, NoSymbol,         uacute,      Uacute ] }; // ú Ú
+  key <AD12> { [ NoSymbol, NoSymbol,     adiaeresis,  Adiaeresis ] }; // ä Ä
+  key <AE02> { [ NoSymbol, NoSymbol,         lcaron,      Lcaron ] }; // ľ Ľ
+  key <AE03> { [ NoSymbol, NoSymbol,         scaron,      Scaron ] }; // š Š
+  key <AE04> { [ NoSymbol, NoSymbol,         ccaron,      Ccaron ] }; // č Č
+  key <AE05> { [ NoSymbol, NoSymbol,         tcaron,      Tcaron ] }; // ť Ť
+  key <AE06> { [ NoSymbol, NoSymbol,         zcaron,      Zcaron ] }; // ž Ž
+  key <AE07> { [ NoSymbol, NoSymbol,         yacute,      Yacute ] }; // ý Ý
+  key <AE08> { [ NoSymbol, NoSymbol,         aacute,      Aacute ] }; // á Á
+  key <AE09> { [ NoSymbol, NoSymbol,         iacute,      Iacute ] }; // í Í
+  key <AE10> { [ NoSymbol, NoSymbol,         eacute,      Eacute ] }; // é É
+  key <AE11> { [ NoSymbol, NoSymbol, dead_diaeresis              ] }; // D¨
+  key <AE12> { [ NoSymbol, NoSymbol,     dead_acute,  dead_caron ] }; // D´ Dˇ
+  key <BKSL> { [ NoSymbol, NoSymbol,         ncaron,      Ncaron ] }; // ň Ň
+};
