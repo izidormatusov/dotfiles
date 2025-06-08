@@ -2,10 +2,10 @@
 #
 # Set keyring credentials for telegram to power alert manager
 
-set -euo pipefail
+set -eu
 
 heading() {
-  echo -e "\033[33;1m$@\033[0m"
+  echo -e "\n\033[33;1m$@\033[0m"
 }
 
 if [ -d "$PASSWORD_STORE_DIR" ]; then

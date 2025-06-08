@@ -1,14 +1,14 @@
 #!/bin/bash
 
-set -euo pipefail
+set -eu
+
+heading() {
+  echo -e "\n\033[33;1m$@\033[0m"
+}
 
 # Only on Mac
 if [ `uname -s` = "Darwin" ]
 then
-
-heading() {
-  echo -e "\033[33;1m$@\033[0m"
-}
 
 heading "Installing Mac dev tools"
 if /usr/bin/xcode-select --install 2>/dev/null

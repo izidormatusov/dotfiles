@@ -1,9 +1,9 @@
 #!/bin/bash
 
-set -euo pipefail
+set -eu
 
 heading() {
-  echo -e "\033[33;1m$@\033[0m"
+  echo -e "\n\033[33;1m$@\033[0m"
 }
 
 if [ $(uname -s) = "Linux" ]; then
