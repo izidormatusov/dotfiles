@@ -269,5 +269,6 @@ endif
 " See https://superuser.com/a/1062063
 let g:netrw_altv=1
 
-" Load work configuration if it exists
-silent! ~/.work.vim
+if filereadable(expand("~/.work.vim"))
+  source ~/.work.vim
+endif
