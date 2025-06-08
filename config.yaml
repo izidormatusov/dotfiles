@@ -25,6 +25,8 @@ exclusions:
   - .config/broot/
   - .config/btop/
   - .config/btop/btop.log
+  - .config/flipperdevices.com/
+  - .config/Autodesk/
   - .config/chrome-profile-
   - .config/chrome-remote-desktop/
   - .config/d-feet/
@@ -88,6 +90,7 @@ exclusions:
   - .local/share/cryfs
   - .local/share/deepin/
   - .local/share/desktop-directories/
+  - .local/share/direnv/allow/
   - .local/share/evolution/
   - .local/share/fish/fish_history
   - .local/share/fish/generated_completions/
@@ -111,6 +114,7 @@ exclusions:
   - .local/share/sounds/
   - .local/share/sqlmap/
   - .local/share/user-places.xbel
+  - .local/share/uv/
   - .local/share/virtualenvs/
   - .local/share/vlc/
   - .local/share/wezterm/check_update
@@ -157,6 +161,7 @@ exclusions:
   - .xsession-errors
   - .xsession-errors.old
   - .zsh_history
+  - .zsh_sessions/
 
 plist_exclusions:
   com.googlecode.iterm2:
