@@ -1,0 +1,146 @@
+#!/usr/bin/env python3
+
+import copy
+import datetime
+import os
+import re
+import subprocess
+import sys
+
+DEFAULT_ZONES = ['Europe/Zurich', 'US/Pacific', 'Asia/Calcutta']
+
+ALIASES = {
+    'Europe/Zurich': '🇨🇭 Zürich',
+    'US/Pacific': '🇺🇸 California',
+    'Asia/Calcutta': '🇮🇳 India',
+}
+
+
+def zone_file_to_zone(zone_file):
+  zone = '/'.join(zone_file.split('/')[-2:])
+  return ALIASES.get(zone, zone)
+
+
+def get_timezone_changes(zone_files):
+  # zdump is part of libc package, should be installed almost everywhere
+  out = subprocess.check_output(['zdump', '-i'] + zone_files).decode()
+  # Remove the first empty line
+  out = out.strip()
+  zones = out.split('\n\n')
+
+  if len(zones) != len(zone_files):
+    zones = [zone.splitlines()[0] for zone in zones]
+    raise ValueError(
+        f'Unexpected output.\nzone_files: {zone_files}\nzones: {zones}'
+    )
+
+  tz_data = {}
+  for zone_file, zone in zip(zone_files, zones):
+    lines = zone.splitlines()
+    m = re.match(r'^TZ="(.+?)"$', lines[0])
+    if not m:
+      snippet = '\n'.join(lines[:5])
+      raise ValueError(f'Unexpected zone format:\n{snippet}')
+    actual_zone_file = m.group(1)
+
+    if actual_zone_file != zone_file:
+      raise ValueError(f'Unexpected zone: {actual_zone_file} vs {zone_file}')
+
+    zone = zone_file_to_zone(zone_file)
+
+    changes = []
+    latest_date = None
+    latest_offset = None
+    for line in lines[1:]:
+      parts = line.split()
+      try:
+        start = datetime.datetime.strptime(parts[0], '%Y-%m-%d').date()
+      except ValueError:
+        # Invalid line
+        continue
+
+      utc_offset = int(parts[2])
+      if len(parts[2]) == 5:
+        utc_offset = utc_offset // 100 + (utc_offset % 100) / 60
+
+      if start < datetime.date.today():
+        if latest_date is None or latest_date <= start:
+          latest_date = start
+          latest_offset = utc_offset
+
+        continue
+
+      changes.append((start, utc_offset))
+
+    if latest_date is None or latest_offset is None:
+      raise ValueError(f'No latest offset for {zone}')
+    changes.append((latest_date, latest_offset))
+    changes.sort()
+    tz_data[zone] = changes
+  return tz_data
+
+
+def main(zone_files):
+  tz_data = get_timezone_changes(zone_files)
+  home_zone = zone_file_to_zone(zone_files[0])
+
+  offsets = {}
+  for zone in tz_data:
+    _, offset = tz_data[zone].pop(0)
+    offsets[zone] = offset
+
+  order = [
+      zone
+      for zone, _ in sorted(offsets.items(), key=lambda p: (p[1], p[0]))
+      if zone != home_zone
+  ]
+
+  intervals = []
+  while len(intervals) < 10 and any(changes for changes in tz_data.values()):
+    next_change = min(changes[0][0] for changes in tz_data.values() if changes)
+
+    base = dict(intervals[-1][1] if intervals else offsets)
+    for zone, changes in tz_data.items():
+      last_offset = None
+      for start, offset in list(changes):
+        if start <= next_change:
+          last_offset = offset
+          changes.pop(0)
+        else:
+          break
+      if last_offset is not None:
+        base[zone] = last_offset
+
+    intervals.append((next_change, base))
+
+  for i, (change, offsets) in enumerate(intervals):
+    if len(order) == 1:
+      zone = order[0]
+      print(f'{change} {zone} {offsets[zone] - offsets[home_zone]}h')
+      continue
+
+    if i > 0:
+      print('')
+    print(f'{change}')
+    for zone in order:
+      print(f'\t{zone}  {offsets[zone] - offsets[home_zone]}')
+
+
+if __name__ == '__main__':
+  if len(sys.argv) > 1:
+    zones = []
+    for zone in sys.argv[1:]:
+      if not re.match(r'^[A-Z][a-zA-Z]+/[A-Z][a-zA-z]+$', zone):
+        raise ValueError(f'Invalid zone "{zone}"')
+      zones.append(zone)
+  else:
+    zones = DEFAULT_ZONES
+
+  zone_files = []
+  for zone in zones:
+    zone_file = '/usr/share/zoneinfo/' + zone
+    if not os.path.exists(zone_file):
+      raise ValueError(f'Missing zone file {zone_file}')
+    zone_files.append(zone_file)
+
+  main(zone_files)
