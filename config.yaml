@@ -19,25 +19,26 @@ exclusions:
   - .cinnamon/glass.log
   - .cinnamon/spices.cache/
   - .config/.gsd-keyboard.settings-ported
+  - .config/Autodesk/
   - .config/GIMP/
   - .config/JetBrains/IdeaIC
   - .config/PureRef.ini
   - .config/broot/
   - .config/btop/
   - .config/btop/btop.log
-  - .config/flipperdevices.com/
-  - .config/Autodesk/
   - .config/chrome-profile-
   - .config/chrome-remote-desktop/
   - .config/d-feet/
   - .config/dconf/user
   - .config/eog/
   - .config/evolution/
+  - .config/flipperdevices.com/
   - .config/gcloud/
   - .config/gedit/
   - .config/glade.conf
   - .config/gnome-control-center/
   - .config/go/
+  - .config/google-chrome-beta/
   - .config/google-chrome/
   - .config/gtk-2.0/
   - .config/gtk-3.0/
@@ -81,6 +82,7 @@ exclusions:
   - .local/bin/
   - .local/lib/python
   - .local/lib/python3.6/site-packages/
+  - .local/share/Eclipse Memory Analyzer/
   - .local/share/JetBrains/
   - .local/share/Trash
   - .local/share/applications/
@@ -98,6 +100,7 @@ exclusions:
   - .local/share/fonts/
   - .local/share/fzf-history/
   - .local/share/gedit/
+  - .local/share/gnome-pomodoro/
   - .local/share/gnome-shell/
   - .local/share/gvfs-metadata/
   - .local/share/icc/
@@ -109,6 +112,7 @@ exclusions:
   - .local/share/mime/
   - .local/share/nautilus/
   - .local/share/org.gnome.TextEditor/
+  - .local/share/pipx/
   - .local/share/radiotray/radiotray.log
   - .local/share/recently-used.xbel
   - .local/share/sounds/
@@ -126,6 +130,7 @@ exclusions:
   - .local/share/wezterm/wezterm-gui-log-
   - .local/share/wezterm/wezterm-log-
   - .local/share/xorg/
+  - .local/share/zoxide/
   - .local/state/
   - .m2/
   - .matplotlib/fontlist-v330.json
@@ -151,6 +156,7 @@ exclusions:
   - .swt/
   - .thumbnails/
   - .vagrant.d/
+  - .var/app/org.gnome.Solanum/
   - .vim/.netrwhist
   - .vim/spell/
   - .vimgolf/
