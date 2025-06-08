@@ -2,7 +2,9 @@
 
 Collection of my various configs (aka dotfiles) and installation scripts.
 
+Not everything is worth configuring automatically, hence dedicated guides:
 
+ - [MacOS](macos.md)
 
 ## Get started
 
@@ -20,6 +22,7 @@ Folder structures:
  - [dotfiles/](dotfiles/) contains the configuration files
  - [scripts/](scripts/) has installation scripts. Each script should be
    idempotent
+ - [keyboard_layout/](keyboard_layout/README.md) has my custom keyboard layout
  - [tools/](tools/) has scripts for management.
 
 You can create sub folders in `work/` and `private/` to keep some dotfiles
