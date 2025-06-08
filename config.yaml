@@ -23,9 +23,9 @@ exclusions:
   - .config/JetBrains/IdeaIC
   - .config/PureRef.ini
   - .config/broot/
+  - .config/btop/
   - .config/btop/btop.log
   - .config/chrome-profile-
-  - .config/btop/
   - .config/chrome-remote-desktop/
   - .config/d-feet/
   - .config/dconf/user
@@ -67,6 +67,7 @@ exclusions:
   - .gnome/apps/
   - .gnupg/
   - .gnuplot_history
+  - .go/
   - .gradle/
   - .gtk-bookmarks
   - .hashcat/
@@ -127,10 +128,7 @@ exclusions:
   - .mitmproxy/
   - .mozilla/
   - .mypy_cache/
-  - .npm/_cacache/
-  - .npm/_logs/
-  - .npm/_npx/
-  - .npm/_update-notifier-last-checked
+  - .npm/
   - .nuuid.ini
   - .nv/GLCache/
   - .oracle_jre_usage/
