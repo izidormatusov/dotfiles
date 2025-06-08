@@ -1,0 +1,56 @@
+#!/usr/bin/env python3
+"""Extract all pictures from .har file."""
+
+import base64
+import json
+import os
+import sys
+
+from urllib.parse import urlparse
+
+
+def main(input_har):
+    with open(input_har) as f:
+        har = json.load(f)
+
+    for entry in har['log']['entries']:
+        url = entry['request']['url']
+        content = entry['response']['content']
+
+        mime_type = content['mimeType']
+        if not mime_type.startswith('image/') or mime_type == 'image/svg+xml':
+            continue
+
+        if 'text' not in content:
+            print('Skipping %s as there is no content' % url)
+            continue
+
+        if '/gen204' in url:
+            # Skip google 204 generator
+            continue
+
+        url_path = urlparse(url).path
+        original_filename = os.path.basename(url_path)
+        assert '.' in original_filename, f'Unexpected url {url}'
+
+        filename = original_filename
+        num = 0
+        while os.path.exists(filename):
+            name, ext = os.path.splitext(original_filename)
+            filename = f'{name}_{num:02d}{ext}'
+            num += 1
+
+        assert not os.path.exists(filename), f'Duplicate {filename} from {url}'
+        assert content.get('encoding') == 'base64', (
+                'Unexpected encoding: %s' % content.get('encoding'), content)
+
+        print(f'Saving {filename} from {url}')
+        with open(filename, 'wb') as f:
+            f.write(base64.b64decode(content['text']))
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        sys.stderr.write('Usage: %s <input har file>\n', sys.argv[0])
+        os.exit(1)
+    main(sys.argv[1])
