@@ -1,0 +1,98 @@
+#!/usr/bin/env python3
+"""Split long commands across multiple lines for easier reading."""
+
+import shlex
+import sys
+import difflib
+
+LENGTH = 80
+
+
+def kind(part):
+    if part.startswith('-') and len(part) == 2:
+        return 'short'
+    elif part.startswith('-'):
+        return 'long'
+    elif part in ('&&', '||'):
+        return 'connector'
+    else:
+        return 'argument'
+
+
+def format_command(raw_command):
+    line = ''
+    lines = []
+    previous_kind = None
+    raw_command = raw_command.replace('\\\n', '\n')
+
+    for part in shlex.split(raw_command, posix=False):
+        new_line = False
+        part_kind = kind(part)
+        if part_kind == 'argument':
+            new_line = previous_kind != 'argument'
+        elif part_kind == 'connector':
+            new_line = False
+        elif part_kind == 'short':
+            new_line == previous_kind not in ('short', 'argument')
+        elif part_kind == 'long':
+            new_line = True
+        else:
+            raise ValueError(f'Unknown type {part_kind} ({part})')
+        previous_kind = part_kind
+
+        if len(line) + 1 + len(part) > LENGTH - 2:
+            new_line = True
+
+        if line.strip() and new_line:
+            lines.append(line)
+            line = '  '
+
+        line += ' ' + part if line.strip() else part
+
+    if line.strip():
+        lines.append(line)
+
+    return ' \\\n'.join(lines)
+
+
+def assert_format(raw, formatted):
+    output = format_command(raw)
+    diff = ''.join(difflib.ndiff(
+            (output+'\n').splitlines(keepends=True),
+            (formatted+'\n').splitlines(keepends=True)))
+    assert output == formatted, (
+            f'Invalid format\nGot : {output}\nDiff:\n{diff}')
+
+
+def test():
+    assert_format(
+            r'company_tool tool 42 && another_tool launch',
+            r'company_tool tool 42 && \
+  another_tool launch')
+
+    assert_format(
+            'echo "My home is $HOME"',
+            'echo "My home is $HOME"')
+
+    assert_format(
+            r'company_tool subcommand --run_in_cluster --as_a_user this-is-the-correct-user \
+  some_kind_of_very_long_id:that_needs_to_be_copy_and_pasted \
+  parameter,500',
+            r'company_tool subcommand \
+  --run_in_cluster \
+  --as_a_user \
+  this-is-the-correct-user \
+  some_kind_of_very_long_id:that_needs_to_be_copy_and_pasted parameter,500')
+
+    assert_format(
+            'bazel test --test_output=errors //projects/foo/frontend_team/...  //projects/foo/backend_team/...  //projects/bar/backend_team/... -k',
+            r'bazel test \
+  --test_output=errors \
+  //projects/foo/frontend_team/... //projects/foo/backend_team/... \
+  //projects/bar/backend_team/... -k')
+
+if __name__ == "__main__":
+    if '--test' in sys.argv:
+        test()
+    else:
+        print(format_command(sys.stdin.read()))
