@@ -5,246 +5,263 @@ The script accounts for many possible platforms (Web, Linux, Mac) and terminal
 emulators, trying to deliver the best possible form of notifications.
 """
 
-from urllib import request
 import json
 import os
 import platform
 import subprocess
 import sys
 import time
+from urllib import request
 import urllib.error
 
 
 def default_text():
-    parent = (
-        subprocess.check_output(["ps", "-o", "args=", str(os.getppid())])
-        .decode()
-        .strip()
-    )
-    is_interactive_session = parent in ("-bash", "fish", "zsh")
-    if is_interactive_session:
-        return "Terminal requires your attention"
-    return f"`{parent}`"
+  parent = (
+      subprocess.check_output(["ps", "-o", "args=", str(os.getppid())])
+      .decode()
+      .strip()
+  )
+  is_interactive_session = parent in ("-bash", "fish", "zsh")
+  if is_interactive_session:
+    return "Terminal requires your attention"
+  return f"`{parent}`"
 
 
 def get_macos_key(service, account):
-    try:
-        return subprocess.check_output(
-            ["security", "find-generic-password", "-s", service, "-a", account, "-w"],
+  try:
+    return (
+        subprocess.check_output(
+            [
+                "security",
+                "find-generic-password",
+                "-s",
+                service,
+                "-a",
+                account,
+                "-w",
+            ],
             stderr=subprocess.PIPE,
-        ).decode().strip()
-    except subprocess.CalledProcessError as e:
-        # Password does not exist
-        if e.returncode == 44:
-            return
-        raise
+        )
+        .decode()
+        .strip()
+    )
+  except subprocess.CalledProcessError as e:
+    # Password does not exist
+    if e.returncode == 44:
+      return
+    raise
 
 
 def get_secret(service, account):
-    system = platform.system()
-    if system == "Linux":
-        # Set it using
-        # keyring set $service $account
-        import keyring
+  system = platform.system()
+  if system == "Linux":
+    # Set it using
+    # keyring set $service $account
+    import keyring
 
-        return keyring.get_password(service, account)
-    elif system == "Darwin":
-        # Set it using
-        # security add-generic-password -s $service -a $account -w '$PASSWORD'
-        return get_macos_key(service, account)
-    else:
-        sys.stderr.write(f"Unsupported platform {system}\n")
+    return keyring.get_password(service, account)
+  elif system == "Darwin":
+    # Set it using
+    # security add-generic-password -s $service -a $account -w '$PASSWORD'
+    return get_macos_key(service, account)
+  else:
+    sys.stderr.write(f"Unsupported platform {system}\n")
 
 
 def notify_gchat(text):
-    """Send a notification on gChat."""
-    hook_url = get_secret("alert", "gchat_hook")
-    if hook_url is None:
-        return False
-    data = json.dumps({"text": text}).encode()
-    headers = {"Content-Type": "application/json; charset=UTF-8"}
-    try:
-        request.urlopen(request.Request(hook_url, data=data, headers=headers))
-        return True
-    except urllib.error.HTTPError as e:
-        sys.stderr.write(f"Posting gChat: {e}\n")
-        return False
+  """Send a notification on gChat."""
+  hook_url = get_secret("alert", "gchat_hook")
+  if hook_url is None:
+    return False
+  data = json.dumps({"text": text}).encode()
+  headers = {"Content-Type": "application/json; charset=UTF-8"}
+  try:
+    request.urlopen(request.Request(hook_url, data=data, headers=headers))
+    return True
+  except urllib.error.HTTPError as e:
+    sys.stderr.write(f"Posting gChat: {e}\n")
+    return False
 
 
 def notify_telegram(text):
-    bot_id = get_secret("alert", "telegram_bot_id")
-    if not bot_id:
-        return False
-    chat_id = get_secret("alert", "telegram_chat_id")
-    if not chat_id:
-        sys.stderr.write(f"Has telegram bot_id but not chat_id\n")
-        return False
+  bot_id = get_secret("alert", "telegram_bot_id")
+  if not bot_id:
+    return False
+  chat_id = get_secret("alert", "telegram_chat_id")
+  if not chat_id:
+    sys.stderr.write(f"Has telegram bot_id but not chat_id\n")
+    return False
 
-    url = f"https://api.telegram.org/bot{bot_id}/sendMessage"
-    data = json.dumps(
-        {"chat_id": chat_id, "text": text, "parse_mode": "markdown"}
-    ).encode()
-    headers = {"Content-Type": "application/json; charset=UTF-8"}
-    try:
-        request.urlopen(request.Request(url, data=data, headers=headers))
-        return True
-    except urllib.error.HTTPError as e:
-        sys.stderr.write(f"Posting gChat: {e}\n")
-        return False
+  url = f"https://api.telegram.org/bot{bot_id}/sendMessage"
+  data = json.dumps(
+      {"chat_id": chat_id, "text": text, "parse_mode": "markdown"}
+  ).encode()
+  headers = {"Content-Type": "application/json; charset=UTF-8"}
+  try:
+    request.urlopen(request.Request(url, data=data, headers=headers))
+    return True
+  except urllib.error.HTTPError as e:
+    sys.stderr.write(f"Posting gChat: {e}\n")
+    return False
 
 
 def has_linux_screensaver():
-    """Is screensaver active?"""
-    try:
-        import dbus
-    except ImportError:
-        return
+  """Is screensaver active?"""
+  try:
+    import dbus
+  except ImportError:
+    return
 
-    path = "org.gnome.ScreenSaver"
-    object_path = "/" + path.replace(".", "/")
-    try:
-        interface = dbus.Interface(session_bus.get_object(path, object_path), path)
-        return interface.GetActive()
-    except dbus.exceptions.DBusException:
-        return
+  path = "org.gnome.ScreenSaver"
+  object_path = "/" + path.replace(".", "/")
+  try:
+    interface = dbus.Interface(
+        dbus.SessionBus().get_object(path, object_path), path
+    )
+    return interface.GetActive()
+  except dbus.exceptions.DBusException:
+    return
 
 
 def get_title():
-    titles = [
-        "Excuse me, sir",
-        "Your attention is desired",
-        "Psst",
-        "A little birdie told me...",
-        "Guess what?",
-        "Incoming",
-        "Your attention, please",
-        "Quick heads-up",
-        "It's happening",
-        "Ding dong",
-        "A friendly ping",
-        "The moment has arrived",
-        "Open me",
-        "Heads Up",
-        "Take a look",
-        "Alert",
-        "Your attention is needed",
-        "Your turn",
-        "Check This Out",
-        "Time to Act",
-        "We've got something for you",
-        "Your next step",
-        "Excuse me, a moment please",
-        "May I have a moment?",
-        "Gentle Reminder",
-        "Please take a look",
-        "A message for you",
-        "We hope this helps",
-        "The notification you've been waiting for",
-        "Your digital doorbell just rang",
-        "You've got news",
-        "A little nudge for you",
-        "We're buzzing about this",
-    ]
+  titles = [
+      "Excuse me, sir",
+      "Your attention is desired",
+      "Psst",
+      "A little birdie told me...",
+      "Guess what?",
+      "Incoming",
+      "Your attention, please",
+      "Quick heads-up",
+      "It's happening",
+      "Ding dong",
+      "A friendly ping",
+      "The moment has arrived",
+      "Open me",
+      "Heads Up",
+      "Take a look",
+      "Alert",
+      "Your attention is needed",
+      "Your turn",
+      "Check This Out",
+      "Time to Act",
+      "We've got something for you",
+      "Your next step",
+      "Excuse me, a moment please",
+      "May I have a moment?",
+      "Gentle Reminder",
+      "Please take a look",
+      "A message for you",
+      "We hope this helps",
+      "The notification you've been waiting for",
+      "Your digital doorbell just rang",
+      "You've got news",
+      "A little nudge for you",
+      "We're buzzing about this",
+  ]
 
-    pos = int(time.time() / (15 * 60)) % len(titles)
-    return titles[pos]
+  pos = int(time.time() / (15 * 60)) % len(titles)
+  return titles[pos]
 
 
 def notify_send(failed, text):
-    icon = "error" if failed else "terminal"
-    env = os.environ.copy()
-    env["DISPLAY"] = ":0.0"
-    subprocess.check_call(
-        [
-            "notify-send",
-            "--urgency",
-            "critical",
-            "--icon",
-            icon,
-            "--expire-time",
-            str(60 * 60 * 1000),
-            get_title(),
-            text,
-        ],
-        env=env,
-    )
+  icon = "error" if failed else "terminal"
+  env = os.environ.copy()
+  env["DISPLAY"] = ":0.0"
+  subprocess.check_call(
+      [
+          "notify-send",
+          "--urgency",
+          "critical",
+          "--icon",
+          icon,
+          "--expire-time",
+          str(60 * 60 * 1000),
+          get_title(),
+          text,
+      ],
+      env=env,
+  )
 
 
 def wezterm_notification(text):
-    """Send wezterm notification.
+  """Send wezterm notification.
 
-    https://wezterm.org/escape-sequences.html#operating-system-command-sequences
-    """
-    return f"\033]777;notify;{get_title()};{text}\033\\"
+  https://wezterm.org/escape-sequences.html#operating-system-command-sequences
+  """
+  return f"\033]777;notify;{get_title()};{text}\033\\"
 
 
 def iterm_notification(text):
-    return f"\033]9;{text}\a"
+  return f"\033]9;{text}\a"
 
 
 def tmux_passthrough(code):
-    code = code.replace("\033", "\033\033")
-    return f"\033Ptmux;{code}\033\\"
+  code = code.replace("\033", "\033\033")
+  return f"\033Ptmux;{code}\033\\"
 
 
 def notify_macos(text):
-    env = os.environ.copy()
-    env["TITLE"] = get_title()
-    env["BODY"] = text
-    subprocess.check_call(
-        [
-            "osascript",
-            "-e",
-            'display notification (system attribute "BODY") with title (system attribute "TITLE")',
-        ],
-        env=env,
-    )
+  env = os.environ.copy()
+  env["TITLE"] = get_title()
+  env["BODY"] = text
+  subprocess.check_call(
+      [
+          "osascript",
+          "-e",
+          (
+              'display notification (system attribute "BODY") with title'
+              ' (system attribute "TITLE")'
+          ),
+      ],
+      env=env,
+  )
 
 
 def local_notification(failed, text, notified):
-    if notified and has_linux_screensaver():
-        # Avoid double notifications
-        return
+  if notified and has_linux_screensaver():
+    # Avoid double notifications
+    return
 
-    terminal = os.environ.get("TERM_PROGRAM", "")
-    if platform.system() == "Linux":
-        notify_send(failed, text)
-    elif terminal == "WezTerm":
-        print(wezterm_notification(text), end="")
-    elif terminal == "tmux" and "WEZTERM_UNIX_SOCKET" in os.environ:
-        print(tmux_passthrough(wezterm_notification(text)), end="")
-    elif terminal == "iTerm.app":
-        print(iterm_notification(text), end="")
-    elif terminal == "tmux" and "ITERM_PROFILE" in os.environ:
-        print(tmux_passthrough(iterm_notification(text)), end="")
-    elif platform.system() == "Darwin":
-        notify_macos(text)
-    else:
-        # Send bell
-        print(f"{text}\a")
+  terminal = os.environ.get("TERM_PROGRAM", "")
+  if platform.system() == "Linux":
+    notify_send(failed, text)
+  elif terminal == "WezTerm":
+    print(wezterm_notification(text), end="")
+  elif terminal == "tmux" and "WEZTERM_UNIX_SOCKET" in os.environ:
+    print(tmux_passthrough(wezterm_notification(text)), end="")
+  elif terminal == "iTerm.app":
+    print(iterm_notification(text), end="")
+  elif terminal == "tmux" and "ITERM_PROFILE" in os.environ:
+    print(tmux_passthrough(iterm_notification(text)), end="")
+  elif platform.system() == "Darwin":
+    notify_macos(text)
+  else:
+    # Send bell
+    print(f"{text}\a")
 
 
 def main():
-    if len(sys.argv) >= 2 and sys.argv[1] in ("S", "E"):
-        failed = sys.argv[1] == "E"
-        sys.argv = sys.argv[:1] + sys.argv[2:]
-    else:
-        failed = None
+  if len(sys.argv) >= 2 and sys.argv[1] in ("S", "E"):
+    failed = sys.argv[1] == "E"
+    sys.argv = sys.argv[:1] + sys.argv[2:]
+  else:
+    failed = None
 
-    if len(sys.argv) >= 2:
-        text = " ".join(sys.argv[1:]).strip()
-    else:
-        text = None
-    if not text:
-        text = default_text()
-    if failed:
-        text = "⚠ " + text
+  if len(sys.argv) >= 2:
+    text = " ".join(sys.argv[1:]).strip()
+  else:
+    text = None
+  if not text:
+    text = default_text()
+  if failed:
+    text = "⚠ " + text
 
-    notified = notify_gchat(text)
-    if not notified:
-        notified = notify_telegram(text)
-    local_notification(failed, text, notified)
+  notified = notify_gchat(text)
+  if not notified:
+    notified = notify_telegram(text)
+  local_notification(failed, text, notified)
 
 
 if __name__ == "__main__":
-    main()
+  main()
