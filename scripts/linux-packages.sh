@@ -16,6 +16,7 @@ if [ $(uname -s) = "Linux" ]; then
   heading "Linux packages: apt install"
 
   packages=(
+
       bat
       binwalk
       btop
@@ -42,6 +43,7 @@ if [ $(uname -s) = "Linux" ]; then
       qrencode
       ripgrep
       rofi
+      rustup
       spotify-client
       sqlite3
       tzwatch
@@ -49,6 +51,7 @@ if [ $(uname -s) = "Linux" ]; then
       wireshark
       wmctrl
       youtube-dl
+
   )
 
   sudo apt install --assume-yes ${packages[@]}
