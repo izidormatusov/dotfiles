@@ -120,7 +120,7 @@ config.keys = {
     action = wezterm.action.SendKey { mods = 'ALT', key = 'k' },
   },
   {
-    mods = 'CMD', key = 'd',
+    mods = 'CMD|SHIFT', key = 'd',
     action = wezterm.action.Multiple {
       wezterm.action.SendKey { mods = 'ALT', key = 'a' },
       wezterm.action.SendKey { key = '"' },
@@ -128,7 +128,7 @@ config.keys = {
   },
 
   {
-    mods = 'CMD|SHIFT', key = 'd',
+    mods = 'CMD', key = 'd',
     action = wezterm.action.Multiple {
       wezterm.action.SendKey { mods = 'ALT', key = 'a' },
       wezterm.action.SendKey { key = '%' },
@@ -163,14 +163,14 @@ config.keys = {
 
   -- Linux
   {
-    mods = 'ALT', key = 'd',
+    mods = 'ALT|SHIFT', key = 'd',
     action = wezterm.action.Multiple {
       wezterm.action.SendKey { mods = 'ALT', key = 'a' },
       wezterm.action.SendKey { key = '"' },
     }
   },
   {
-    mods = 'ALT|SHIFT', key = 'd',
+    mods = 'ALT', key = 'd',
     action = wezterm.action.Multiple {
       wezterm.action.SendKey { mods = 'ALT', key = 'a' },
       wezterm.action.SendKey { key = '%' },
