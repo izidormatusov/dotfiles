@@ -11,7 +11,6 @@ end
 
 config.exit_behavior = 'CloseOnCleanExit'
 
-
 -- Keep it quiet
 config.audible_bell = 'Disabled'
 config.use_resize_increments = false
@@ -48,6 +47,7 @@ end
 
 if is_mac then
   config.default_cwd = wezterm.home_dir .. "/Downloads"
+  config.default_prog = { '/opt/homebrew/bin/bash' }
 end
 
 local scheme = wezterm.color.get_builtin_schemes()["Catppuccin Mocha"]
