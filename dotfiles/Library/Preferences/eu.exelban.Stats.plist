@@ -2,55 +2,99 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Battery_state</key>
-	<false/>
+	<key>Battery_barChart_position</key>
+	<integer>3</integer>
+	<key>Battery_batteryDetails_position</key>
+	<integer>4</integer>
+	<key>Battery_battery_position</key>
+	<integer>0</integer>
+	<key>Battery_label_position</key>
+	<integer>1</integer>
+	<key>Battery_mini_position</key>
+	<integer>2</integer>
 	<key>Battery_widget</key>
 	<string></string>
+	<key>CPU_barChart_position</key>
+	<integer>0</integer>
 	<key>CPU_bar_chart_box</key>
 	<false/>
 	<key>CPU_bar_chart_color</key>
 	<string>utilization</string>
+	<key>CPU_bar_chart_frame</key>
+	<false/>
 	<key>CPU_bar_chart_label</key>
 	<true/>
+	<key>CPU_label_position</key>
+	<integer>2</integer>
+	<key>CPU_lineChart_position</key>
+	<integer>3</integer>
+	<key>CPU_mini_position</key>
+	<integer>1</integer>
+	<key>CPU_pieChart_position</key>
+	<integer>4</integer>
 	<key>CPU_splitValue</key>
 	<false/>
+	<key>CPU_tachometer_position</key>
+	<integer>5</integer>
 	<key>CPU_usagePerCore</key>
 	<true/>
 	<key>CPU_widget</key>
 	<string>bar_chart</string>
-	<key>Disk_speed_icon</key>
-	<string>chars</string>
-	<key>Disk_state</key>
-	<true/>
+	<key>Disk_barChart_position</key>
+	<integer>3</integer>
+	<key>Disk_label_position</key>
+	<integer>2</integer>
+	<key>Disk_memory_position</key>
+	<integer>5</integer>
+	<key>Disk_mini_position</key>
+	<integer>1</integer>
+	<key>Disk_networkChart_position</key>
+	<integer>6</integer>
+	<key>Disk_pieChart_position</key>
+	<integer>4</integer>
+	<key>Disk_speed_downloadColor</key>
+	<string>secondBlue</string>
+	<key>Disk_speed_position</key>
+	<integer>0</integer>
+	<key>Disk_text_position</key>
+	<integer>7</integer>
 	<key>Disk_widget</key>
 	<string>speed</string>
-	<key>GPU_showType</key>
-	<false/>
-	<key>GPU_state</key>
-	<false/>
-	<key>GPU_widget</key>
-	<string></string>
-	<key>LaunchAtLoginNext</key>
-	<true/>
+	<key>NSStatusItem Restore Position Battery_battery</key>
+	<integer>317</integer>
 	<key>Network_speed_icon</key>
 	<string>arrows</string>
+	<key>RAM_barChart_position</key>
+	<integer>4</integer>
+	<key>RAM_label_position</key>
+	<integer>2</integer>
+	<key>RAM_lineChart_position</key>
+	<integer>3</integer>
+	<key>RAM_memory_position</key>
+	<integer>5</integer>
+	<key>RAM_mini_position</key>
+	<integer>1</integer>
+	<key>RAM_pieChart_position</key>
+	<integer>0</integer>
 	<key>RAM_pie_chart_label</key>
 	<true/>
-	<key>RAM_state</key>
-	<true/>
+	<key>RAM_tachometer_position</key>
+	<integer>6</integer>
+	<key>RAM_text_position</key>
+	<integer>7</integer>
 	<key>RAM_widget</key>
 	<string>pie_chart</string>
-	<key>Sensors_state</key>
-	<false/>
 	<key>runAtLoginInitialized</key>
 	<true/>
 	<key>sensor_F0Ac</key>
 	<true/>
 	<key>sensor_F1Ac</key>
 	<true/>
-	<key>sensor_Hottest CPU</key>
+	<key>setupProcess</key>
 	<true/>
 	<key>telemetry</key>
 	<false/>
+	<key>update-interval</key>
+	<string>Silent</string>
 </dict>
 </plist>
