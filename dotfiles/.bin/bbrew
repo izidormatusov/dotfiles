@@ -1,4 +1,7 @@
 #!/bin/bash
 # Install all dependencies from ~/.Brewfile
 
-${EDITOR-vi} ~/.Brewfile && brew bundle --global --verbose --no-upgrade
+set -e
+
+${EDITOR-vim} ~/.Brewfile* -O
+brew bundle --global --verbose --no-upgrade

@@ -58,7 +58,7 @@ command -v dircolors > /dev/null && eval $(dircolors --bourne-shell)
 # }}}
 
 # Exports {{{
-export EDITOR=/usr/bin/vim
+export EDITOR=vim
 
 export HOMEBREW_REPOSITORY="/opt/homebrew"
 if [ -d "$HOMEBREW_REPOSITORY" ]; then
