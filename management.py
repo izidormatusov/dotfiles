@@ -148,6 +148,21 @@ def run_script(config, initial_query):
             sys.exit(return_code)
 
 
+def show_status(config):
+    root = os.path.abspath(config.base_dir)
+    git_repos = []
+    for path, folders, _ in os.walk(root):
+        if path != root and '.git' in folders:
+            git_repos.append(path)
+
+    subprocess.check_call(['git', 'status', '-sb'])
+
+    for repo in  git_repos:
+        name = os.path.relpath(repo, root)
+        print(f'\n== {name}')
+        subprocess.check_call(['git', 'status', '-sb'], cwd=repo)
+
+
 class Args:
 
     def __init__(self, args):
@@ -191,6 +206,8 @@ def main():
     elif command == 'run':
         query = args.consume('')
         run_script(config, query)
+    elif command == 'status':
+        show_status(config)
     elif command == 'help':
         usage()
     else:
