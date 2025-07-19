@@ -1,0 +1,13 @@
+#!/bin/bash
+# Launch the dotfiles management tool
+
+set -e
+
+BASE_FOLDER=~/code/dotfiles
+if [ -d ~/files/dotfiles ]
+then
+  BASE_FOLDER=~/files/dotfiles
+fi
+
+cd $BASE_FOLDER
+exec .venv/bin/python3 management.py "$@"
