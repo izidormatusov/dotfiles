@@ -261,7 +261,8 @@ def discover_dotfiles(config):
                     home_path = os.path.join(home_dir, name)
 
                     dotfile = DotFile(name, home_path, dotfile_path, config)
-                    if dotfile.is_macos_only and sys.platform != 'darwin2':
+                    if dotfile.is_macos_only and sys.platform != 'darwin':
+                        print(f'Skipping {dotfile_path}')
                         continue
 
                     dotfiles[name] = dotfile
