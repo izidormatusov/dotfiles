@@ -1,0 +1,54 @@
+#!/usr/bin/env python3
+"""Open a random obsidian path that still needs to be processed."""
+
+import os
+import random
+import urllib.parse
+import subprocess
+import math
+
+
+def find_candidates(root):
+    paths, weights = [], []
+    for folder, _, fnames in os.walk(root):
+
+        # Ignore final destination folders
+        relpath = os.path.relpath(folder, root)
+        if folder != root and not relpath.startswith('xxx'):
+            continue
+
+        fnames = [fname for fname in fnames if fname.lower().endswith('.md')]
+        for fname in fnames:
+            path = os.path.join(folder, fname)
+            size = os.path.getsize(path)
+            weight = 1 / (len(fnames) + 1000 * max(math.log(max(size, 1)), 0.01))
+
+            if 'untitled' in fname.lower():
+                weight *= 100
+
+            paths.append(path)
+            weights.append(weight)
+    return paths, weights
+
+def main():
+    root = os.path.expanduser('~/knowledge')
+    paths, weights = find_candidates(root)
+
+    # Debugging
+    if False:
+        scores = [(path, weights[i]) for i, path in enumerate(paths)]
+        scores.sort(key=lambda v: (v[1], v[0]))
+        for path, weight in scores:
+            print(f'{weight:.6f} {os.path.relpath(path, root)}')
+
+    print(f'There are \033[33m{len(paths)}\033[0m remaining notes.')
+
+    path = random.choices(paths, weights)[0]
+    print(f'\nSelected: {path}')
+    params = urllib.parse.urlencode(
+            {"file": os.path.relpath(path, root)},
+            quote_via=urllib.parse.quote)
+    subprocess.run(['open', f'obsidian://open?{params}'])
+
+if __name__ == "__main__":
+    main()
