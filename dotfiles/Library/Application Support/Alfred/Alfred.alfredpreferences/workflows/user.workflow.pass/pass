@@ -1,0 +1,89 @@
+#!/usr/bin/env python3
+"""List/filter out all the passwords.
+
+Relies on fzf binary.
+
+Item arguments is {new,edit,otp}:::{filename}
+"""
+
+import os
+import sys
+import subprocess
+
+
+def edit(password):
+    """Run an interactive session.
+
+     - open is used so that the focus follows into the new window
+     - WezTerm is the terminal of the choice
+     - bash is used to pull all the environment variables
+     - cmd is the actual command to run
+    """
+    subprocess.check_call([
+        "open", "-n", "-a", "WezTerm", "--args",
+        "start", '--', 'bash', '-c', f'pass edit "{password}"'])
+
+
+def extract_username(password_content):
+    """Extract username from the password.
+
+     - Skip the first line that is used for password
+     - Username line starts either with "login: " or "email: "
+     - Login has preference over email
+     - Return None if nothing was found.
+    """
+    login, email = None, None
+    for line in password_content.splitlines()[1:]:
+        parts = line.split(': ', 1)
+        if len(parts) < 2:
+            continue
+        key = parts[0].strip()
+        value = parts[1].strip()
+        if key == 'login' and login is None:
+            login = value
+        elif key == 'email' and email is None:
+            email = value
+
+    if login is not None:
+        return login
+    elif email is not None:
+        return email
+    else:
+        return None
+
+
+def copy_username(password):
+    content = subprocess.check_output(['pass', 'show', '--', password]).decode()
+    username = extract_username(content)
+    if username is not None:
+        subprocess.run(['pbcopy'], input=username.encode(), check=True)
+        print(f'✅︎')
+    else:
+        print('No username 😔')
+
+
+def main():
+    # might or might not be used
+    password_store_dir = os.environ.get(
+            'PASSWORD_STORE_DIR', os.path.expanduser('~/.password-store'))
+
+    action, password = sys.argv[1].split(':::', 1)
+
+    if action == 'pass':
+        subprocess.check_call(['pass', 'show', '-c', '--', password], stdout=subprocess.DEVNULL)
+        print('✅︎')
+    elif action == 'otp':
+        subprocess.check_call(['pass', 'otp', '-c', '--', password], stdout=subprocess.DEVNULL)
+        print('✅︎')
+    elif action == 'username':
+        copy_username(password)
+    elif action == 'edit':
+        edit(password)
+    elif action == 'new':
+        pass
+    else:
+        raise Exception(f'Unknown action {action}')
+
+
+if __name__ == "__main__":
+    main()

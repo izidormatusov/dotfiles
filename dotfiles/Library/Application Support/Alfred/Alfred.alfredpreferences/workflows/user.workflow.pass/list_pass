@@ -1,0 +1,85 @@
+#!/usr/bin/env python3
+"""List/filter out all the passwords.
+
+Relies on fzf binary.
+
+Item arguments is {new,edit,otp}:::{filename}
+"""
+
+import json
+import os
+import sys
+import subprocess
+
+
+def discover_passwords(folder):
+    passwords = []
+    suffix = '.gpg'
+    for dirpath, _, filenames in os.walk(folder):
+        for filename in filenames:
+            if not filename.endswith(suffix):
+                continue
+            filename = filename[:-len(suffix)]
+            name = os.path.join(dirpath, filename)
+            name = os.path.relpath(name, folder)
+            passwords.append(name)
+    return passwords
+
+
+def filter_passwords(passwords, query):
+    """Filter passwords using fzf binary"""
+    try:
+        return subprocess.check_output(
+                ['fzf', '--filter', query],
+                input='\n'.join(passwords), text=True).splitlines()
+    except subprocess.CalledProcessError as e:
+        if e.returncode == 1:
+            # exit code 1 means no match
+            return []
+        raise
+
+
+def main():
+    password_store_dir = os.environ.get(
+            'PASSWORD_STORE_DIR', os.path.expanduser('~/.password-store'))
+
+    passwords = discover_passwords(password_store_dir)
+
+    query = sys.argv[1] if len(sys.argv) > 1 and sys.argv[1] else ''
+    if query and passwords:
+        passwords = filter_passwords(passwords, sys.argv[1])
+
+    items = []
+    for password in passwords:
+        items.append({
+            'uid': 'pass_' + password,
+            'title': password,
+            'arg': "pass:::" + password,
+            'mods': {
+                'alt': {
+                    'arg': 'otp:::' + password,
+                    'subtitle': 'Copy one-time password (OTP)',
+                },
+                'cmd': {
+                    'arg': 'edit:::' + password,
+                    'subtitle': 'Edit the password',
+                },
+                'shift': {
+                    'arg': 'username:::' + password,
+                    'subtitle': 'Copy the username',
+                },
+            },
+        })
+
+    if query and query not in passwords:
+        # Does not specify uid to keep this item at the very bottom
+        items.append({
+            'title': 'Add a new password',
+            'subtitle': query,
+            'arg': 'new:::' + query,
+        })
+
+    print(json.dumps({'items': items}))
+
+if __name__ == "__main__":
+    main()
