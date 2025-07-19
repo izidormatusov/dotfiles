@@ -54,6 +54,9 @@ class DotFile:
 
     def _filtered_source_plist(self):
         """Filter out settings that we don't care about."""
+        if not os.path.exists(self.home_path):
+            return ''
+
         with open(self.home_path, 'rb') as f:
             settings = plistlib.load(f)
 
