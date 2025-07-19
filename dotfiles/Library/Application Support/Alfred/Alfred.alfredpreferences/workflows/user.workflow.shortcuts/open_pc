@@ -1,0 +1,4 @@
+#!/bin/bash
+# Open WezTerm and connect to pc
+
+open -n -a WezTerm --args start ~/.bin/pc

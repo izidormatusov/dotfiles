@@ -1,0 +1,4 @@
+#!/bin/bash
+# Open WezTerm and attach it to tmux
+
+open -n -a WezTerm --args start /opt/homebrew/bin/tmux -2 new -A
