@@ -60,7 +60,6 @@ cask "rectangle"
 cask "signal"
 cask "spotify"
 cask "stats"                      # https://github.com/exelban/stats
-cask "stolendata-mpv"             # MPV app
 cask "telegram"
 cask "vlc"
 cask "wezterm"                    # Terminal
@@ -84,3 +83,5 @@ mas "Flow", id: 1423210932        # Pomodoro timer
 Dir.glob(File.join(File.dirname(__FILE__), ".Brewfile_*")) do |brewfile|
   instance_eval(File.read(brewfile))
 end
+
+# vi: set ft=ruby :

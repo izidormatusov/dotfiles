@@ -16,3 +16,5 @@ cask "qflipper"                    # Flipper Zero app
 # Cross compiling
 tap "filosottile/musl-cross"
 brew "filosottile/musl-cross/musl-cross", args: ["with-arm-hf"]
+
+# vi: set ft=ruby :
