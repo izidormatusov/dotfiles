@@ -162,6 +162,7 @@ class DotFile:
             elif direction == 'home':
                 with open(source, 'rb') as f:
                     settings = plistlib.load(f)
+                os.makedirs(os.path.dirname(destination), exist_ok=True)
                 with open(destination, 'wb') as f:
                     plistlib.dump(settings, f, fmt=plistlib.FMT_BINARY)
         else:
