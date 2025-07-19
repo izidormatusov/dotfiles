@@ -1,4 +1,7 @@
 ---
+inclusions:
+  - Library/Application Support/Alfred/Alfred.alfredpreferences/
+
 exclusions:
   - .Brewfile.lock.json
   - .CFUserTextEncoding
@@ -168,6 +171,14 @@ exclusions:
   - .xsession-errors.old
   - .zsh_history
   - .zsh_sessions/
+  - Library/Application Support/Alfred/.DS_Store
+  - Library/Application Support/Alfred/Alfred.alfredpreferences/remote
+  - Library/Application Support/Alfred/Alfred.alfredpreferences/preferences/local/
+  - Library/Application Support/Alfred/Assistant/
+  - Library/Application Support/Alfred/Databases/
+  - Library/Application Support/Alfred/license
+  - Library/Application Support/Alfred/powerpack.
+  - Library/Application Support/Alfred/usage.data
 
 plist_exclusions:
   com.googlecode.iterm2:
