@@ -75,6 +75,19 @@
 		</array>
 		<key>C366DE63-D815-4437-B658-777497762A7D</key>
 		<array/>
+		<key>D278F17E-2322-4670-A50C-DE52E2295985</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F4885663-34F5-4168-930D-871B2A4E38EA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Izidor Matušov</string>
@@ -143,6 +156,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>command</key>
+				<integer>11</integer>
+				<key>confirm</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.systemcommand</string>
+			<key>uid</key>
+			<string>C366DE63-D815-4437-B658-777497762A7D</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -168,21 +196,6 @@
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>17027955-2541-4128-8B9D-6E466A051B95</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>command</key>
-				<integer>11</integer>
-				<key>confirm</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.systemcommand</string>
-			<key>uid</key>
-			<string>C366DE63-D815-4437-B658-777497762A7D</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -297,6 +310,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>random_obsidian_note</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>6307FC18-2E35-465E-9106-847C66769FC4</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -328,25 +364,72 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
 				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>F4885663-34F5-4168-930D-871B2A4E38EA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
 				<key>escaping</key>
 				<integer>0</integer>
+				<key>keyword</key>
+				<string>ob</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
 				<string>random_obsidian_note</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Number of obsidian notes to clean up</string>
 				<key>type</key>
 				<integer>8</integer>
+				<key>withspace</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>6307FC18-2E35-465E-9106-847C66769FC4</string>
+			<string>D278F17E-2322-4670-A50C-DE52E2295985</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -360,7 +443,7 @@
 			<key>xpos</key>
 			<real>70.0</real>
 			<key>ypos</key>
-			<real>295.0</real>
+			<real>335.0</real>
 		</dict>
 		<key>146AEECD-44FA-4A8B-8487-DBFC793CB7B5</key>
 		<dict>
@@ -394,7 +477,7 @@
 			<key>xpos</key>
 			<real>255.0</real>
 			<key>ypos</key>
-			<real>295.0</real>
+			<real>335.0</real>
 		</dict>
 		<key>66850FED-9E83-4D05-8586-248DEFCD316D</key>
 		<dict>
@@ -438,6 +521,20 @@
 			<real>250.0</real>
 			<key>ypos</key>
 			<real>40.0</real>
+		</dict>
+		<key>D278F17E-2322-4670-A50C-DE52E2295985</key>
+		<dict>
+			<key>xpos</key>
+			<real>70.0</real>
+			<key>ypos</key>
+			<real>455.0</real>
+		</dict>
+		<key>F4885663-34F5-4168-930D-871B2A4E38EA</key>
+		<dict>
+			<key>xpos</key>
+			<real>250.0</real>
+			<key>ypos</key>
+			<real>450.0</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

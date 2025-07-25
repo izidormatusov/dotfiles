@@ -2,6 +2,7 @@
 """Open a random obsidian path that still needs to be processed."""
 
 import os
+import json
 import random
 import urllib.parse
 import subprocess
@@ -62,11 +63,29 @@ def main():
         for path, weight in scores:
             print(f'{weight:.6f} {os.path.relpath(path, root)}')
 
-    print(f'There are \033[33m{len(paths)}\033[0m remaining notes.')
+    if 'alfred_workflow_keyword' in os.environ:
+        icon = {'path': '/Applications/Obsidian.app/Contents/Resources/icon.icns'}
+        items = [{
+            'title': f'{len(paths)} remaining notes',
+            'valid': False,
+            'icon': icon,
+            }
+        ]
 
-    paths = random.choices(paths, weights, k=5)
-    for path in paths:
-        open_note(os.path.relpath(path, root), new_tab=True)
+        for path in random.choices(paths, weights, k=5):
+            relpath = os.path.relpath(path, root)
+            items.append({
+                'title': path,
+                'icon': icon,
+                'arg': obsidian_uri(path, root),
+            })
+        print(json.dumps({'items': items}))
+    else:
+        print(f'There are \033[33m{len(paths)}\033[0m remaining notes.')
+
+        path = random.choices(paths, weights)[0]
+        print(f'\nSelected: {path}')
+        subprocess.run(['open', obsidian_uri(path, root)])
 
 if __name__ == "__main__":
     main()
