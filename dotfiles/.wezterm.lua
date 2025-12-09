@@ -47,7 +47,8 @@ end
 
 if is_mac then
   config.default_cwd = wezterm.home_dir .. "/Downloads"
-  config.default_prog = { '/opt/homebrew/bin/bash' }
+  -- This requires a login shell (-l) to load various system wide settings
+  config.default_prog = { '/opt/homebrew/bin/bash', '-l' }
 end
 
 local scheme = wezterm.color.get_builtin_schemes()["Catppuccin Mocha"]
