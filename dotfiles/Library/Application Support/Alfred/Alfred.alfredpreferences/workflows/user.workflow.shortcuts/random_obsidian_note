@@ -30,6 +30,27 @@ def find_candidates(root):
             weights.append(weight)
     return paths, weights
 
+
+def open_note(path, new_tab=False):
+    if new_tab:
+        # Requires Advanced URI plugin
+        params = urllib.parse.urlencode({
+            "vault": "knowledge",
+            "filepath": path,
+            "openmode": "tab",
+        },
+        quote_via=urllib.parse.quote)
+        uri = f'obsidian://adv-uri?{params}'
+    else:
+        params = urllib.parse.urlencode({
+            "file": path,
+        },
+        quote_via=urllib.parse.quote)
+        uri = f'obsidian://open?{params}'
+    print(uri)
+    subprocess.run(['open', uri])
+
+
 def main():
     root = os.path.expanduser('~/knowledge')
     paths, weights = find_candidates(root)
@@ -43,12 +64,9 @@ def main():
 
     print(f'There are \033[33m{len(paths)}\033[0m remaining notes.')
 
-    path = random.choices(paths, weights)[0]
-    print(f'\nSelected: {path}')
-    params = urllib.parse.urlencode(
-            {"file": os.path.relpath(path, root)},
-            quote_via=urllib.parse.quote)
-    subprocess.run(['open', f'obsidian://open?{params}'])
+    paths = random.choices(paths, weights, k=5)
+    for path in paths:
+        open_note(os.path.relpath(path, root), new_tab=True)
 
 if __name__ == "__main__":
     main()
