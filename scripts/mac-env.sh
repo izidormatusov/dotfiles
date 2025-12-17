@@ -287,9 +287,11 @@ heading "Automatic sleep"
 # Documentation
 #   man pmset
 # See https://iboysoft.com/news/missing-energy-saver-schedule-ventura.html
+
+# NOTE(2025-12-17): Decided to disable automatic shutdown
 # Schedule the time to sleep at 10:01pm
-sudo pmset repeat cancel && \
-  sudo pmset repeat sleep MTWRFSU 22:01:00
+# sudo pmset repeat cancel && \
+#   sudo pmset repeat sleep MTWRFSU 22:01:00
 
 heading "pinentry-mac"
 # Do not force me to store password in the keychain
