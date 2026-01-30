@@ -4,8 +4,10 @@
 # setting changed after touching it in UI
 
 print_settings() {
-  defaults read -g
+  echo "--- Normal"
   defaults read
+  echo
+  echo "--- Current host"
   defaults -currentHost read
 }
 
@@ -24,6 +26,11 @@ while true; do
   read
   [ -f new ] && mv $NEW $OLD
   print_settings > $NEW
+
+  if diff $OLD $NEW >/dev/null; then
+    echo "No change detected"
+    continue
+  fi
 
   vimdiff $OLD $NEW || break
 done
