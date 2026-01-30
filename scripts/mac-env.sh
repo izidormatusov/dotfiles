@@ -15,6 +15,8 @@ osascript -e 'tell application "System Preferences" to quit' || echo "Could not 
 heading "Setting up mac environment"
 # Use Dark theme
 defaults write -g AppleInterfaceStyle Dark
+# Tahoe icon tint
+defaults write -g AppleIconAppearanceTheme RegularDark
 # Show scroll bars when scrolling
 defaults write -g AppleShowScrollBars Automatic
 
