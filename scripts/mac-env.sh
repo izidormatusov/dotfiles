@@ -17,6 +17,8 @@ heading "Setting up mac environment"
 defaults write -g AppleInterfaceStyle Dark
 # Tahoe icon tint
 defaults write -g AppleIconAppearanceTheme RegularDark
+# Display background color on the menu bar (otherwise transparent)
+defaults write -g SLSMenuBarUseBlurredAppearance 1
 # Show scroll bars when scrolling
 defaults write -g AppleShowScrollBars Automatic
 
